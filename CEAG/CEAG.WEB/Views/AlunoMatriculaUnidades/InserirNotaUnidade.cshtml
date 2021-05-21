@@ -1,0 +1,58 @@
+﻿@model CEAG.WEB.ViewModel.AlunoMatriculaUnidade.AlunoMatriculaUnidadeViewModel
+
+@{
+    Layout = null;
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+            </button>
+            <table align="center">
+                <tr>
+                    <td align="center">
+                        <h3 class="modal-title"><b>Insira as notas nos campos abaixo</b></h3>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="modal-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <hr />
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <fieldset>
+                        <legend>Notas</legend>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NotaTeste, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-1">
+                                @Html.EditorFor(model => model.NotaTeste, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NotaTeste, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.LabelFor(model => model.NotaProva, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-1">
+                                @Html.EditorFor(model => model.NotaProva, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NotaProva, "", new { @class = "text-danger" })
+                            </div>
+
+                            @Html.LabelFor(model => model.NotaPC, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-1">
+                                @Html.EditorFor(model => model.NotaPC, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NotaPC, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary but_clientes" data-dismiss="modal">Fechar</button>
+                </div>
+            }
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->

@@ -1,0 +1,86 @@
+﻿@model PagedList.IPagedList<CEAG.WEB.ViewModel.Aluno.AlunoExibicaoViewModel>
+
+@{ ViewBag.Title = "ListagemAlunos";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Relatório Listagem de Clientes</h5></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <tr>
+                        <th>Matricula </th>
+                        <th>Nome </th>
+                        <th>CPF</th>
+                        <th>Endereço </th>
+                        <th>Email </th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Matricula)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Cpf)</td>
+                            <td>@Html.DisplayFor(modelItem => item.LogradouroCompleto)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        </tr>}
+                    <tr>
+                        <td>
+                            <b>@Model.Count registos de @Model.TotalItemCount</b>
+                        </td>
+                        <td>
+                            <a href="ListagemAlunos?gerarPDF=true">
+                                <b>GERAR PDF</b>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        @{
+            if (Model.TotalItemCount != Model.Count)
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de
+                        @Model.PageCount
+
+                        @if (Model.HasPreviousPage)
+                        {
+                            @Html.ActionLink("<<", "ListagemClientes", new { pagina = 1,
+                            sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                            @Html.Raw(" ");
+                            @Html.ActionLink("< Anterior", "ListagemClientes", new { pagina =
+                            Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter =
+                            ViewBag.CurrentFilter })
+                        }
+                        else
+                        {
+                            @:<<
+                            @Html.Raw(" ");
+                            @:< Anterior
+                        }
+
+                        @if (Model.HasNextPage)
+                        {
+                            @Html.ActionLink("Próxima >", "ListagemClientes", new { pagina =
+                            Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter =
+                            ViewBag.CurrentFilter })
+                            @Html.Raw(" ");
+                            @Html.ActionLink(">>", "ListagemClientes", new { pagina =
+                            Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter =
+                            ViewBag.CurrentFilter })
+                        }
+                        else
+                        {
+                            @:Próxima >
+                            @Html.Raw(" ")
+                            @:>>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

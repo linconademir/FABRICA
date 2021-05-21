@@ -1,0 +1,141 @@
+﻿@model CEAG.WEB.ViewModel.Debito.DebitoViewModel
+@using CEAG.WEB.ViewModel.MensalidadeValores;
+
+@{
+    ViewBag.Title = "Realizar Pagamento";
+}
+@{
+    DateTime QuintoDiaUtil = ViewBag.QuintoDiaUtil;
+}
+@{ 
+    MensalidadeValorExibicaoViewModel MensalidadeValor = ViewBag.MensalidadeValor;
+    double ValorDesconto = MensalidadeValor.ValorDescontoAntecipacao;
+}
+
+<div class="containerLopus">
+
+    @if (ViewBag.Aluno.Sexo == "MASCULINO")
+    {
+        <div>
+            <img src="" />
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/budget.png" /> PAGAMENTO DE DÉBITO DO ALUNO <b>@ViewBag.Aluno.Nome</b></h3>
+        </div>
+    }
+    else
+    {
+        <div>
+            <img src="" />
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/budget.png" /> PAGAMENTO DE DÉBITO DA ALUNA <b><b>@ViewBag.Aluno.Nome</b></h3>
+        </div>
+    }
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CodAlunoMatricula)
+        @Html.HiddenFor(model => model.CodDebito)
+        @Html.HiddenFor(model => model.Inclusao)
+        @Html.HiddenFor(model => model.Periodo)
+        @Html.HiddenFor(model => model.ValorDebito)
+        @Html.HiddenFor(model => model.TipoDebito)
+        @Html.HiddenFor(model => model.Descricao)
+        @Html.HiddenFor(model => model.FormaPagamento)
+        @Html.HiddenFor(model => model.Vencimento)
+        @Html.HiddenFor(model => model.Status)
+        @Html.HiddenFor(model => model.Responsavel)
+
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <fieldset>
+                <legend>DADOS DO DÉBITO</legend>
+                <div class="form-group">
+                    <div class="col-md-3 col-lg-3">
+                        <h4>Descrição:</h4>
+                        <h4>Forma de Pagamento:</h4>
+                        <h4>Tipo:</h4>
+                        <h4>Observação:</h4>
+                        <h4>Periodo:</h4>
+                        <h4>Valor:</h4>
+                        <h4>Vencimento:</h4>
+                        <h4>Status:</h4>
+                    </div>
+                    <div class="col-md-9 col-lg-9">
+                        <h4><b>@Model.Descricao</b> </h4>
+                        <h4><b>@Model.FormaPagamento</b> </h4>
+                        <h4><b>@Model.TipoDebito</b> </h4>
+                        <h4><b>@Model.Observacao</b> </h4>
+                        <h4><b>@Model.Periodo.ToString("MM/yyyy")</b> </h4>
+                        <h4><b><span style="color: #f00;">@Model.ValorDebito.ToString("C")</span></b> </h4>
+                        <h4><b>@Model.Vencimento.ToShortDateString()</b> </h4>
+                        <h4>
+                            <b>
+                                @if (@Model.Status.Equals("VENCIDO"))
+                                {
+                                    <span style="color: #f00;">@Model.Status</span>
+                                }
+                                else
+                                {
+                                    <span style="color: #1dee4e;">@Model.Status</span>
+                                }
+
+                            </b>
+                        </h4>
+                    </div>
+                </div>
+
+            </fieldset>
+            <fieldset>
+                <legend>DADOS DO PAGAMENTO</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ValorPago, htmlAttributes: new { @class = "control-label col-md-2 col-sm-2 col-lg-2" })
+
+                    @if ((DateTime.Now < QuintoDiaUtil) && Model.TipoDebito.Equals("MENSALIDADE"))
+                    {
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.ValorPago, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", @Value = (Model.ValorDebito - ValorDesconto).ToString("N2") } })
+                        </div>
+                        <div class="col-md-8">
+
+                            <h5><span style="color: #f00;">Este "débito" está sendo pago antes do quinto dia útil (@QuintoDiaUtil.ToString("dd/MM/yyyy")), o desconto de R$ @ValorDesconto.ToString("N2") foi aplicado ao valor de <b>@Model.ValorDebito.ToString("C")</b></span> </h5>
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.ValorPago, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", @Value = Model.ValorDebito.ToString("N2") } })
+                        </div>
+                    }
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Observacao, htmlAttributes: new { @class = "control-label col-md-2 col-sm-2 col-lg-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Observacao, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", rows = "3" } })
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                <button type="submit">
+                    <img src="~/images/Browser/ok.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" />
+                </button>
+                <button type="button" onclick="location.href='@Url.Action("Index", "Debitos", new { codAlunoMatricula = Model.CodAlunoMatricula})'">
+                    <img src="~/images/Browser/cancel.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" />
+                </button>
+            </div>
+        </div>
+
+    }
+
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/validations_pt-br")
+
+}

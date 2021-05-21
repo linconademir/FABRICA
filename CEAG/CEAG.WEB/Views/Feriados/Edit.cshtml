@@ -1,0 +1,63 @@
+﻿@model CEAG.WEB.ViewModel.Feriado.FeriadoViewModel
+
+@{
+    ViewBag.Title = "Cadastro de Feriado";
+}
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/crossed-out-date.png" /> ALTERAÇÃO DE FERIADO</h3>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CodEscola)
+        @Html.HiddenFor(model => model.CodFeriado)
+        
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <fieldset>
+                <legend>DADOS DO FERIADO</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-1 col-lg-2" })
+                    <div class="col-md-3 col-lg-3">
+                        @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", @placeholder = "Digite a descrição do feriado" } })
+                        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-1 col-lg-1" })
+                    <div class="col-md-2 col-lg-2">
+                        @Html.DropDownListFor(model => model.Tipo, (SelectList)ViewBag.DropdownTipoFeriado, new { @class = "form-control", data_live_search = "true", id = "ddlTipoFeriado" })
+                        @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                <button type="submit">
+                    <img src="~/images/Browser/ok.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" />
+                </button>
+                <button type="button" onclick="location.href='@Url.Action("Index", "Feriados")'">
+                    <img src="~/images/Browser/cancel.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" />
+                </button>
+            </div>
+        </div>
+
+    }
+
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/validations_pt-br")
+
+}

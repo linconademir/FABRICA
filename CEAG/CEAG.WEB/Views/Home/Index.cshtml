@@ -1,0 +1,79 @@
+﻿@model CEAG.WEB.ViewModel.Acesso.AcessoViewModel
+@using CEAG.WEB.ViewModel.PontoAtencao;
+
+@{
+    ViewBag.Title = "Pagina Home";
+}
+
+@{
+    List<PontoAtencaoViewModel> pontosAtencaos = new List<PontoAtencaoViewModel>(); ;
+    if (ViewBag.PontosAtencao.Count > 0)
+    {
+        pontosAtencaos = ViewBag.PontosAtencao;
+    }
+
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="containerLopus">
+    <div class="row">
+        <table align="center">
+            <tr>
+                <td align="center">
+                    <img src="@Model.Escola.Logo" width="480" height="200" alt="">
+                </td>
+            </tr>
+            <tr>
+                <td><hr /></td>
+            </tr>
+            <tr>
+                <td>
+                    <h2>Olá <b>@Model.Nome </b>! </h2>
+                    <h3>Você está logando ao ambiente do @Model.Escola.Fantasia - @Model.Escola.Razao </h3>
+                </td>
+            </tr>
+            @if (pontosAtencaos.Any())
+            {
+                <tr>
+                    <td>
+                        <table align="center" width="800px" border="3">
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4><b>Foram identificados pontos de atenção, indicados por usuários do sistema</b></h4>
+                                    <div class="alert-danger">
+                                        <table width="700px" align="center">
+                                            @foreach (var item in pontosAtencaos.Select(p => p.AcessoNome).Distinct())
+                                            {
+                                                <tr>
+                                                    <td width="80%">
+                                                      <b>@item</b> identificou <b>@pontosAtencaos.Where(p => p.AcessoNome == item).Count() pontos para correção. </b>
+                                                    </td>
+                                                    <td width="20%">
+                                                        <a href="@Url.Action("ViewUser","PontoAtencaos", new { acessoNome = item})">
+                                                            <img src="@Url.Content("~/images/ImageLink/view-file.png")" width="30" height="30" data-toggle="modal" data-target="#modal-mensagem" title='Visualizar' />
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </table>
+                                        <br />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

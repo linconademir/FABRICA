@@ -1,0 +1,203 @@
+﻿@model CEAG.WEB.ViewModel.AlunoMatriculaUnidade.AlunoMatriculaUnidadeComLista
+
+@{
+    ViewBag.Title = "Lançamento de Notas";
+}
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/examBig.png" /> LANÇAMENTO DE NOTAS DA TURMA <b> @Model.AlunoMatriculaUnidadeViewModels[0].AlunoMatricula.Turma.Descricao</b> PARA A UNIDADE <b>@ViewBag.NumeroUnidade </b></h3> <h3 class="btn-danger"> @ViewBag.MessageError</h3>
+    </div>
+    @using (Html.BeginForm("Create", "AlunoMatriculaUnidades", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <hr />
+            <table class="table table-striped table-hover" id="tblConsulta">
+                <thead class="btn-primary">
+                    <tr>
+                        <th align="center">
+                            ALUNO
+                        </th>
+
+                        <th align="center">
+                            DISCIPLINA
+                        </th>
+
+                        <th align="center">
+                            TESTE
+                        </th>
+
+                        <th align="center">
+                            PROVA
+                        </th>
+
+                        <th align="center">
+                            PARTI. E COMPORTAMENTO
+                        </th>
+                        <th align="center">
+                            RESULTADO
+                        </th>
+                        <th align="center">
+                            RECUPERAÇÃO
+                        </th>
+                        <th align="center">
+                            CONS. CLASSE
+                        </th>
+                        <th align="center">
+                            RESULTADO FINAL
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < ViewBag.QuantidadeRegistros; i++)
+                    {
+                        @Html.HiddenFor(model => model.AlunoMatriculaUnidadeViewModels[i].CodAlunoMatricula)
+                        @Html.HiddenFor(model => model.AlunoMatriculaUnidadeViewModels[i].CodAlunoMatriculaUnidade)
+                        @Html.HiddenFor(model => model.AlunoMatriculaUnidadeViewModels[i].NumeroUnidade)
+                        @Html.HiddenFor(model => model.AlunoMatriculaUnidadeViewModels[i].CodDisciplina)
+                        @Html.HiddenFor(model => model.CodTurma)
+                        @Html.HiddenFor(model => model.AlunoMatriculaUnidadeViewModels[i].CodFuncionario)
+                        @Html.HiddenFor(model => model.AlunoMatriculaUnidadeViewModels[i].AlunoMatricula)
+
+                        Model.AlunoMatriculaUnidadeViewModels[i].Media = Model.AlunoMatriculaUnidadeViewModels[i].NotaTeste + Model.AlunoMatriculaUnidadeViewModels[i].NotaProva + Model.AlunoMatriculaUnidadeViewModels[i].NotaPC;
+                        <tr>
+                            <td width="250px">
+                                <h4>@Model.AlunoMatriculaUnidadeViewModels[i].AlunoMatricula.Aluno.Nome</h4>
+                            </td>
+                            <td width="100px">
+                                <h4>@Model.AlunoMatriculaUnidadeViewModels[i].Disciplina.Descricao</h4>
+                            </td>
+                            <td width="30px" align="left">
+                                <b>@Html.EditorFor(model => model.AlunoMatriculaUnidadeViewModels[i].NotaTeste, new { htmlAttributes = new { @class = "form-control-tresdigitos", maxlength = "3", @id = "notaTeste" + i } })</b>
+                            </td>
+                            <td width="30px" align="left">
+                                <b> @Html.EditorFor(model => model.AlunoMatriculaUnidadeViewModels[i].NotaProva, new { htmlAttributes = new { @class = "form-control-tresdigitos", maxlength = "3", @id = "notaProva" + i } })</b>
+                            </td>
+                            <td width="30px" align="left">
+                                <b>@Html.EditorFor(model => model.AlunoMatriculaUnidadeViewModels[i].NotaPC, new { htmlAttributes = new { @class = "form-control-tresdigitos", maxlength = "3", @id = "notaPC" + i } })</b>
+                            </td>
+                            <td width="30px" align="left">
+                                <b>@Html.EditorFor(model => model.AlunoMatriculaUnidadeViewModels[i].Media, new { htmlAttributes = new { @class = "form-control-tresdigitos", maxlength = "5", @id = "total" + i, @readonly = "true" } })</b>
+                            </td>
+                            <td width="30px" align="left">
+                                <b>@Html.EditorFor(model => model.AlunoMatriculaUnidadeViewModels[i].NotaRecuperacao, new { htmlAttributes = new { @class = "form-control-tresdigitos", maxlength = "3", @id = "notaRecuperacao" + i } })</b>
+                            </td>
+                            <td width="30px" align="left">
+                                <b>@Html.EditorFor(model => model.AlunoMatriculaUnidadeViewModels[i].NotaConselhoClasse, new { htmlAttributes = new { @class = "form-control-tresdigitos", maxlength = "3", @id = "notaConselho" + i } })</b>
+                            </td>
+                            <td width="30px" align="left">
+                                <b>@Html.EditorFor(model => model.AlunoMatriculaUnidadeViewModels[i].Media, new { htmlAttributes = new { @class = "form-control-tresdigitos", maxlength = "5", @id = "totalFinal" + i, @readonly = "true" } })</b>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="form-group">
+                <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                    <button type="submit">
+                        <img src="~/images/Browser/ok.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" />
+                    </button>
+                    <button type="button" onclick="location.href='@Url.Action("Index", "AlunoMatriculaUnidades", new {codTurma =  Model.CodTurma})'">
+                        <img src="~/images/Browser/cancel.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" />
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/validations_pt-br")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            calcular(); // calcula imediatamente ao carregar a página
+            calcularNotaFinal();
+            for (var i = 0; i < @ViewBag.QuantidadeRegistros; i++) {
+                $('#notaPC' + i + ', #notaProva' + i + ', #notaTeste' + i + ', #total' + i + ', #notaRecuperacao' + i + ', #notaConselho' + i)
+                    .blur(function () { calcular(); }) // calcula ao perder o foco
+                    .keyup(function () { calcular(); }) // calcula ao soltar a tecla
+                    .blur(function () { calcularNotaFinal(); }) // calcula ao perder o foco
+                    .keyup(function () { calcularNotaFinal(); }); // calcula ao soltar a tecla
+            }
+
+        });
+
+        function calcular() {
+            for (var i = 0; i < @ViewBag.QuantidadeRegistros; i++) {
+
+                var notaTeste = $('#notaTeste'+i).val();
+                var notaProva = $('#notaProva' + i).val();
+                var notaPC = $('#notaPC' + i).val();
+                var notaRecuperacao = $('#notaRecuperacao' + i).val();
+
+                if (notaRecuperacao == null || notaRecuperacao == "") {
+                    notaRecuperacao = 0;
+                }
+
+                if (notaTeste == "") notaTeste = 0;
+                if (notaProva == "") notaProva = 0;
+                if (notaPC == "") notaPC = 0;
+
+                var resultado = parseFloat(notaTeste) + parseFloat(notaProva) + parseFloat(notaPC);
+                var resultadoComRecuperacao = (parseFloat(notaTeste) + parseFloat(notaProva) + parseFloat(notaPC) + parseFloat(notaRecuperacao));
+
+                $('#total' + i).val(resultado);
+
+                var buttonRecuperacao = $('#notaRecuperacao' + i);
+                var buttonConselhoClasse = $('#notaConselho' + i);
+
+                if (resultado >= 6) {
+                    buttonRecuperacao.prop('disabled', true);
+                    buttonRecuperacao.hide();
+                    buttonRecuperacao.val("");
+
+                    if (resultadoComRecuperacao >= 6) {
+                        buttonConselhoClasse.prop('disabled', true);
+                        buttonConselhoClasse.hide();
+                        buttonConselhoClasse.val("");
+                    }
+                    else {
+                        buttonConselhoClasse.prop('disabled', false);
+                        buttonConselhoClasse.show();
+                    }
+                }
+                else {
+                    buttonRecuperacao.prop('disabled', false);
+                    buttonRecuperacao.show();
+
+                    buttonConselhoClasse.prop('disabled', false);
+                    buttonConselhoClasse.show();
+
+                }
+
+
+            }
+        }
+
+        function calcularNotaFinal() {
+            for (var i = 0; i < @ViewBag.QuantidadeRegistros; i++) {
+
+                var notaTotal = $('#total' + i).val();
+                var notaRecuperacao = $('#notaRecuperacao' + i).val();
+                var notaConselho = $('#notaConselho' + i).val();
+
+
+                if (notaConselho == "") notaConselho = 0;
+                if (notaTotal == "") notaTotal = 0;
+                if (notaRecuperacao == "") notaRecuperacao = 0;
+
+                var resultado = parseFloat(notaTotal) + parseFloat(notaRecuperacao) + parseFloat(notaConselho);
+                $('#totalFinal' + i).val(resultado);
+            }
+        }
+
+    </script>
+}

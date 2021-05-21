@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink("Olá " + User.Identity.GetUserName(), "Index", "Home")
+        </li>
+        <li>
+        <a href="javascript:document.getElementById('logoutForm').submit()"><b>SAIR DO OLIE</b></a>
+        </li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right navbar navbar-light">
+        @* <li>@Html.ActionLink("Registre-se", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+        <a class="navbar-brand" href="..\Account\Login">
+            <img src="~/Images/user-6.png" width="25" height="25" alt="">
+        </a>
+        <li>@Html.ActionLink("ENTRAR", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

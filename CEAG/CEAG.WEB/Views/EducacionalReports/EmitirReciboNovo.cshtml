@@ -1,0 +1,156 @@
+﻿@model CEAG.DOMINIO.Procedure.AlunoReciboMensal
+@using CEAG.NEGOCIO.Enum;
+@using CEAG.NEGOCIO.Classes;
+@{
+    ViewBag.Title = "Recibo";
+    Layout = "~/Views/Shared/_LayoutReport.cshtml";
+}
+
+@{
+    ImagemCodificada imagem = ViewBag.ImagemCodificada;
+}
+
+<div class="containerLopus">
+    <div align="center">
+        <table width="850" height="30">
+            <tr>
+                <td width="20%">
+                    @if (ViewBag.imageBytes != null)
+                    {
+                        <img style="height:150px;width:150px" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(ViewBag.imageBytes))" />
+                    }
+                </td>
+                <td width="60%" align="center">
+                    <img src="~/Images/CEAG.png" width="240" height="100" />
+                </td>
+                <td align="center" width="20%">
+                    <b>RECIBO </b><br /><br /><div><b><span style="color: #f00;">@Model.NUMERO_IN_DEBITO</span></b></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <hr />
+                </td>
+            </tr>
+
+        </table>
+        <table border="3" width="850" height="30">
+            <tr>
+                <td>
+                    <table border="0" width="850" height="30">
+                        <tr align="left">
+                            <td height="30">&nbsp;RECEBEMOS DO ALUNO(A) <b>@Model.NOME_VC_ALUNO</b></td>
+                        </tr>
+                        <tr align="Left">
+                            <td height="30">&nbsp;SÉRIE: <b>@Model.SEGMENTO_VC_TURMA</b> TURNO: <b>@Model.PERIODO_VC_TURMA</b></td>
+                            <td align="right">VALOR R$</td>
+                            <td align="right"><b>@Model.VALOR_MO_DEBITO.ToString("N2")</b></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr align="left">
+                            @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.MENSALIDADE.ToString()))
+                            {
+                                <td height="30">&nbsp;REFERENTE AO MÊS <b>@Model.PERIODO_DT_DEBITO.Month/@Model.PERIODO_DT_DEBITO.Year</b></td>
+                            }
+                            @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.MATERIAL.ToString()))
+                            {
+                                <td height="30">&nbsp;REFERENTE AO MATERIAL ESCOLAR</td>
+                            }
+                            @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.MATRICULA.ToString()))
+                            {
+                                <td height="30">&nbsp;REFERENTE A MATRICULA ESCOLAR</td>
+                            }
+                            @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.RENEGOCIAÇÃO.ToString()))
+                            {
+                                <td height="30">&nbsp;REFERENTE À NEGOCIAÇÃO</td>
+                            }
+                            @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.FARDAMENTO.ToString()))
+                            {
+                                <td height="30">&nbsp;REFERENTE AO FARDAMENTO ESCOLAR</td>
+                            }
+                            @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.LIVRO.ToString()))
+                            {
+                                <td height="30">&nbsp;REFERENTE À COMPRA DE LIVRO</td>
+                            }
+                            @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.DOCUMENTAL.ToString()))
+                            {
+                                <td height="30">&nbsp;REFERENTE À SOLICITAÇÃO DE DOCUMENTO</td>
+                            }
+                            @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.AVULSO.ToString()))
+                            {
+                                <td height="30">&nbsp;PAGAMENTO AVULSO</td>
+                            }
+                            <td align="right">DESCONTO R$</td>
+                            <td align="right"><span style="color: #f00;">@Model.DESCONTO_MO_DEBITO.ToString("N2")</span></td>
+                        </tr>
+                        <tr align="left">
+                            @if (!Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.MENSALIDADE.ToString()))
+                            {
+                                <td height="30">
+                                    <table border="1" width="100%" height="30">
+                                        <tr>
+                                            <td>
+                                                &nbsp;@Model.DESCRICAO_VC_DEBITO
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            }
+                            else
+                            {
+                                <td height="30"></td>
+                            }
+
+                            <td align="right"><h4><b>TOTAL R$</h4></b></td>
+                            <td align="right"><h4><b>@Model.PAGO_MO_DEBITO.ToString("N2")</b></h4></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table border="0" width="850" height="30">
+            <tr align="left">
+                <td height="30">
+                    PAGO:
+                    <b>
+                        @Model.PAGAMENTO_DT_DEBITO.ToString("dd/MM/yyyy")
+                    </b>
+                </td>
+            </tr>
+        </table><br /><br /><br /><br /><br />
+        <table border="0" width="850" height="30">
+            <tr align="center">
+                <td height="30">
+                    <b>
+                        @Model.NOME_VC_FUNCIONARIO
+
+                    </b>
+                </td>
+            </tr>
+        </table>
+        <hr />
+        <table border="0" width="850" height="30">
+            <tr align="left">
+                <td height="30">
+                    <b>
+                        IMPRESSO: @DateTime.Now.ToString("dd/MM/yyyy")
+                    </b>
+                </td>
+            </tr>
+        </table>    </div>
+</div>
+</div>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/inputmask")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#telefone").inputmask("mask", { "mask": "(99) 9999-9999" });
+            $("#cpf").inputmask("mask", { "mask": "999.999.999-99" }, { reverse: true });
+            $("#cep").inputmask("mask", { "mask": "99999-999" });
+            $("#preco").inputmask("mask", { "mask": "999.999,99" }, { reverse: true });
+            $("#valor").inputmask("mask", { "mask": "#.##9,99" }, { reverse: true });
+        });
+    </script>
+}

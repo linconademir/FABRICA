@@ -1,0 +1,201 @@
+﻿@model CEAG.WEB.ViewModel.AlunoMatricula.AlunoMatriculaViewModel
+
+@{
+    ViewBag.Title = "Matricula de Aluno";
+}
+
+@{
+    string valor = ViewBag.MensalidadeValor.ValorAnual.ToString("N2");
+}
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/rucksackBig.png" /> MATRICULA DE ALUNO</h3>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CodTurma)
+        @Html.HiddenFor(model => model.CodAluno)
+        @Html.HiddenFor(model => model.CodAluno)
+        @*@Html.HiddenFor(model => model.Ano)*@
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <fieldset>
+                <legend>INFORMAÇÕES DO ALUNO</legend>
+                <div class="form-group">
+                    <div class="col-md-1">
+                        @if (ViewBag.Aluno.Sexo.ToUpper() == "MASCULINO")
+                        {
+                            <img alt="Brand" height="50" width="50" src="~/Images/Browser/student-male-big.png" />
+                        }
+                        else
+                        {
+                            <img alt="Brand" height="50" width="50" src="~/Images/Browser/student-female-big.png" />
+                        }
+                    </div>
+                    <div class="col-md-5 col-sm-5 col-lg-5">
+                        <h4><b>Nome: </b>@ViewBag.Aluno.Nome</h4>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-lg-2">
+                        <h4><b>CPF: </b>@ViewBag.Aluno.CpfComMascara</h4>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4">
+                        <h4><b>Endereço: </b>@ViewBag.Aluno.LogradouroCompleto</h4>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>INFORMAÇÕES DA TURMA</legend>
+                <div class="form-group">
+                    <div class="col-md-1">
+                        <img alt="Brand" height="50" width="50" src="~/Images/Browser/classroomBig.png" />
+                    </div>
+                    <div class="col-md-3">
+                        <h4><b>Nome: </b>@ViewBag.Turma.Descricao</h4>
+                    </div>
+                    <div class="col-md-2">
+                        <h4><b>Segmento: </b>@ViewBag.Turma.Segmento</h4>
+                    </div>
+                    <div class="col-md-2">
+                        <h4><b>Nível: </b>@ViewBag.Turma.Nivel</h4>
+                    </div>
+                    <div class="col-md-1">
+                        <h4><b>Ano: </b>@ViewBag.Turma.AnoLetivo</h4>
+                    </div>
+                    <div class="col-md-2">
+                        <h4><b>Periodo: </b>@ViewBag.Turma.Periodo</h4>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>INFORMAÇÕES DA MATRICULA</legend>
+
+                <div class="form-group">
+                    @Html.Label("VALOR ANUIDADE", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.CodTurma, new { htmlAttributes = new { @class = "form-control", id = "codTurma", @readonly = "readonly", @style = "display: none" } })
+                    <div class="col-md-2">
+                        @Html.Editor(@valor, new { htmlAttributes = new { @class = "form-control", @Value = @valor, @readonly = "readonly" } })
+                    </div>
+                    @Html.LabelFor(model => model.Bolsista, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Bolsista, (SelectList)ViewBag.DropdownSimNao, new { @class = "form-control", data_live_search = "true", id = "ddlBolsista" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ParcelasMensalidade, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.ParcelasMensalidade, (SelectList)ViewBag.DropdownQuantidadeParcelas, new { @class = "form-control", data_live_search = "true", id = "ddlQtdParcelas" })
+                    </div>
+                    @Html.LabelFor(model => model.ValorMatricula, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.ValorMatricula, new { htmlAttributes = new { @class = "form-control", id = "valor", @readonly = "readonly", @Value = ViewBag.ValorMensal } })
+                    </div>
+                    @Html.LabelFor(model => model.ValorMensalidade, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.ValorMensalidade, new { htmlAttributes = new { @class = "form-control", @Value = valor, id = "valorMensalidade" } })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    @Html.LabelFor(model => model.ValorTaxaMaterial, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.ValorTaxaMaterial, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.LabelFor(model => model.FormaPagamento, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.FormaPagamento, (SelectList)ViewBag.DropdownFormaPagamento, new { @class = "form-control", data_live_search = "true", id = "ddlFormaPagamento" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Observação, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Observação, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                    <button type="submit">
+                        <img src="~/images/Browser/ok.png" width="50" height="50" />
+                    </button>
+                    <button type="button" onclick="location.href='@Url.Action("MatricularAluno", "AlunoMatriculas", new { codturma = @ViewBag.Turma.CodTurma})'">
+                        <img src="~/images/Browser/cancel.png" data-toggle="modal" data-target="#modal-mensagem" width="50" height="50" />
+                    </button>
+                </div>
+            </div>
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/validations_pt-br")
+
+    @*<script src="../../Scripts/jquery-3.3.1.js" type="text/javascript"></script>
+        <script src="../../Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>*@
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        //Dropdownlist Selectedchange event
+        $("#ddlQtdParcelas").change(function () {
+            $("#valorMensalidade").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("DividirValorAnual", "AlunoMatriculas")', // we are calling json method
+                dataType: 'json',
+
+                data: { qtdParcelas: $("#ddlQtdParcelas").val(), codTurma: $("#CodTurma").val() },
+               // here we are get value of selected country and passing same value as inputto json method GetStates.
+
+                success: function (retorno) {
+                    $("#valorMensalidade").val(retorno);
+                    // states contains the JSON formatted list
+                    // of states passed from the controller
+                    if ($("#ddlQtdParcelas").val() == 1) {
+                        var campoValor = $("#valor");
+                        campoValor.hide();
+                        campoValor.prop('readonly', true);
+                    }
+                    else {
+                        var campoValor = $("#valor");
+                        campoValor.show();
+                        campoValor.prop('readonly', false);
+                    }
+                },
+                error: function (ex) {
+                    alert('Ocorreu falha no carregamento das parcelas.' + ex.error);
+                }
+            });
+            return false;
+        })
+        $("#ddlBolsista").change(function () {
+                if ($("#ddlBolsista").val() == "SIM") {
+                    var campoValor = $("#valor");
+                    var parcelas = $("#ddlQtdParcelas");
+                    var campoMensalidade = $("#valorMensalidade");
+                    campoMensalidade.val(0);
+                    campoValor.val(0);
+                    parcelas.hide();
+                }
+                else {
+                    var parcelas = $("#ddlQtdParcelas");
+                    parcelas.show();
+                }
+            })
+    });
+    </script>
+}

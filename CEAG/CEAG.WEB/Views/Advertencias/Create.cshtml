@@ -1,0 +1,75 @@
+﻿@model CEAG.WEB.ViewModel.Advertencia.AdvertenciaViewModel
+
+@{
+    ViewBag.Title = "Cadastro de Advertência";
+}
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/delete-message.png" /> INCLUSÃO DE ADVERTÊNCIA PARA ALUNO</h3>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CodAlunoMatricula)
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <fieldset>
+                <legend>DADOS DA ADVERTÊNCIA</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label col-md-2 col-sm-2 col-lg-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                    </div>
+                    @Html.LabelFor(model => model.Comparecimento, htmlAttributes: new { @class = "control-label col-md-2 col-sm-2 col-lg-2" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.Comparecimento, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2 col-lg-2" })
+                    <div class="col-md-10 col-lg-10">
+                        @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", @placeholder = "Descreva as informações da advertência", rows = "8" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-2 col-lg-2" })
+                    <div class="col-md-2 col-lg-2">
+                        @Html.DropDownListFor(model => model.Tipo, (SelectList)ViewBag.DropdownTipoAdvertencia, new { @class = "form-control", data_live_search = "true", id = "ddlFormaPagamento" })
+                    </div>
+                    @Html.LabelFor(model => model.Motivo, htmlAttributes: new { @class = "control-label col-md-1 col-sm-1 col-lg-1" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.Motivo, (SelectList)ViewBag.DropdownMotivoAdvertencia, new { @class = "form-control", data_live_search = "true", id = "ddlTipoDebito" })
+                    </div>
+                    @Html.LabelFor(model => model.Urgencia, htmlAttributes: new { @class = "control-label col-md-1 col-sm-1 col-lg-1" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.Urgencia, (SelectList)ViewBag.DropdownTipoUrgenciaAdvertencia, new { @class = "form-control", data_live_search = "true", id = "ddlTipoDebito" })
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                <button type="submit">
+                    <img src="~/images/Browser/ok.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" />
+                </button>
+                <button type="button" onclick="location.href='@Url.Action("Index", "Advertencias", new { codAlunoMatricula = Model.CodAlunoMatricula})'">
+                    <img src="~/images/Browser/cancel.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" />
+                </button>
+            </div>
+        </div>
+
+    }
+
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/validations_pt-br")
+
+}

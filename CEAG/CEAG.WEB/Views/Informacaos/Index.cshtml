@@ -1,0 +1,65 @@
+﻿@model IEnumerable<CEAG.WEB.ViewModel.Informacao.InformacaoExibicaoViewModel>
+
+@{
+    ViewBag.Title = "Informações";
+}
+
+<div class="containerLopus">
+    <div>
+        <br />
+        @if (ViewBag.Aluno.Sexo.ToUpper() == "MASCULINO")
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/user-2.png" /> Informações do Aluno: <b>@ViewBag.Aluno.Nome (Informações: @Model.Count()) </b></h3>
+
+        }
+        else
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/user-2.png" /> Informações da Aluna: <b>@ViewBag.Aluno.Nome</b></h3>
+        }
+
+    </div>
+    <hr />
+
+    @Html.ActionLink("+ ADICIONAR INFORMAÇÃO", "Create", "Informacaos", new { codAluno = ViewBag.Aluno.CodAluno }, new { @class = "btn btn-primary but_clientes" })
+    <br />
+    <br />
+    @foreach (var tipo in Model.Select(p => p.Tipo).Distinct())
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    <h3> Tipo:  <b> @tipo - @Model.Where(p => p.Tipo.Equals(tipo)).Count()</b></h3>
+                </th>
+                <th> <h3> <b> Ações </b></h3></th>
+            </tr>
+
+            @foreach (var item in Model.Where(p => p.Tipo.Equals(tipo)))
+            {
+                <tr>
+                    <td width="70%">
+                        <b>@Html.DisplayNameFor(model => model.Descricao):</b> @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit","Informacaos", new { codInformacao = item.CodInformacao})">
+                            <img src="@Url.Content("~/images/ImageLink/edit-pie-chart-report.png")" width="30" height="30" title='Editar a informação do Aluno' />
+                        </a>
+                        @*<a href="@Url.Action("Details","Informacaos", new { id = item.CodInformacao})">
+                            <img src="@Url.Content("~/images/ImageLink/view-file.png")" width="30" height="30" title='Visualizar a informação do Aluno' />
+                        </a>*@
+                        <a href="@Url.Action("Delete","Informacaos", new { codInformacao = item.CodInformacao})">
+                            <img src="@Url.Content("~/images/ImageLink/delete.png")" width="30" height="30" title='Apagar a Informação do Aluno' />
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <hr class="btn-primary" />
+    }
+    <div class="form-group">
+        <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+            <a href="@Url.Action("Details","Alunos", new { codAluno = @ViewBag.Aluno.CodAluno})">
+                <img src="@Url.Content("~/images/Browser/cancel.png")" width="50" height="50" title='Voltar para a lista de opções' />
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,689 @@
+﻿@model CEAG.DOMINIO.Procedure.AlunoReciboMensal
+
+@{
+    ViewBag.Title = "Emitir Contrato";
+    Layout = "~/Views/Shared/_LayoutReport.cshtml";
+}
+
+@if (!ViewBag.EmitirContrato)
+{
+    <br />
+    <br />
+    <div align="center">
+        <a class="btn btn-primary" href="@Url.Action("EmitirContrato","EducacionalReports", new { codAluno = Model.AlunoMatriculaExibicaoViewModel.CodAlunoMatricula, gerarPDF = true})">
+            <b>IMPRIMIR PDF</b>
+        </a>
+        <a class="btn btn-primary" href="@HttpContext.Current.Request.UrlReferrer.AbsoluteUri">
+            <b>VOLTAR</b>
+        </a>
+    </div>
+}
+
+<div align="center">
+    <table width="850">
+        <tr>
+            <a href="~/Views/EducacionalReports/EmitirContrato.cshtml">~/Views/EducacionalReports/EmitirContrato.cshtml</a>
+            <td width="28%">
+                <img height="150" src="" />
+            </td>
+
+            <td>
+                <h4><b>CENTRO EDUCACIONAL ANTONIO GALDINO</b></h4>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="containerLopus">
+    <div align="center"><h4><b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b></h4></div>
+    <div align="center"><h4>ANO LETIVO @DateTime.Now.Year</h4></div>
+    <div align="center">
+        <table border="1" width="850" height="30">
+            <tr align="center" class="bg-primary">
+                <td><b>CONTRATANTES – RESPONSÁVEIS PELO (A) ALUNO (A)</b></td>
+            </tr>
+        </table>
+        <table border="1" width="850">
+            <tr align="center">
+                <td><b>BENEFICIÁRIO</b></td>
+            </tr>
+        </table>
+        <table border="1" width="850" height="40">
+            <tr>
+                <td><b>&nbsp;Nome Completo: </b>@Model.Nome.ToUpper()</td>
+            </tr>
+        </table>
+        <table border="1" width="850" height="40">
+            <tr>
+                <td><b>&nbsp;Data de Nascimento: </b>@Model.NascimentoFormatado</td>
+                <td><b>&nbsp;Série: </b>@Model.AlunoMatriculaExibicaoViewModel.Turma.Segmento</td>
+                <td><b>&nbsp;Turma: </b>@Model.AlunoMatriculaExibicaoViewModel.Turma.Periodo</td>
+            </tr>
+        </table>
+        <table border="1" width="850" height="40">
+            <tr>
+                <td><b>&nbsp;Endereço Residencial: </b>@Model.LogradouroCompleto.ToUpper()</td>
+            </tr>
+        </table>
+        <table border="1" width="850" height="40">
+            <tr>
+                <td width="33%"><b>&nbsp;Telefone: </b>(@Model.TelefoneViewModels[0].Ddd) @Model.TelefoneViewModels[0].Numero</td>
+                <td width="33%"><b>&nbsp;Nacionalidade: </b>@Model.Nacionalidade.ToUpper() </td>
+                <td><b>&nbsp;Naturalidade: </b>@Model.Naturalidade.ToUpper()</td>
+            </tr>
+        </table>
+        <table border="1" width="850" height="30">
+            <tr align="center" class="bg-primary">
+                <td><b>CONTRATANTE – RESPONSÁVEL LEGAL</b></td>
+            </tr>
+        </table>
+        @foreach (var itemResponsaveis in @Model.ResponsavelViewModels.Where(p => p.Tipo.ToUpper().Equals("LEGAL")))
+        {
+            <table border="1" width="850">
+                <tr align="center">
+                    <td><b>DADOS PESSOAIS</b></td>
+                </tr>
+            </table>
+            <table border="1" width="850" height="40">
+                <tr>
+                    <td width="80%"><b>&nbsp;Nome Completo: </b>@itemResponsaveis.Nome</td>
+                    <td><b>&nbsp;CPF: </b>@itemResponsaveis.CpfComMascara</td>
+                </tr>
+            </table>
+            <table border="1" width="850" height="40">
+                <tr>
+                    <td width="33%"><b>&nbsp;RG: </b>@itemResponsaveis.Rg</td>
+                    <td width="33%"><b>&nbsp;Orgão Emissor: </b>@itemResponsaveis.RgOrgaoEmissor.ToUpper()-@itemResponsaveis.RgUf.ToUpper() </td>
+                    <td><b>&nbsp;Naturalidade: </b>@itemResponsaveis.Naturalidade.ToUpper() </td>
+                </tr>
+            </table>
+            <table border="1" width="850" height="40">
+                <tr>
+                    <td width="33%"><b>&nbsp;Estado Civil: </b>@itemResponsaveis.EstadoCivil.ToUpper()</td>
+                    <td width="33%"><b>&nbsp;Profissão: </b>@itemResponsaveis.Profissao.ToUpper()</td>
+                    <td><b>&nbsp;Nacionalidade: </b>@itemResponsaveis.Nacionalidade.ToUpper() </td>
+                </tr>
+            </table>
+            <table border="1" width="850" height="40">
+                <tr>
+                    <td><b>&nbsp;Endereço Residencial: </b>@itemResponsaveis.LogradouroCompleto.ToUpper()</td>
+                </tr>
+            </table>
+            <table border="1" width="850">
+                <tr align="center">
+                    <td><b>TELEFONES</b></td>
+                </tr>
+            </table>
+            foreach (var itemResponsaveisTelefones in itemResponsaveis.Telefones)
+            {
+                <table border="1" width="850" height="40">
+                    <tr>
+                        <td width="33%"><b>&nbsp;Tipo: </b>@itemResponsaveisTelefones.Tipo.ToUpper()</td>
+                        <td width="33%"><b>&nbsp;Local: </b>@itemResponsaveisTelefones.Local.ToUpper()</td>
+                        <td><b>&nbsp;Numero: </b>(@itemResponsaveisTelefones.Ddd) @itemResponsaveisTelefones.Numero </td>
+                    </tr>
+                </table>
+            }
+        }
+
+    </div>
+    <br />
+    <div align="center">
+        <table border="0" width="850">
+            <tr>
+                <td align="justify">
+                    <p>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Por meio do presente instrumento particular o <b>CONTRATANTE</b>, em benefício do aluno(a), qualificado neste contrato, que passa a fazer parte do mesmo, de um lado, e de outro lado, como <b>CONTRATADA</b>: o <b>CENTRO EDUCACIONAL ANTONIO GALDINO LTDA</b>, pessoa jurídica de direito privado, com sede na Rua Fernando Tomas da Silva, 66 Ibura de Baixo, Recife-PE, CNPJ de Nº 06.149.709/0001-30 e Filial intitulada <b>CEAGUINHO</b>, pessoa jurídica de direito privado, com sede na Rua Fernando Tomaz da Silva,  Nº 148, Ibura, Recife-PE, CNPJ: 06.149.709/0002-10, e-mail:colegioceag@gmail.com - mantenedora Srª. Poliana Vitoria Galdino Higino, Dr. Pedagógica, firmam o presente <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b> à Vista do que dispõem os Artigos 1º, inciso IV; 5º, inciso II, 173, inciso IV, 206 incisos II e III e 209, todos da Constituição federal; artigos 389, 476 e 597 do Código Civil Brasileiro; da Lei Nº 8.069/90 (Estatuto da Criança e do Adolescente); da lei 8.078/90 (código do Consumidor), Lei 8.880/94, lei 9.069/95 e Lei 9.870/99, mediante clausulas e condições a seguir especificadas e cujo cumprimento se obrigam mutuamente:
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table border="0" width="850">
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 1ª </b>– o objeto deste contrato é a prestação de serviços educacionais pela CONTRATADA, ao aluno indicado pelo CONTRATANTE, durante o ano de 2020, de acordo com o seu Plano Escolar.
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table border="0" width="850">
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 2º </b>- A CONTRATADA assegura ao CONTRATANTE uma vaga no seu corpo discente, a ser utilizada conforme especificado na ficha de matricula, que passa a fazer integrante do presente contrato, ministrando a educação e o ensino através de aulas e demais atividades escolares cujo planejamento pedagógico atenda ao disposto na legislação em vigor.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        §1º - As aulas serão ministradas nas salas de aula ou locais que a CONTRATADA indicar, tendo em vista a natureza dos conteúdos e as técnicas pedagógicas que se fizerem necessárias.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        §2º - Reserva-se a CONTRATADA, até 05 dias antes do inicio de cada período letivo, o direito de cancelar qualquer turma cujo numero de alunos seja inferior a 20 (vinte), proporcionando ao aluno, neste caso, o direito de ocupar uma vaga em outra turma da mesma natureza, no mesmo ou outro turno, desde que exista.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        §3º - A prestação dos serviços educacionais, objeto deste contrato, tem seu início na data da assinatura do mesmo e seu término no último dia letivo previsto no calendário escolar do ano letivo em exercício.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        §4º - É de exclusiva competência e responsabilidade da CONTRATADA a orientação técnica e pedagógica decorrente da prestação de serviços educacionais.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 3ª </b>– É de inteira responsabilidade do CONTRATANTE a aquisição de Material Didático (livros e/ou apostilas) e Escolar do Aluno, constante em Lista de Material entregue no ato da Matricula.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        §1º - Para as Turmas da Educação Infantil será adotado Kit de Livros Didáticos Coleção Iluminuras; Para as Turmas do 1º ao 9º Ano será adotado o Sistema de Ensino MAXI e demais livros integrados, que serão ministrados semestralmente e vendidos nesta unidade de ensino através da livraria NGS Books.
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="justify">
+                    <p>
+                        §2º- Será facultado ao CONTRATANTE, o pagamento de taxa de material escolar, cujo valor será de R$ 0,00 para os alunos do Maternal ao 1º ano, ou, a entrega total do material escolar solicitado pela CONTRATADA através de lista de material escolar disponível na secretaria da escola.
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 4ª </b>- A contraprestação pelos serviços a serem prestados referentes ao período letivo de janeiro a dezembro de 2020, conforme previsto na cláusula 2ª será a anuidade de:
+                    </p>
+                </td>
+            </tr>
+        </table>
+
+        <table border="1" width="850">
+            <tr class="bg-primary">
+                <td width="20%" align="center"><b>Curso </b></td>
+                <td width="20%" align="center"><b>ANUIDADE </b></td>
+                <td align="center"><b>VALOR ANUIDADE À VISTA (ESPÉCIE) VALOR </b></td>
+            </tr>
+            @foreach (var itemMensalidadeValor in @Model.MensalidadeValor)
+            {
+                <tr>
+                    <td width="30%"><b>&nbsp;&nbsp;@itemMensalidadeValor.Turma</b></td>
+                    <td width="30%" align="center"><b>&nbsp;@itemMensalidadeValor.ValorAnual.ToString("C")</b></td>
+                    <td align="center"><b>&nbsp;@itemMensalidadeValor.ValorAnualVista.ToString("C")</b></td>
+                </tr>
+            }
+        </table>
+        <br />
+        <table border="0" width="850">
+            <tr>
+                <td align="justify">
+                    <p>
+                        Pagáveis na forma da cláusula 5ª.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 1º - O valor da contraprestação acima pactuado poderá ser reajustado quando expressamente permitido por lei, bem como para preservar o equilíbrio contratual, caso qualquer mudança legislativa ou normativa altere a equação econômico-financeira do presente instrumento.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        §2º - Taxas referentes a festividades realizadas pela contratada, não configura esta aquisição, em hipótese nenhuma, como parte integrante da anuidade aqui contratada
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 5ª </b>- A anuidade pode ser paga à vista em espécie (previsto na cláusula 4ª) no ato da matrícula ou parcelada da seguinte forma
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table border="1" width="850">
+            <tr class="bg-primary">
+                <td width="20%" align="center"><b>Curso </b></td>
+                <td width="20%" align="center"><b>MATRICULA + 11 PARCELAS </b></td>
+                <td align="center"><b>VALOR C/ DESC. IRMÃOS </b></td>
+            </tr>
+            @foreach (var itemMensalidadeValor in @Model.MensalidadeValor)
+            {
+                <tr>
+                    <td width="30%"><b>&nbsp;&nbsp;@itemMensalidadeValor.Turma</b></td>
+                    <td width="30%" align="center"><b>&nbsp;@itemMensalidadeValor.ValorMensal.ToString("C") + 11 x @itemMensalidadeValor.ValorMensal.ToString("C")</b></td>
+                    <td align="center"><b>&nbsp;@itemMensalidadeValor.ValorComDesconto.ToString("C") + 11 x @itemMensalidadeValor.ValorComDesconto.ToString("C")</b></td>
+                </tr>
+            }
+        </table>
+        <br />
+        <table border="0" width="850">
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 1º - A primeira parcela será cobrada no ato da matrícula e tem caráter de sinal e princípio de pagamento, razão pela qual só será devolvida em parte 80%, ou seja, do valor pago se a matrícula for cancelada ou trancada até o 1º dia útil anterior ou início do período letivo (fevereiro de 2020). Caso o CONTRATANTE venha a solicitar o trancamento e/ou a transferência após o inicio do ano letivo e do vencimento da 1ª parcela ou subseqüentes, a escola não estará obrigada a devolver a matrícula, além de importar ao CONTRATANTE estar em dia com a parcela do mês em que o evento ocorreu.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 2º - O pagamento da Matrícula, bem como a entrega da documentação exigida pela CONTRATADA: Xerox da certidão de nascimento, Xerox do comprovante de residência, Xerox do RG e CPF dos responsáveis e Transferência da escola anterior, são imprescindíveis para a concretização do presente contrato.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 3º - O vencimento das parcelas (mensalidades) é todo dia 30 (trinta) do mês corrente.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 4º - Para as turmas do Maternal I , II e 6º ao 9ºANO tem  obtenção de desconto de R$ 27,50 (vinte e sete reais e cinqüenta centavos) de antecipação nas mensalidades, e para as turmas do Jardim  ao 5º ANO  tem a obtenção do desconto de R$ 26,50 ( vinte e seis reais e cinqüenta centavos) de antecipação estas deverão ser pagas até o 5º (quinto) dia útil do mês corrente. Ex.: Mensalidade de Fevereiro/2020 deverá ser pago até o dia 07/02/2020, Março/2020 deverá ser pago até 12/03/2020 e assim por diante.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 5º - As turmas do Maternal I e II , 6º ao 9º ano o  desconto de irmão  é de R$17,50 fixo em cada mensalidade. E para as turmas do Jardim ao 5º o  desconto de irmão  é de R$ 16,50 fixo em cada mensalidade.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 6ª</b> - O CONTRATANTE declara que teve conhecimento prévio das condições financeiras deste contrato que foi exposto em local de fácil acesso e visualização (art. 2º da Lei nº  9.870/99), conhecendo-as e aceitando-as livremente.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 7ª </b>- Os pagamentos das parcelas deverão ser efetuados até a data do vencimento acima prevista, nos locais (banco ou secretaria da escola) indicados pela CONTRATADA.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 1º - O pagamento efetuado após a data de vencimento será acrescido de multa no percentual de 2% (dois por cento) sobre o valor da prestação em atraso, mais correção monetária e juros moratórios de 1% (um por cento) por período de 30 dias.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 2º - Poderá a CONTRATADA, para a cobrança de seu crédito, fazer inscrever o nome do CONTRATANTE em bancos de dados cadastrais (SPC/DPC/SERASA), PROTESTO ou valer-se de firma especializada, sendo que neste caso o CONTRATANTE inadimplente responderá, também, por honorários a esta devidos.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 3º - O pagamento das obrigações financeiras do CONTRATANTE comprovar-se-á mediante apresentação do recibo ou carnê que individualize a obrigação quitada.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 4º - A CONTRATADA poderá valer-se do contrato, apurada a inadimplência do CONTRATANTE e a efetiva prestação do serviço pela CONTRATADA, para emitir e, se for o caso, protestar notas promissórias, duplicatas e letras de câmbio de prestação de serviços, tudo em conformidade com a legislação vigente.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 5º - Em caso de inadimplência, o CONTRATANTE perderá todo e qualquer desconto do qual seja eventualmente beneficiário.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 8ª </b>- Os valores da contraprestação acima pactuada satisfazem, exclusivamente, a prestação de serviços decorrentes da carga horária constante da proposta curricular da CONTRATADA  e  de seu calendário escolar.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 1º - Este contrato não inclui o fornecimento de livros didáticos, apostilas, serviços de estudos de recuperação, cursos paralelos e outros serviços facultativos.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 2º - Os serviços extraordinários efetivamente prestados ao aluno, dos quais citamos, exemplificativamente: segunda chamada de provas e exames, declarações, estudos de recuperação, adaptação e dependência, segunda via de boletins de notas, segunda via de histórico escolar, segunda via de documento de conclusão, segunda via de transferência, alimentação e transporte escolar (quando oferecidos), serão cobrados à parte. O CONTRATANTE declara que teve conhecimento dos valores cobrados por estes serviços extraordinários, conforme tabela que está à disposição na secretaria escolar.
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table border="1" width="850">
+            <tr class="bg-primary">
+                <td width="60%" align="center"><b>DOCUMENTO</b></td>
+                <td align="center"><b>VALOR</b></td>
+            </tr>
+            @foreach (var itemTaxa in @Model.TaxaExibicaoViewModel.Where(p => p.Tipo.ToUpper().Equals("DOCUMENTAL")))
+            {
+                <tr>
+                    <td width="30%"><b>&nbsp;&nbsp;@itemTaxa.Descricao</b></td>
+                    <td width="30%" align="center">
+                        <b>
+                            @if (@itemTaxa.Valor == 0)
+                            {
+                                <label>Gratuito</label>
+                            }
+                            else
+                            {
+                                @itemTaxa.Valor.ToString("C");
+                            }
+                        </b>
+                    </td>
+                </tr>
+            }
+        </table>
+        <br />
+        <table border="0" width="850">
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 9ª </b>- O presente instrumento poderá ser rescindido por iniciativa do CONTRATANTE (configurando cancelamento da matrícula e transferência do aluno, quando for o caso) mediante comunicação prévia junto à secretaria da CONTRATADA, com antecedência de 30 (trinta) dias.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 1º - Para a efetivação da rescisão de que trata esta cláusula, o CONTRATANTE deverá estar quite com suas obrigações financeiras até o mês da rescisão, inclusive.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 2º - O presente contrato poderá ser rescindido por iniciativa da CONTRATADA, caso o beneficiário do contrato cometa infração disciplinar que justifique, nos termos do regimento escolar, seu desligamento do estabelecimento de ensino.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 3º - O estabelecimento de ensino não se responsabiliza e não realiza transporte de alunos.
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table border="0" width="850">
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 10ª </b>- Ao firmar o presente contrato o CONTRATANTE declara que tem conhecimento prévio do Regimento Escolar e das instruções específicas, que lhes foram apresentados e que passam a fazer parte integrante do presente contrato, submetendo-se às suas disposições, bem como das demais obrigações decorrentes da legislação aplicável à área de ensino. Independentemente do acima declarado, o Regimento Escolar e demais instruções estarão a disposição do CONTRATANTE para consulta, no endereço da CONTRATADA.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 1º - Obriga-se o CONTRATANTE a fazer com que o aluno cumpra o calendário escolar e horários estabelecidos pela CONTRATADA, assumindo total responsabilidade pelos problemas advindos da não observância destes.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 2º - O não comparecimento do aluno aos atos escolares ora contratados não exime do pagamento, tendo em vista a disponibilidade do serviço colocado ao CONTRATANTE.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 3º - O CONTRATANTE está ciente da obrigatoriedade do uso completo do uniforme escolar por parte do aluno, denominado nas alíneas a e b deste parágrafo, bem como da aquisição de todo o material escolar individual exigido, assumindo inteiramente a responsabilidade por qualquer fato que venha a prejudicar o aluno pelo descumprimento desta obrigação.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>a - Do Maternal ao 5º Ano: </b>Tênis, Blusa Regata ou Camisa Pólo (da escola) e Bermuda ou short-saia(da escola)
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>b – Do 6º ao 9º Ano: </b>Tênis, Blusa Regata ou Camisa Pólo (da escola) e Calça comprida jeans azul ou preta.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 4º - É obrigação dos discentes virem com o fardamento escolar completo, pois o contrario, não será permitida a entrada dos mesmos na escola.
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table border="0" width="850">
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 11ª </b>- O CONTRATANTE assume total responsabilidade quanto às declarações prestadas neste contrato e no ato de matrícula, relativas à aptidão legal do aluno para a freqüência na série e graus indicados, quando for o caso, concordando, desde já, que a não entrega dos documentos legais comprobatórios das declarações prestadas, até 60 (sessenta) dias contados do início das aulas, acarretará o automático cancelamento da vaga aberta ao aluno, rescindindo-se o presente contrato, encerrando-se a prestação de serviços e isentando a CONTRATADA de qualquer responsabilidade pelos eventuais danos resultantes.
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table border="0" width="850">
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 12ª </b>- A CONTRATADA não estará obrigada a renovar a matrícula do beneficiário do CONTRATANTE, para o período letivo posterior, caso este não tenha cumprido rigorosamente as cláusulas do presente contrato.
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table border="0" width="850">
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 13ª </b>- O CONTRATANTE cede, gratuitamente, os direitos autorais por trabalhos escolares de qualquer natureza e direito a imagem do BENEFICIÁRIO, para publicação em site, rede sociais, jornais, livros, impressos e apresentação em feiras, exposições e eventos de natureza escolar.
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table border="0" width="850">
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 14ª </b>- As partes comprometem-se a comunicar, reciprocamente, por escrito e mediante recibo, qualquer mudança de endereço sob pena de serem consideradas válidas as correspondências enviadas aos endereços constantes do presente instrumento, inclusive para os efeitos da citação judicial.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        Parágrafo Único – O CONTRATANTE declara na ficha de matrícula do beneficiário do contrato o regime de guarda e responsabilidade deste e compromete-se a comunicar expressamente à CONTRATADA sobre a existência e o teor de decisões judiciais que venham a alterar o regime de guarda do beneficiário, não se responsabilizando a CONTRATADA por quaisquer fatos que resultem da não observância da presente cláusula.
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table border="0" width="850">
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 15ª </b>– A CONTRATADA será indenizada pelo CONTRATANTE por qualquer dano ou prejuízo que este ou o DISCENTE, preposto ou acompanhante de qualquer um deles, venha a causar nos edifícios, instalações, mobiliários ou equipamentos da CONTRATADA.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 1º – A CONTRATADA não se responsabiliza pela guarda e conseqüente indenização, decorrente do extravio ou dos danos causados a quaisquer objetos, não empregados no processo de aprendizado, levados ao estabelecimento da CONTRATADA, inclusive celulares, aparelhos eletro-eletrônicos, papel moeda ou documentos, pertencentes ou sob a posse do CONTRATANTE, do DISCENTE ou de seus prepostos ou acompanhantes, exceto se decorrentes de atos dos seus subordinados.
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 2º – A CONTRATADA NÃO PERMITE a entrada de aparelhos telefônicos e aparelhos eletro-eletrônicos de qualquer espécie nas dependências da escola por parte dos discentes.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 3º – A CONTRATADA dispõe em sua sede de serviços de segurança eletrônica e guarda patrimonial, câmeras de segurança dispostas em pontos estratégicos para segurança e conforto de seu corpo discente e docente e poderá vir a fazer uso de aparelhos para detectar a entrada de objetos não característicos de uso nos serviços prestados pela contratada (estilete, faca, arma de fogo, veneno ou qualquer outro material nocivo a vida humana).
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="justify">
+                    <p>
+                        § 4º – O CONTRATANTE fica ciente, ainda, que a CONTRATADA não presta quaisquer tipos de serviços em relação a estacionamento, vigilância ou guarda de veículos automotores de qualquer natureza, não assumindo, portanto, para si, a Responsabilidade de indenizações por danos, furtos, roubos, incêndios, atropelamentos, colisões etc., que venham a ocorrer no pátio externo, ou circunvizinhos de seu prédio, cuja responsabilidade será exclusivamente de seu condutor e/ou proprietário.
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table border="0" width="850">
+            <tr>
+                <td align="justify">
+                    <p>
+                        <b>Cláusula 16ª </b>- As partes contratantes atribuem ao presente contrato plena eficácia e força executiva judicial. Fica eleito o foro de Recife, para dirimir as dúvidas que o presente contrato possa suscitar.
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table border="0" width="850">
+            <tr>
+                <td align="justify">
+                    <p>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        E por estarem às partes de acordo com todos os termos e condições do instrumento, assinam o presente contrato, em duas vias de igual teor e forma, juntamente com duas testemunhas, para que produza seus jurídicos efeitos.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <p>
+                        <b>Recife</b>, @DateTime.Now.ToShortDateString().
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <br />
+        <table border="0" width="850">
+            <tr>
+                <td align="center">
+                    <p>
+                        __________________________________________________
+                    </p>
+                </td>
+                <td align="center">
+                    <p>
+                        __________________________________________________
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <p>
+                        <b>CONTRATANTE</b>
+                    </p>
+                </td>
+                <td align="center">
+                    <p>
+                        <b>CONTRATADA</b>
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <br />
+        <table border="0" width="850">
+            <tr>
+                <td align="center">
+                    <p>
+                        __________________________________________________
+                    </p>
+                </td>
+                <td align="center">
+                    <p>
+                        __________________________________________________
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <p>
+                        <b>TESTEMUNHA</b>
+                    </p>
+                </td>
+                <td align="center">
+                    <p>
+                        <b>TESTEMUNHA</b>
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <br />
+        <table border="0" width="850">
+            <tr>
+                <td align="right">
+                    <p>
+                        <b>Documento impresso em @DateTime.Now.Date às @DateTime.Now.Hour:@DateTime.Now.Minute</b>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/inputmask")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#telefone").inputmask("mask", { "mask": "(99) 9999-9999" });
+            $("#cpf").inputmask("mask", { "mask": "999.999.999-99" }, { reverse: true });
+            $("#cep").inputmask("mask", { "mask": "99999-999" });
+            $("#preco").inputmask("mask", { "mask": "999.999,99" }, { reverse: true });
+            $("#valor").inputmask("mask", { "mask": "#.##9,99" }, { reverse: true });
+        });
+    </script>
+}

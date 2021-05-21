@@ -1,0 +1,22 @@
+﻿@model CEAG.DOMINIO.Escola
+
+@{
+    Layout = null;
+}
+
+<div>
+    <table>
+        <tr>
+            <td align="center">
+                <h4>
+                    <b>
+                        Endereço: @Model.Logradouro.Rua, @Model.Logradouro.Numero @Model.Logradouro.Bairro @Model.Logradouro.Municipio-@Model.Logradouro.Uf | CEP: @Model.Logradouro.Cep <br />
+                        Autorização de funcionamento ou Decreto @Model.Autorizacao<br />
+                        Publicado no D.O de @Model.PublicacaoDiarioOficial.Value.ToString("dd/MM/yyyy")<br />
+                        Inscrição de cadastro Nº @Model.Inscricao
+                    </b>
+                </h4>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,21 @@
+﻿
+@model IEnumerable<CEAG.WEB.ViewModel.Turma.TurmaExibicaoViewModel>
+
+<table>
+    <tr>
+        @foreach (var item in Model)
+        {
+            <td>
+                [ 
+                    @item.Descricao -
+                    <font color="rrggbb">
+                        <b>
+                            @item.AnoLetivo
+                        </b>
+                    </font>
+                ]
+            </td>
+        }
+    </tr>
+</table>
+

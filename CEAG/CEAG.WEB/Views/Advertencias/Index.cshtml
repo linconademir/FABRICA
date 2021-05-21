@@ -1,0 +1,93 @@
+﻿@model IEnumerable<CEAG.WEB.ViewModel.Advertencia.AdvertenciaExibicaoViewModel>
+
+@{
+    ViewBag.Title = "Advertências do Aluno";
+}
+}
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/delete-message.png" /> LISTA DE ADVERTÊNCIAS DO ALUNO: { @Model.Count().ToString() ADVERTÊNCIAS NESTA PÁGINA }</h3> <h3 class="btn-danger"> @ViewBag.MessageError</h3>
+    </div>
+    @using (Html.BeginForm("Create", "Advertencias", FormMethod.Get))
+    {
+        <div>
+            <input type="hidden" name="codAlunoMatricula" value="@ViewBag.CodAlunoMatricula" />
+            <input type="submit" id="btnAdicionar" class="btn-primary but_clientes" data-toggle="modal" data-target="#modal-mensagem" value="+ ADICIONAR ADVERTÊNCIA" />
+        </div>
+    }
+    <hr />
+    <table class="table table-striped table-hover" id="tblConsulta">
+        <thead class="btn-primary">
+            <tr>
+                <th class="cabecalho">
+                    @Html.DisplayNameFor(model => model.Tipo)
+                </th>
+                <th class="cabecalho">
+                    @Html.DisplayNameFor(model => model.Titulo)
+                </th>
+                <th class="cabecalho">
+                    @Html.DisplayNameFor(model => model.Urgencia)
+                </th>
+               
+                <th class="cabecalho">
+                    @Html.DisplayNameFor(model => model.Motivo)
+                </th>
+                <th class="cabecalho">
+                    @Html.DisplayNameFor(model => model.Inclusao)
+                </th>
+                <th class="cabecalho">
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th class="cabecalho">AÇÕES</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="100">
+                        @Html.DisplayFor(modelItem => item.Tipo)
+                    </td>
+                    <td width="420" align="center">
+                        @Html.DisplayFor(modelItem => item.Titulo)
+                    </td>
+                    <td width="100px" align="center">
+                        @Html.DisplayFor(modelItem => item.Urgencia)
+                    </td>
+                  
+                    <td width="100px" align="center">
+                        @Html.DisplayFor(modelItem => item.Motivo)
+                    </td>
+                    <td width="100px" align="center">
+                        @Html.DisplayFor(modelItem => item.Inclusao)
+                    </td>
+                    <td width="100px" align="center">
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+
+                    <td width="160px" align="center">
+                        <a href="@Url.Action("Edit","Advertencias", new { codAdvertencia = item.CodAdvertencia})">
+                            <img src="@Url.Content("~/images/ImageLink/edit-pie-chart-report.png")" data-toggle="modal" data-target="#modal-mensagem" width="30" height="30" title='Negociar débito vencido' />
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <hr class="btn-primary" />
+    <div class="form-group">
+        <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+            <a href="@Url.Action("Details","Turmas", new { codTurma = ViewBag.CodTurma})">
+                <img src="@Url.Content("~/images/Browser/cancel.png")" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" title='Voltar para a lista de opções' />
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/validations_pt-br")
+}

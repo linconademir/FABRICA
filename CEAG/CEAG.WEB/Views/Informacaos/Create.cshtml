@@ -1,0 +1,61 @@
+﻿@model  CEAG.WEB.ViewModel.Informacao.InformacaoViewModel
+@{
+    ViewBag.Title = "Cadastro de informação";
+}
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        @if (ViewBag.Aluno.Sexo.ToUpper() == "MASCULINO")
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/todo-list.png" /> CADASTRO DE INFORMAÇÕES DO ALUNO <b>@ViewBag.Aluno.Nome</b></h3>
+
+        }
+        else
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/todo-list.png" /> CADASTRO DE INFORMAÇÕES DA ALUNA <b>@ViewBag.Aluno.Nome</b></h3>
+        }
+
+    </div>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CodAluno)
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <fieldset>
+                <legend>DADOS</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(model => model.Tipo, (SelectList)ViewBag.DropdownListaInformacoes, new { @class = "form-control", data_live_search = "true", id = "ddlPacote" })
+                        @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                    <button type="submit">
+                        <img src="~/images/Browser/ok.png" width="50" height="50"/>
+                    </button>
+                    <button type="button" onclick="location.href='@Url.Action("Details", "Alunos", new { codAluno = ViewBag.Aluno.CodAluno } )'">
+                        <img src="~/images/Browser/cancel.png" width="50" height="50" />
+                    </button>
+                    @*<a href="@Url.Action("Index","Alunos")">
+                            <img src="@Url.Content("~/images/Browser/cancel.png")" />
+                        </a>*@
+                </div>
+            </div>
+        </div>
+    }
+</div>

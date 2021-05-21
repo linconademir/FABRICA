@@ -1,0 +1,65 @@
+﻿@model CEAG.WEB.ViewModel.Unidade.UnidadeViewModel
+
+@{
+
+    ViewBag.Title = "Alterar Unidade";
+}
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/pin3Big.png" /> ALTERAR UNIDADE</h3> <h3 class="btn-danger"> @ViewBag.MessageError</h3>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CodEscola)
+        @Html.HiddenFor(model => model.CodUnidade)
+        @Html.HiddenFor(model => model.Inclusao)
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <fieldset>
+                <legend>DADOS DA UNIDADE</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Ano, htmlAttributes: new { @class = "control-label col-md-2 col-lg-2" })
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.Ano, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </div>
+
+
+                    @Html.LabelFor(model => model.Numero, htmlAttributes: new { @class = "control-label col-md-1 col-lg-1" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Numero, (SelectList)ViewBag.DropdownNumeroUnidade, new { @class = "form-control", data_live_search = "true", id = "ddlNumeroUnidade" })
+                        @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Abertura, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.Abertura, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Abertura, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Fechamento, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.Fechamento, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Fechamento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                    <button type="submit">
+                        <img src="~/images/Browser/ok.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem"/>
+                    </button>
+                    <button type="button" onclick="location.href='@Url.Action("Index", "Unidades")'">
+                        <img src="~/images/Browser/cancel.png" data-toggle="modal" data-target="#modal-mensagem" width="50" height="50"/>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

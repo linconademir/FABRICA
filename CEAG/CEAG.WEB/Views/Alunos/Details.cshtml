@@ -1,0 +1,310 @@
+﻿@model CEAG.WEB.ViewModel.Aluno.AlunoExibicaoViewModel
+
+@{
+    /**/
+
+    ViewBag.Title = "Detalhes";
+}
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        @if (Model.Sexo.ToUpper() == "MASCULINO")
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/student-male-big.png" /> DADOS DO ALUNO </h3>
+
+        }
+        else
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/student-female-big.png" /> DADOS DA ALUNA </h3>
+        }
+    </div>
+    <div>
+        <a class="but_card btn-default" href="@Url.Action("Edit","Alunos", new { codAluno = Model.CodAluno })">
+            <div class="col-md-12">
+                <table class="col-md-12">
+                    <tr>
+                        <td>
+                            <h2><b>@Html.DisplayFor(model => model.Nome) </b> <font COLOR="#rrggbb">@Html.DisplayFor(model => model.Matricula)</font>  </h2>
+                        </td>
+                    </tr>
+                </table>
+                <table class="col-md-10">
+                    <tr>
+                        <td>
+                            INCLUSÃO <b>@Html.DisplayFor(model => model.Inclusao)</b>
+                            <br />
+                            NASCIMENTO <b>@Html.DisplayFor(model => model.Nascimento)</b>
+                            <br />
+                        </td>
+                        <td>
+                            CPF <b>@Html.DisplayFor(model => model.CpfComMascara)</b>
+                            <br />
+                            RG <b>@Html.DisplayFor(model => model.Rg) @Html.DisplayFor(model => model.RgOrgaoEmissor)-@Html.DisplayFor(model => model.RgUf)</b>
+                            <br />
+                        </td>
+                        <td>
+                            MÃE <b>@Html.DisplayFor(model => model.MaeNome) ( @Html.DisplayFor(model => model.MaeProfissao) )</b>
+                            <br />
+                            PAI <b>@Html.DisplayFor(model => model.PaiNome) ( @Html.DisplayFor(model => model.PaiProfissao) )</b>
+                            <br />
+                        </td>
+                    </tr>
+                </table>
+                <table class="col-md-10">
+                    <tr>
+                        <td>
+                            <h4>@Html.DisplayFor(model => model.LogradouroCompleto)</h4>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </a>
+    </div>
+    <br />
+    <div class="col-lg-9">
+        <div>
+
+            @if (Model.Parentes.Any())
+            {
+                <table class="table table-striped table-hover" id="tblParentes">
+                    <thead class="bg-primary">
+                        <tr>
+                            <td>
+                                <b>PARENTES CADASTRADOS OU MATRICULADOS</b>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Parentes)
+                        {
+                            <tr>
+                                <td>
+                                    <b>@item.NivelParentesco</b> @item.Nome
+                                    @foreach (var itemTurma in item.ListaTurmasJaMatriculadas.OrderByDescending(p => p.AnoLetivo))
+                                    {
+                                        <font color="rrggbb">
+                                            - @itemTurma.Descricao
+                                            <b>
+                                                @itemTurma.AnoLetivo
+                                            </b>
+                                        </font>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Delete","ParentescoAlunos", new { codParentescoAluno = item.CodParentescoAluno, codAluno = Model.CodAluno})">
+                                        <img src="@Url.Content("~/images/ImageLink/delete.png")" data-toggle="modal" data-target="#modal-mensagem" width="30" height="30" title='Apagar o Parente' />
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+            @if (Model.ListaAlunoMatriculaExibicaoViewModel.Any())
+            {
+                <table class="table table-striped table-hover" id="tblConsulta">
+                    <thead class="bg-primary">
+                        <tr>
+                            <td>
+                                <b>HISTÓRICO DE TURMAS MATRICULADAS</b>
+                            </td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var itemListaAluno in Model.ListaAlunoMatriculaExibicaoViewModel)
+                        {
+                            <tr>
+                                <td>
+                                    [ @itemListaAluno.Turma.Descricao -
+                                    <font color="rrggbb">
+                                        <b>
+                                            @itemListaAluno.Turma.AnoLetivo
+                                        </b>
+                                        @if (@itemListaAluno.Bolsista.Equals("SIM"))
+                                        {<b> BOLSISTA </b>}
+
+                                    </font>
+                                    ]
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <hr />
+        <hr />
+        <div>
+            <h3><b>INFORMAÇÔES COMPLEMENTARES AO CADASTRO</b></h3>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+                @foreach (var itemResponsavel in Model.ResponsavelViewModels.OrderBy(p => p.Tipo))
+                {
+                    <table class="but_mini_card btn-default" width="100%">
+                        <tr>
+                            <td>
+
+                                <a href="@Url.Action("Delete","Responsavels", new { codResponsavel = itemResponsavel.CodResponsavel})">
+                                    <img src="@Url.Content("~/images/ImageLink/delete.png")" data-toggle="modal" data-target="#modal-mensagem" width="30" height="30" title='Apagar o responsável' />
+                                </a>
+
+                                <a href="@Url.Action("Edit","Responsavels", new { codResponsavel = itemResponsavel.CodResponsavel})">
+                                    @if (itemResponsavel.Tipo.ToUpper().Equals("FINANCEIRO"))
+                                    {
+                                        <img src="@Url.Content("~/images/Browser/payroll.png")" data-toggle="modal" data-target="#modal-mensagem" width="30" height="30" title='Editar o responsável' />
+                                    }
+                                    @if (itemResponsavel.Tipo.ToUpper().Equals("TRANSPORTE"))
+                                    {
+                                        <img src="@Url.Content("~/images/Browser/bus.png")" data-toggle="modal" data-target="#modal-mensagem" width="30" height="30" title='Editar o responsável' />
+                                    }
+                                    @if (itemResponsavel.Tipo.ToUpper().Equals("LEGAL"))
+                                    {
+                                        <img src="@Url.Content("~/images/Browser/law.png")" data-toggle="modal" data-target="#modal-mensagem" width="30" height="30" title='Editar o responsável' />
+                                    }
+                                </a>
+                                <label>
+                                    <font color="rrggbb"><b>@Html.DisplayFor(model => itemResponsavel.Tipo)</b></font>
+                                    @Html.DisplayFor(model => itemResponsavel.Nome)
+
+                                    @foreach (var itemTelefoneResponsavel in itemResponsavel.Telefones)
+                                    {
+                                        <label>
+                                            [
+                                            @Html.DisplayFor(model => itemTelefoneResponsavel.Tipo)
+                                            - @Html.DisplayFor(model => itemTelefoneResponsavel.Local)
+                                            - (@Html.DisplayFor(model => itemTelefoneResponsavel.Ddd)) @Html.DisplayFor(model => itemTelefoneResponsavel.Numero)
+                                            ]
+                                        </label>
+                                    }
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                }
+            </div>
+
+            <div class="col-md-12">
+                <hr>
+                @foreach (var itemTipo in Model.InformacoeViewModels)
+                {
+                    <table class="but_mini_card btn-default" width="100%">
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("Delete","Informacaos", new { codInformacao = itemTipo.CodInformacao})">
+                                    <img src="@Url.Content("~/images/ImageLink/delete.png")" data-toggle="modal" data-target="#modal-mensagem" width="30" height="30" title='Apagar o responsável' />
+                                </a>
+                                <a href="@Url.Action("Edit","Informacaos", new { codInformacao = itemTipo.CodInformacao })">
+                                    <img src="@Url.Content("~/images/Browser/hypertension.png")" data-toggle="modal" data-target="#modal-mensagem" width="30" height="30" title='Editar o responsável' />
+                                </a>
+                                <label>
+                                    @Html.DisplayFor(model => itemTipo.Tipo)<br />
+                                    @Html.DisplayFor(model => itemTipo.Descricao)<br />
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                }
+            </div>
+
+            <div class="col-md-12">
+                <hr>
+                @foreach (var itemTelefones in Model.TelefoneViewModels.OrderBy(p => p.Tipo))
+                {
+                    <table class="but_mini_card btn-default" width="100%">
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("Delete","Telefones", new { codTelefone = itemTelefones.CodTelefone})">
+                                    <img src="@Url.Content("~/images/ImageLink/delete.png")" data-toggle="modal" data-target="#modal-mensagem" width="30" height="30" title='Apagar o responsável' />
+                                </a>
+                                <a href="@Url.Action("Edit","Telefones", new { codTelefone = itemTelefones.CodTelefone })">
+                                    @if (itemTelefones.Tipo.ToUpper().Equals("CELULAR"))
+                                    {
+                                        <img src="@Url.Content("~/images/Browser/android.png")" data-toggle="modal" data-target="#modal-mensagem" width="30" height="30" title='Editar o responsável' />
+                                    }
+                                    @if (itemTelefones.Tipo.ToUpper().Equals("FIXO"))
+                                    {
+                                        <img src="@Url.Content("~/images/Browser/phone-office.png")" data-toggle="modal" data-target="#modal-mensagem" width="30" height="30" title='Editar o responsável' />
+                                    }
+                                </a>
+                                <label>
+                                    <font color="rrggbb">@Html.DisplayFor(model => itemTelefones.Pessoa)</font> -  @Html.DisplayFor(model => itemTelefones.Local)
+                                    <b>@Html.DisplayFor(model => itemTelefones.Tipo)</b>
+                                    (@Html.DisplayFor(model => itemTelefones.Ddd)) @Html.DisplayFor(model => itemTelefones.Numero)<br />
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                }
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-3 but_mini_card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div>
+                        @using (Html.BeginForm("Create", "ParentescoAlunos", FormMethod.Get, new { codAluno = Model.CodAluno }))
+                        {
+                            <div>
+                                <input type="submit" id="btnAdicionar" class="btn-primary but_clientes" data-toggle="modal" data-target="#modal-mensagem" value="+ PARENTE" />
+                                <input type="hidden" name="codAluno" value="@Model.CodAluno" />
+                            </div>
+                        }
+                    </div>
+                    <br />
+                    <div>
+                        @using (Html.BeginForm("Matricular", "AlunoMatriculas", FormMethod.Get, new { codAluno = Model.CodAluno }))
+                        {
+                            <div>
+                                <input type="submit" id="btnAdicionar" class="btn-primary but_clientes" data-toggle="modal" data-target="#modal-mensagem" value="+ MATRICULA" />
+                                <input type="hidden" name="codAluno" value="@Model.CodAluno" />
+                            </div>
+                        }
+                    </div>
+                    <br />
+                    <div>
+                        @using (Html.BeginForm("Create", "Responsavels", FormMethod.Get, new { codAluno = Model.CodAluno }))
+                        {
+                            <div>
+                                <input type="submit" id="btnAdicionar" class="btn-primary but_clientes" data-toggle="modal" data-target="#modal-mensagem" value="+ RESPONSÁVEL" />
+                            </div>
+                        }
+                    </div>
+                    <br />
+                    <div>
+                        @using (Html.BeginForm("Create", "Informacaos", FormMethod.Get, new { codAluno = Model.CodAluno }))
+                        {
+                            <div>
+                                <input type="submit" id="btnAdicionar" class="btn-primary but_clientes" data-toggle="modal" data-target="#modal-mensagem" value="+ ACOMPANHAMENTO" />
+                            </div>
+                        }
+                    </div>
+                    <br />
+                    <div>
+                        @using (Html.BeginForm("Create", "Telefones", FormMethod.Get, new { codAluno = Model.CodAluno }))
+                        {
+                            <div>
+                                <input type="submit" id="btnAdicionar" class="btn-primary but_clientes" data-toggle="modal" data-target="#modal-mensagem" value="+ TELEFONE" />
+                            </div>
+                        }
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+            <a href="@Url.Action("Index","Alunos")">
+                <img src="@Url.Content("~/images/Browser/cancel.png")" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" title='Voltar para a lista de Alunos' />
+            </a>
+        </div>
+    </div>
+</div>

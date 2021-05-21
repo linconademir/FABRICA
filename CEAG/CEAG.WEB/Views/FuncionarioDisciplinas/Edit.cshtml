@@ -1,0 +1,360 @@
+﻿@model IEnumerable<CEAG.WEB.ViewModel.Disciplina.DisciplinaViewModel>
+@using CEAG.WEB.ViewModel.TurmaFuncionarioDisciplinas;
+
+
+@{
+    /**/
+
+    ViewBag.Title = "Editar Professor";
+}
+
+
+@{
+    List<TurmaFuncionarioDisciplinaHorarioExibicaoViewModel> listaHorario = ViewBag.ListaTurmaFuncionarioDisciplinaHorarioExibicaoViewModel;
+    List<TurmaFuncionarioDisciplinaHorarioExibicaoViewModel> listaHorarioProfessor = ViewBag.ListaTurmaFuncionarioDisciplinaHorarioExibicaoViewModelProfessor;
+}
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        @if (ViewBag.Funcionario.Sexo.ToUpper() == "MASCULINO")
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/learningbig.png" /> ALTERAR CADASTRO DO PROFESSOR <b>@ViewBag.Funcionario.Nome </b></h3>
+
+        }
+        else
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/learningbig.png" /> ALTERAR CADASTRO DA PROFESSORA <b>@ViewBag.Funcionario.Nome </b></h3>
+        }
+
+    </div>
+    <hr />
+    <fieldset>
+        <legend><img alt="Brand" height="20" width="20" src="~/Images/Browser/learningbig.png" /> INFORMAÇÕES DO PROFESSOR</legend>
+        <div class="form-group">
+            <div class="col-md-4">
+                <h4><b>NOME: </b>@ViewBag.Funcionario.Nome</h4>
+            </div>
+            <div class="col-md-2">
+                <h4><b>CPF: </b>@ViewBag.Funcionario.CpfComMascara</h4>
+            </div>
+            <div class="col-md-2">
+                <h4><b>FUNÇÃO: </b>@ViewBag.Funcionario.Funcao</h4>
+            </div>
+            <div class="col-md-4">
+                <h4><b>TITULAÇÃO: </b>@ViewBag.Funcionario.Titulacao</h4>
+            </div>
+        </div>
+    </fieldset>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <table>
+                <thead class="bg-primary">
+                    <tr>
+                        <th height="50">
+                            <h4><b>&nbsp;&nbsp;SELECIONE AS DISCIPLINAS QUE SERÃO ADICIONADAS AO PROFESSOR</b></h4>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <hr />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <div class="btn-group-toggle" data-toggle="buttons">
+                                    <div class="containerLopus">
+                                        @foreach (var item in Model.OrderBy(p => p.Descricao))
+                                        {
+                                            <div class="col-md-2">
+                                                @if (item.Marcado)
+                                                {
+                                                    <label class="btn-danger but_mini_card">
+                                                        <input type="checkbox" name="Ids" value="@item.CodDisciplina" checked="checked"><b> @Html.DisplayFor(modelItem => item.Descricao)</b>
+                                                    </label>
+                                                }
+                                                else
+                                                {
+                                                    <label class="btn-default but_mini_card">
+                                                        <input type="checkbox" name="Ids" value="@item.CodDisciplina" /><b> @Html.DisplayFor(modelItem => item.Descricao)</b>
+                                                    </label>
+                                                }
+                                                <br />
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- #region Calendários das turmas -->
+
+        <div class="form-group">
+            <table width="100%">
+                <thead class="bg-primary">
+                    <tr>
+                        <td height="50">
+                            <h4><b>&nbsp;&nbsp;CALENDÁRIOS DE TURMAS COM @ViewBag.Funcionario.Nome</b></h4>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+        <!-- #region Calendários Geral -->
+
+        @foreach (var itemListaHorario in listaHorarioProfessor)
+        {
+            <div class="form-group">
+                <table width="100%">
+                    <thead class="bg-primary">
+                        <tr>
+                            <td height="50" align="center">
+                                <h4><b>CALENDÁRIO GERAL DO PROFESSOR</b></h4>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+                <table width="100%" border="1">
+                    <tbody class="text-primary">
+                        <tr>
+                            <td width="15%" align="center">
+                                <h5><b>HORÁRIOS/DIAS</b></h5>
+                            </td>
+                            <td width="15%" align="center">
+                                <h5><b>SEGUNDA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>TERÇA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>QUARTA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>QUINTA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>SEXTA</b></h5>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table width="100%" border="1">
+                    <tbody>
+
+                        @foreach (var item in itemListaHorario.HorarioAulaViewModels.Select(p => p.Inicio).Distinct())
+                        {
+                            <tr>
+                                <td width="15%" align="center">
+                                    @foreach (var horarioView in itemListaHorario.HorarioAulaViewModels.Where(p => p.Inicio == item).Take(1))
+                                    {
+                                        <label>
+                                            &nbsp;&nbsp;@Html.DisplayFor(modelItemHorario => horarioView.Inicio) até @Html.DisplayFor(modelItemHorario => horarioView.Termino)
+                                        </label>
+                                    }
+                                </td>
+                                @foreach (var itemHorario in itemListaHorario.HorarioAulaViewModels.Where(p => p.Inicio == item))
+                                {
+
+                                    if (itemListaHorario.TurmaFuncionarioDisciplinaExibicaoViewModels
+                                        .Where(p => p.CodHorarioAula == itemHorario.CodHorarioAula && p.DiaSemana == itemHorario.DiaSemana).Any())
+                                    {
+                                        foreach (var itemTurmaFuncionarioDisciplina in itemListaHorario.TurmaFuncionarioDisciplinaExibicaoViewModels
+                                            .Where(p => p.CodHorarioAula == itemHorario.CodHorarioAula && p.DiaSemana == itemHorario.DiaSemana))
+                                        {
+                                            <td width="15%" align="left" bgcolor="#87CEFA">
+                                                <div>
+                                                    @if (itemTurmaFuncionarioDisciplina.Funcionario.Nome == @ViewBag.Funcionario.Nome)
+                                                    {<h5>
+                                                         <b>
+                                                             &nbsp;&nbsp;&nbsp;&nbsp;
+                                                             @Html.DisplayFor(modelItem => itemTurmaFuncionarioDisciplina.Turma.Descricao)<br />
+                                                             &nbsp;&nbsp;&nbsp;&nbsp;
+                                                             @Html.DisplayFor(modelItem => itemTurmaFuncionarioDisciplina.Disciplina.Descricao)
+                                                         </b>
+                                                        </h5>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h5>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                                            OCUPADO
+                                                        </h5>
+                                                    }
+
+                                                </div>
+                                            </td>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <td width="15%" align="left" bgcolor="#BDB76B">
+                                            <div>
+                                                <h5 class="text-danger"><b>&nbsp;&nbsp;&nbsp;&nbsp;LIVRE</b></h5>
+                                            </div>
+                                        </td>
+                                    }
+
+                                    @*</div>
+                                    </td>*@
+
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        }
+
+
+        <!-- #endregion Calendários Geral -->
+<hr />
+        <!-- #region Calendário por turma -->
+
+        @foreach (var itemListaHorario in listaHorario)
+        {
+
+            <div class="form-group">
+                <table width="100%">
+                    <thead class="btn-primary">
+                        <tr>
+                            <td height="30" align="center">
+                                <h5><b>CALENDÁRIO DO PROFESSOR NA TURMA @itemListaHorario.TurmaExibicaoViewModel.Descricao </b></h5>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+                <table width="100%" border="1">
+                    <tbody class="text-primary">
+                        <tr>
+                            <td width="15%" align="center">
+                                <h5><b>HORÁRIOS/DIAS</b></h5>
+                            </td>
+                            <td width="15%" align="center">
+                                <h5><b>SEGUNDA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>TERÇA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>QUARTA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>QUINTA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>SEXTA</b></h5>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table width="100%" border="1">
+                    <tbody>
+
+                        @foreach (var item in itemListaHorario.HorarioAulaViewModels.Select(p => p.Inicio).Distinct())
+                        {
+                            <tr>
+                                <td width="15%" align="center">
+                                    @foreach (var horarioView in itemListaHorario.HorarioAulaViewModels.Where(p => p.Inicio == item).Take(1))
+                                    {
+                                        <label>
+                                            &nbsp;&nbsp;@Html.DisplayFor(modelItemHorario => horarioView.Inicio) até @Html.DisplayFor(modelItemHorario => horarioView.Termino)
+                                        </label>
+                                    }
+                                </td>
+                                @foreach (var itemHorario in itemListaHorario.HorarioAulaViewModels.Where(p => p.Inicio == item))
+                                {
+
+                                    if (itemListaHorario.TurmaFuncionarioDisciplinaExibicaoViewModels
+                                        .Where(p => p.CodHorarioAula == itemHorario.CodHorarioAula && p.DiaSemana == itemHorario.DiaSemana).Any())
+                                    {
+                                        foreach (var itemTurmaFuncionarioDisciplina in itemListaHorario.TurmaFuncionarioDisciplinaExibicaoViewModels
+                                            .Where(p => p.CodHorarioAula == itemHorario.CodHorarioAula && p.DiaSemana == itemHorario.DiaSemana))
+                                        {
+                                            <td width="15%" align="left" bgcolor="#87CEFA">
+                                                <div>
+                                                    @if (itemTurmaFuncionarioDisciplina.Funcionario.Nome == @ViewBag.Funcionario.Nome)
+                                                    {<h4>
+                                                            <b>
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                @Html.DisplayFor(modelItem => itemTurmaFuncionarioDisciplina.Disciplina.Descricao)
+                                                            </b>
+                                                        </h4>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h5>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                                            OCUPADO
+                                                        </h5>
+                                                    }
+
+                                                </div>
+                                            </td>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <td width="15%" align="left" bgcolor="#BDB76B">
+                                            <div>
+                                                <h5 class="text-danger"><b>&nbsp;&nbsp;&nbsp;&nbsp;LIVRE</b></h5>
+                                            </div>
+                                        </td>
+                                    }
+
+                                    @*</div>
+                                    </td>*@
+
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        }
+
+        <!-- #endregion Calendário por turma-->
+
+        <!-- #endregion Calendários das turmas -->
+
+        <div class="form-group">
+            <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                <button type="submit">
+                    <img src="~/images/Browser/ok.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" onclick="location.href='@Url.Action("Create", "FuncionarioDisciplinas", new {codFuncionario = ViewBag.Funcionario.CodFuncionario })'" />
+                </button>
+                <button type="button" data-toggle="modal" data-target="#modal-mensagem" onclick="location.href='@Url.Action("Index", "FuncionarioDisciplinas")'">
+                    <img src="~/images/Browser/cancel.png" width="50" height="50" />
+                </button>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+

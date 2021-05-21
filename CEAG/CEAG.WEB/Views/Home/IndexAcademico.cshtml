@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@*<div>
+        <img src="~/Images/download.png" />
+    </div>*@
+
+<br />
+<br />
+<br />
+
+<div class="containerLopus">
+    <div class="row">
+        <div class="jumbotron col-md-3 btn btn-primary">
+            <p>
+                <img src="~/Images/group.png" height="100" width="110" />
+            </p>
+            <p>
+                @Html.ActionLink("ALUNOS", "Index", "Alunos", null, new { @class = "btn btn-primary" })
+            </p>
+        </div>
+        <div class="jumbotron col-md-3 btn btn-primary">
+            <p>
+                <img src="~/Images/networking-2.png" height="100" width="110" />
+            </p>
+            <p>
+                @Html.ActionLink("PROFESSORES", "Index", "Professores", null, new { @class = "btn btn-primary" })
+            </p>
+        </div>
+        <div class="jumbotron col-md-3 btn btn-primary">
+            <p>
+                <img src="~/Images/invoice.png" height="100" width="110" />
+            </p>
+            <p>
+                @Html.ActionLink("MATRICULAS", "Index", "Matriculas", null, new { @class = "btn btn-primary" })
+            </p>
+        </div>
+        
+    </div>
+</div>

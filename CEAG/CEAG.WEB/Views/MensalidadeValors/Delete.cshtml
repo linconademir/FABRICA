@@ -1,0 +1,75 @@
+﻿@model CEAG.WEB.ViewModel.MensalidadeValores.MensalidadeValorViewModel
+
+@{
+    ViewBag.Title = "EXCLUIR VALOR";
+}
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/calcreg.png" /> DESEJA DELETAR O VALOR ABAIXO?</h3>
+    </div>
+    <hr />
+    <div>
+        <fieldset>
+            <legend>DADOS DO VALOR CADASTRADO</legend>
+            <dl class="dl-horizontal">
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Turma)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Turma)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ValorAnual)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ValorAnual)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ValorAnualVista)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ValorAnualVista)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ValorMensal)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ValorMensal)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ValorComDesconto)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ValorComDesconto)
+                </dd>
+
+            </dl>
+
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                    <button type="submit" value="Delete">
+                        <img src="~/images/Browser/ok.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" />
+                    </button>
+                    <button type="button" onclick="location.href='@Url.Action("Index", "MensalidadeValors")'">
+                        <img src="~/images/Browser/cancel.png" data-toggle="modal" data-target="#modal-mensagem" width="50" height="50" />
+                    </button>
+
+                </div>
+            }
+        </fieldset>
+    </div>
+</div>

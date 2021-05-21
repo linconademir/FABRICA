@@ -1,0 +1,95 @@
+﻿@model CEAG.WEB.ViewModel.Turma.TurmaViewModel
+
+@{
+    ViewBag.Title = "Excluir Turma";
+}
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/classroomBig.png" /> EXCLUSÃO DE TURMA</h3>
+    </div>
+
+    <hr />
+    <div>
+        <fieldset>
+            <legend>DADOS DA TURMA</legend>
+            <dl class="dl-horizontal">
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Descricao)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AnoLetivo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AnoLetivo)
+                </dd>
+
+               
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Vagas)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Vagas)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nivel)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Nivel)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Status)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Status)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Segmento)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Segmento)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Portaria)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Portaria)
+                </dd>
+            </dl>
+
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                    <button type="submit" value="Delete">
+                        <img src="~/images/Browser/ok.png" width="50" height="50"/>
+                    </button>
+                    <button type="button" onclick="location.href='@Url.Action("Index", "Turmas" )'">
+                        <img src="~/images/Browser/cancel.png" width="50" height="50" />
+                    </button>
+                    @*<a href="@Url.Action("Index","Alunos")">
+                            <img src="@Url.Content("~/images/Browser/cancel.png")" />
+                        </a>*@
+                </div>
+            }
+        </fieldset>
+    </div>
+</div>

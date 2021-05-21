@@ -1,0 +1,98 @@
+﻿@model CEAG.DOMINIO.Advertencia
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Advertencia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AlunoMatricula.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AlunoMatricula.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aula.Observacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aula.Observacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Urgencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Urgencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inclusao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inclusao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comparecimento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comparecimento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodAcesso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodAcesso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Resolucao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resolucao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CodAdvertencia }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,58 @@
+﻿@model CEAG.WEB.ViewModel.Disciplina.DisciplinaViewModel
+
+@{
+    ViewBag.Title = "Cadastro de Disciplina";
+}
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/book-shelf.png" /> CADASTRO DE DISCIPLINA</h3>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CodEscola)
+
+        <div class="form-horizontal">
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <fieldset>
+                <legend>DADOS DA DISCIPLINA</legend>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(model => model.Obrigatoria, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Obrigatoria, (SelectList)ViewBag.DropdownSimNao, new { @class = "form-control", data_live_search = "true", id = "ddlSimNao" })
+                        @Html.ValidationMessageFor(model => model.Obrigatoria, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Tipo, (SelectList)ViewBag.DropdownTipoDisciplina, new { @class = "form-control", data_live_search = "true", id = "ddlTipoDisciplina" })
+                        @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-group">
+                <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                    <button type="submit">
+                        <img src="~/images/Browser/ok.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem"/>
+                    </button>
+                    <button type="button" onclick="location.href='@Url.Action("Index", "Disciplinas")'">
+                        <img src="~/images/Browser/cancel.png" data-toggle="modal" data-target="#modal-mensagem" width="50" height="50"/>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    }
+
+</div>

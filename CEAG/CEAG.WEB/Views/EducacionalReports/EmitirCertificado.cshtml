@@ -1,0 +1,182 @@
+﻿@model CEAG.WEB.ViewModel.Aluno.AlunoExibicaoViewModel
+
+@{
+    ViewBag.Title = "Emitir Certificado";
+    Layout = "~/Views/Shared/_LayoutReport.cshtml";
+}
+
+<div align="center">
+    <table width="850" align="center">
+        <tr>
+            <td align="center">
+                <img src="~/Images/CEAG.png" width="700" />
+            </td>
+        </tr>
+    </table>
+</div>
+<br />
+<br />
+<div align="center">
+    <table width="850" border="4">
+        <tr>
+            <td align="center">
+                @Html.Partial("_CabecalhoEscola", Model.Escola)
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div align="center"><hDiploma><b>CERTIFICADO</b></hDiploma></div>
+<div align="center">
+    <table border="4" width="850">
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td width="99%">
+                            <table align="center" height="30">
+                                <tr>
+                                    @if (Model.AlunoMatriculaExibicaoViewModel.Aluno.Sexo == "MASCULINO")
+                                    {
+                                        <td align="justify" width="760">
+                                            <h4>
+                                                PELO PRESENTE HISTÓRICO ESCOLAR CERTIFICAMOS QUE @Model.AlunoMatriculaExibicaoViewModel.Aluno.Nome FILHO DE @Model.AlunoMatriculaExibicaoViewModel.Aluno.MaeNome E DE @Model.AlunoMatriculaExibicaoViewModel.Aluno.PaiNome, NASCIDO EM @Model.AlunoMatriculaExibicaoViewModel.Aluno.Nascimento.ToString("dd/MM/yyyy") E NATURAL DE @Model.AlunoMatriculaExibicaoViewModel.Aluno.Naturalidade - @Model.AlunoMatriculaExibicaoViewModel.Aluno.Nacionalidade.
+                                            </h4>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td align="justify" width="760">
+                                            <h4>
+                                                PELO PRESENTE HISTÓRICO ESCOLAR CERTIFICAMOS QUE @Model.AlunoMatriculaExibicaoViewModel.Aluno.Nome FILHA DE @Model.AlunoMatriculaExibicaoViewModel.Aluno.MaeNome E DE @Model.AlunoMatriculaExibicaoViewModel.Aluno.PaiNome, NASCIDA EM @Model.AlunoMatriculaExibicaoViewModel.Aluno.Nascimento.ToString("dd/MM/yyyy") E NATURAL DE @Model.AlunoMatriculaExibicaoViewModel.Aluno.Naturalidade - @Model.AlunoMatriculaExibicaoViewModel.Aluno.Nacionalidade.
+                                            </h4>
+                                        </td>
+                                    }
+
+                                </tr>
+                                <tr>
+                                    <td align="justify" width="760">
+                                        <h4>
+                                            CONCLUIU O @Model.AlunoMatriculaExibicaoViewModel.Turma.Descricao &nbsp;NOS TERMOS DA LEI 9.394, PROMULGADA EM 20 DE DEZEMBRO DE 1996.
+                                        </h4>
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </td>
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div align="center"><h1><b>INFORMAÇÕES COMPLEMENTARES</b></h1></div>
+    <table border="1">
+        <tr>
+            <td>
+                <table width="850" height="40">
+                    <tr>
+                        <td width="2%"></td>
+                        <td width="98%">
+                            <table align="left" width="740" height="30">
+                                <tr>
+                                    <td align="justify" width="99%"><h4>1. A NOTA MÍNIMA DE APROVAÇÃO É 6,0 (SEIS) E 5,0 (CINCO) APÓS RECUPERAÇÃO FINAL.</h4></td>
+                                </tr>
+                                <tr>
+                                    <td width="99%" align="justify"><h4>2. DE ACORDO COM O REGIMENTO, ESTA ESCOLA NÃO ADMITE O REGIME DE PROGRESSÃO PARCIAL.</h4></td>
+                                </tr>
+                                <tr>
+                                    <td width="99%" align="justify"><h4>3. EM CASO DE DISPENSA DA PRÁTICA DE EDUCAÇÃO FÍSICA, INFORMAMOS QUE ELA OCORREU DE ACORDO COM:</h4></td>
+                                </tr>
+                                <tr>
+                                    <td><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DECRETO FEDERAL 69450, DE 01.11.71 - ART 6º - ALÍNEA __________.</h4></td>
+                                </tr>
+                                <tr>
+                                    <td width="99%" align="justify"><h4>4. <b>EMC</b> E <b>OSPB</b> SÃO VIVENCIADOS EM HISTÓRIA CONFORME A LEI FEDERAL 8665/83.</h4></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table width="850" height="40">
+        <tr>
+            <td align="center"><h4>OBSERVAÇÃO:_______________________________________________________________________</h4></td>
+        </tr>
+        <tr>
+            <td align="center"><h4>____________________________________________________________________________________</h4></td>
+        </tr>
+        <tr>
+            <td align="center"><h4>____________________________________________________________________________________</h4></td>
+        </tr>
+    </table>
+
+</div>
+
+<br /><br /><br />
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <table align="center" width="700" border="1">
+        <tr>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+            <td id="vertical" height="150" width="3">
+                <h5>Português</h5>
+            </td>
+        </tr>
+    </table>
+</div>
+<br /><br />

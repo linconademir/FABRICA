@@ -1,0 +1,31 @@
+﻿@model CEAG.WEB.Constants.Erro
+
+@{
+    ViewBag.Title = "Erro";
+}
+
+<div class="containerLopus longTop">
+    <div class="col-sm-12">
+        <p style="font-size:100px; text-align:center">OPS!</p>
+    </div>
+    <div class="col-sm-12">
+        <p style="font-size:60px; color:red; text-align:center">
+            "@Model.MensagemErro"<br />
+        </p>
+    </div>
+    <div class="col-sm-12">
+        <p style="font-size:40px; text-align:center">
+            @*@Html.ActionLink("VOLTAR PARA TELA INICIAL", "Index", "Home", new { @class = "btn-primary but_clientes" })*@
+            @if (Model.UrlChamada == "")
+            {
+                @Html.ActionLink("VOLTAR PARA TELA INICIAL", "Index", "Home", new { @class = "btn-primary but_clientes" })
+            }
+            else
+            {
+                <a href=@Model.UrlChamada class="btn btn-primary but_clientes">VOLTAR</a>
+            }
+        </p>
+    </div>
+
+
+</div>

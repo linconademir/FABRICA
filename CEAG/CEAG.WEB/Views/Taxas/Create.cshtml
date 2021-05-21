@@ -1,0 +1,67 @@
+﻿@model CEAG.WEB.ViewModel.Taxa.TaxaViewModel
+
+@{
+    ViewBag.Title = "Cadastro de Taxas";
+}
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/webmoney.png" /> INCLUSÃO DE TAXA DE ALUNO</h3>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CodEscola)
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <fieldset>
+                <legend>DADOS DA TAXA</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-1 col-lg-2" })
+                    <div class="col-md-3 col-lg-3">
+                        @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", @placeholder = "Digite a descrição da taxa" } })
+                        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-1 col-lg-1" })
+                    <div class="col-md-2 col-lg-2">
+                        @Html.DropDownListFor(model => model.Tipo, (SelectList)ViewBag.DropdownTipoTaxa, new { @class = "form-control", data_live_search = "true", id = "ddlTipoTaxa" })
+                        @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(model => model.ViasGratuitas, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.ViasGratuitas, new { htmlAttributes = new { @class = "form-control", maxlength = "2", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.ViasGratuitas, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                <button type="submit">
+                    <img src="~/images/Browser/ok.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem"/>
+                </button>
+                <button type="button" onclick="location.href='@Url.Action("Index", "Taxas")'">
+                    <img src="~/images/Browser/cancel.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" />
+                </button>
+            </div>
+        </div>
+
+    }
+
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/validations_pt-br")
+
+}

@@ -1,0 +1,91 @@
+﻿@model IEnumerable<CEAG.WEB.ViewModel.Disciplina.DisciplinaViewModel>
+
+@{
+    ViewBag.Title = "Cadastro de Professor";
+}
+
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/learningbig.png" /> INCLUSÃO DE PROFESSOR E DISCIPLINAS</h3>
+    </div>
+    <hr />
+    <fieldset>
+        <legend><img alt="Brand" height="20" width="20" src="~/Images/Browser/learningbig.png" /> INFORMAÇÕES DO PROFESSOR</legend>
+        <div class="form-group">
+            <div class="col-md-4">
+                <h4><b>NOME: </b>@ViewBag.Funcionario.Nome</h4>
+            </div>
+            <div class="col-md-2">
+                <h4><b>CPF: </b>@ViewBag.Funcionario.CpfComMascara</h4>
+            </div>
+            <div class="col-md-2">
+                <h4><b>FUNÇÃO: </b>@ViewBag.Funcionario.Funcao</h4>
+            </div>
+            <div class="col-md-4">
+                <h4><b>TITULAÇÃO: </b>@ViewBag.Funcionario.Titulacao</h4>
+            </div>
+        </div>
+    </fieldset>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <table>
+                <thead class="btn-primary">
+                    <tr>
+                        <th height="50">
+                            <h4><b>&nbsp;&nbsp;SELECIONE AS DISCIPLINAS QUE SERÃO ADICIONADAS AO PROFESSOR</b></h4>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <div class="btn-group-toggle" data-toggle="buttons">
+                                    <div class="containerLopus">
+                                        @foreach (var item in Model.OrderBy(p => p.Descricao))
+                                        {
+                                        <div class="col-md-2">
+                                            <label class="btn-default but_mini_card">
+                                                <input type="checkbox" name="Ids" value="@item.CodDisciplina"><b> @Html.DisplayFor(modelItem => item.Descricao)</b>
+                                            </label>
+                                        </div>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                    <button type="submit">
+                        <img data-toggle="modal" width="50" height="50" data-target="#modal-mensagem" src="~/images/Browser/ok.png" onclick="location.href='@Url.Action("Create", "FuncionarioDisciplinas", new {codFuncionario = ViewBag.Funcionario.CodFuncionario })'" />
+                    </button>
+                    <button  type="button" onclick="location.href='@Url.Action("Index", "FuncionarioDisciplinas")'">
+                        <img src="~/images/Browser/cancel.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem"/>
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

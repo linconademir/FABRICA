@@ -1,0 +1,117 @@
+﻿@model CEAG.WEB.ViewModel.Funcionario.FuncionarioExibicaoViewModel
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        @if (Model.Sexo.ToUpper() == "MASCULINO")
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/funcionario.png" /> DADOS DO FUNCIONÁRIO <b>@Model.Nome </b></h3>
+
+        }
+        else
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/funcionario.png" /> DADOS DA FUNCIONÁRIA <b>@Model.Nome </b></h3>
+        }
+    </div>
+
+
+    <div>
+        <fieldset>
+            <legend>DADOS DO FUNCIONÁRIO</legend>
+            <a class="jumbotron" href="@Url.Action("Edit","Funcionarios", new { codFuncionario = Model.CodFuncionario })">
+                <div class="col-md-4">
+                    <dl class="dl-horizontal">
+                      <dt>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Nome)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Nascimento)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Nascimento)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Inclusao)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Inclusao)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CpfComMascara)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CpfComMascara)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Rg)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Rg)  @Html.DisplayFor(model => model.RgOrgaoEmissor) - @Html.DisplayFor(model => model.RgUf)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Funcao)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Funcao)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Titulacao)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Titulacao)
+                        </dd>
+
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LogradouroCompleto)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.LogradouroCompleto)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+
+                    </dl>
+                </div>
+            </a>
+        </fieldset>
+    </div>
+    
+    
+    <div class="form-group">
+        <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+            <a href="@Url.Action("Index","Funcionarios")">
+                <img src="@Url.Content("~/images/Browser/cancel.png")" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem"  title='Voltar para a lista de Funcionários' />
+            </a>
+        </div>
+    </div>

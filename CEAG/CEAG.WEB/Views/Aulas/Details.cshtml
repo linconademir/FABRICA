@@ -1,0 +1,132 @@
+﻿@model CEAG.WEB.ViewModel.Aula.AulaViewModel
+@using CEAG.WEB.ViewModel.AlunoMatricula
+@using CEAG.WEB.ViewModel.Horario
+@using CEAG.WEB.ViewModel.AulaAluno
+@{
+    /**/
+
+    ViewBag.Title = "Chamada";
+}
+@{
+    HorarioAulaViewModel horario = ViewBag.HorarioAula;
+    List<AlunoMatriculaExibicaoViewModel> alunoExibicao = new List<AlunoMatriculaExibicaoViewModel>();
+    alunoExibicao = ViewBag.ListaAlunos;
+
+}
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/teacher.png" />&nbsp;&nbsp; CHAMADA DA DISCIPLINA <b>@Model.Disciplina.Descricao </b> NA TURMA <b>@Model.TurmaExibicaoViewModel.Descricao</b> PARA A DATA <b>@Model.Realizada.ToString("dd/MM/yyyy") (@horario.Inicio ATÉ @horario.Termino)</b></h3>
+    </div>
+    <hr />
+    <style>
+        input.largerCheckbox {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div class="form-horizontal">
+            <fieldset>
+                <legend>DADOS DA CHAMADA</legend>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Assunto, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Assunto, new { htmlAttributes = new { @class = "form-control", @readonly="true" } })
+                        @Html.ValidationMessageFor(model => model.Assunto, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Observacao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Observacao, new { htmlAttributes = new { @class = "form-control", @readonly = "true", rows = "4" } })
+                        @Html.ValidationMessageFor(model => model.Observacao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </fieldset>
+            <table width="100%">
+                <thead class="bg-primary">
+                    <tr>
+                        <td height="50" width="70%" align="left">
+                            <b>&nbsp;&nbsp;ALUNO(A)</b>
+                        </td>
+                        <td height="50" width="30%" align="left">
+                            <b>&nbsp;&nbsp;SITUAÇÃO</b>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+            <table width="100%" border="1">
+
+                @for (int i = 0; i < alunoExibicao.Count(); i++)
+                {
+
+                    <tr>
+                        <td width="70%" height="40">
+                            <div>
+                                <label>
+
+                                    <font size="4">&nbsp;&nbsp; @Html.DisplayFor(modelItem => alunoExibicao[i].Aluno.Nome)</font>
+                                </label>
+                            </div>
+                        </td>
+
+
+                        @if (Model.AulaAlunos.Where(p => p.CodAlunoMatricula == alunoExibicao[i].CodAlunoMatricula).Any())
+                        {
+                            AulaAlunoExibicaoViewModel item = Model.AulaAlunos.SingleOrDefault(p => p.CodAlunoMatricula == alunoExibicao[i].CodAlunoMatricula);
+
+                            if (item.Situacao.Equals("PRESENTE"))
+                            {
+                                <td width="30%">
+                                    <div>
+                                        <label>
+                                            <font size="4">&nbsp;&nbsp; PRESENTE</font>
+                                        </label>
+                                    </div>
+                                </td>
+                            }
+                            else
+                            {
+                                <td width="30%">
+                                    <div>
+                                        <label>
+                                            <font size="4">&nbsp;&nbsp; AUSENTE</font>
+                                        </label>
+                                    </div>
+                                </td>
+                            }
+                        }
+                        else
+                        {
+                            <td width="30%">
+                                <div>
+                                    <label>
+                                        <font size="5">&nbsp;&nbsp; SEM CHAMADA</font>
+                                    </label>
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                }
+            </table>
+
+            <hr class="btn-primary" />
+            <div class="form-group">
+                <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                    <button type="button" onclick="location.href='@Url.Action("Index", "Aulas", new {codTurma =  Model.CodTurma})'">
+                        <img src="~/images/Browser/cancel.png" width="50" height="50" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div>

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<CEAG.WEB.ViewModel.Responsavel.ResponsavelExibicaoViewModel>
+@{
+    ViewBag.Title = "Responsáveis";
+}
+<div class="containerLopus">
+    <div>
+        <br />
+        @if (ViewBag.Aluno.Sexo.ToUpper() == "MASCULINO")
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/027-book.png" /> Responsáveis do Aluno: <b>@ViewBag.Aluno.Nome (Responsáveis: @Model.Count()) </b></h3>
+
+        }
+        else
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/027-book.png" /> Responsáveis da Aluna: <b>@ViewBag.Aluno.Nome</b></h3>
+        }
+
+    </div>
+    <hr />
+
+    @Html.ActionLink("+ ADICIONAR RESPONSÁVEL", "Create", "Responsavels", new { codAluno = ViewBag.Aluno.CodAluno }, new { @class = "btn btn-primary but_clientes" })
+    <br />
+    <br />
+    <table class="table">
+        <thead class="btn-primary">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tipo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LogradouroCompleto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cpf)
+                </th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="100">
+                        @Html.DisplayFor(modelItem => item.Tipo)
+                    </td>
+                    <td width="450px">
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td width="140">
+                        @Html.DisplayFor(modelItem => item.LogradouroCompleto)
+                    </td>
+                    <td width="340px">
+                        @Html.DisplayFor(modelItem => item.Cpf)
+                    </td>
+                    <td width="100px">
+                        @*@Html.ActionLink("Alterar", "Edit", "Alunos", new { id = item.CodAluno }, new { @class = "btn btn-primary but_grid" })*@
+                        <a href="@Url.Action("Edit","Responsavels", new { codResponsavel = item.CodResponsavel})">
+                            <img src="@Url.Content("~/images/ImageLink/edit-pie-chart-report.png")" width="30" height="30" title='Editar o cadastro do Responsável' />
+                        </a>
+                        <a href="@Url.Action("Details","Responsavels", new { codResponsavel = item.CodResponsavel})">
+                            <img src="@Url.Content("~/images/ImageLink/view-file.png")" width="30" height="30" title='Visualizar o cadastro do Responsável' />
+                        </a>
+                        <a href="@Url.Action("Delete","Responsavels", new { codResponsavel = item.CodResponsavel})">
+                            <img src="@Url.Content("~/images/ImageLink/delete.png")" width="30" height="30" title='Apagar o telefone do Aluno' />
+                        </a>
+                      
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <hr class="btn-primary" />
+    <div class="form-group">
+        <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+            <a href="@Url.Action("Details","Alunos", new { codAluno = ViewBag.Aluno.CodAluno})">
+                <img src="@Url.Content("~/images/Browser/cancel.png")" width="50" height="50" title='Voltar para a lista de opções' />
+            </a>
+        </div>
+    </div>
+</div>

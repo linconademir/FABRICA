@@ -1,0 +1,82 @@
+﻿@model CEAG.WEB.ViewModel.Horario.HorarioViewModel
+
+@{
+    ViewBag.Title = "Alteração de Horário";
+}
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/timetablebig.png" /> EDIÇÃO DE HORÁRIO</h3>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CodEscola)
+        @Html.HiddenFor(model => model.CodHorario)
+
+        <div class="form-horizontal">
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <fieldset>
+                <legend>DADOS DO HORÁRIO</legend>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    DADOS DAS AULAS
+                    <a href="@Url.Action("Create","HorarioAulas", new { codHorario = Model.CodHorario})">
+                        <img src="@Url.Content("~/images/ImageLink/calendar-plus.png")" width="30" height="30" title='Adicionar Horario de aula' />
+                    </a>
+                </legend>
+                @for (int i = 0; i < Model.HorarioAulaViewModels.Count(); i++)
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(modelItem => Model.HorarioAulaViewModels[i].Turno, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(modelItem => Model.HorarioAulaViewModels[i].Turno, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </div>
+                        @Html.LabelFor(modelItem => Model.HorarioAulaViewModels[i].DiaSemana, htmlAttributes: new { @class = "control-label col-md-1" })
+                        <div class="col-md-1">
+                            @Html.EditorFor(modelItem => Model.HorarioAulaViewModels[i].NomeDiaSemana, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </div>
+                        @Html.LabelFor(modelItem => Model.HorarioAulaViewModels[i].Inicio, htmlAttributes: new { @class = "control-label col-md-1" })
+                        <div class="col-md-1">
+                            @Html.EditorFor(modelItem => Model.HorarioAulaViewModels[i].Inicio, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </div>
+                        @Html.LabelFor(modelItem => Model.HorarioAulaViewModels[i].Termino, htmlAttributes: new { @class = "control-label col-md-1" })
+                        <div class="col-md-1">
+                            @Html.EditorFor(modelItem => Model.HorarioAulaViewModels[i].Termino, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </div>
+                        <div>
+                            <a href="@Url.Action("Delete","HorarioAulas", new { codHorarioAula = Model.HorarioAulaViewModels[i].CodHorarioAula})">
+                                <img src="@Url.Content("~/images/ImageLink/delete.png")" data-toggle="modal" data-target="#modal-mensagem" width="30" height="30" title='Apagar Horario de aula' />
+                            </a>
+                        </div>
+                    </div>
+                }
+            </fieldset>
+            <div class="form-group">
+                <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                    <button type="submit">
+                        <img src="~/images/Browser/ok.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" />
+                    </button>
+                    <button type="button" onclick="location.href='@Url.Action("Index", "Horarios")'">
+                        <img src="~/images/Browser/cancel.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" />
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    }
+
+</div>

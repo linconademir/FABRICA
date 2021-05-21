@@ -1,0 +1,61 @@
+﻿@model CEAG.WEB.ViewModel.Disciplina.DisciplinaViewModel
+
+@{
+    ViewBag.Title = "Excluir Disciplina";
+}
+
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/book-shelf.png" /> DESEJA DELETAR A DISCIPLINA ABAIXO?</h3>
+    </div>
+    <hr />
+    <div>
+        <fieldset>
+            <legend>DADOS DA DISCIPLINA</legend>
+            <dl class="dl-horizontal">
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Descricao)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Tipo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Tipo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Obrigatoria)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Obrigatoria)
+                </dd>
+
+            </dl>
+
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                    <button type="submit" value="Delete">
+                        <img src="~/images/Browser/ok.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem"/>
+                    </button>
+                    <button type="button" onclick="location.href='@Url.Action("Index", "Disciplinas")'">
+                        <img src="~/images/Browser/cancel.png" data-toggle="modal" data-target="#modal-mensagem" width="50" height="50"/>
+                    </button>
+                   
+                </div>
+            }
+        </fieldset>
+    </div>
+</div>

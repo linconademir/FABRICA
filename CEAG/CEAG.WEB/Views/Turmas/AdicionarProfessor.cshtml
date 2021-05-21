@@ -1,0 +1,167 @@
+﻿@model List<CEAG.WEB.ViewModel.FuncionarioDisciplina.FuncionarioDisciplinaExibicaoViewModel>
+
+@{
+    ViewBag.Title = "Adicionar Professor na Turma";
+}
+
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/learningbig.png" /> ADICIONAR PROFESSOR NA TURMA</h3>
+    </div>
+
+    <fieldset>
+        <legend>
+           INFORMAÇÕES DA TURMA
+        </legend>
+
+        <div class="form-group">
+            <div class="col-md-1">
+                <img alt="Brand" height="50" width="50" src="~/Images/Browser/classroomBig.png" />
+            </div>
+            
+            <div class="col-md-3">
+                <h4><b>Nome: </b>@ViewBag.Turma.Descricao</h4>
+            </div>
+            <div class="col-md-2">
+                <h4><b>Ano: </b>@ViewBag.Turma.AnoLetivo</h4>
+            </div>
+            <div class="col-md-2">
+                <h4><b>Nivel: </b>@ViewBag.Turma.Nivel</h4>
+            </div>
+            <div class="col-md-4">
+                <h4><b>Segmento: </b>@ViewBag.Turma.Segmento</h4>
+            </div>
+        </div>
+    </fieldset>
+    <hr />
+    <fieldset>
+        <legend>INFORMAÇÕES DO PROFESSOR</legend>
+        <div class="form-group">
+            <div class="col-md-1">
+                <img alt="Brand" height="50" width="50" src="~/Images/Browser/learningbig.png" />
+            </div>
+            <div class="col-md-4">
+                <h4><b>Nome: </b>@ViewBag.Funcionario.Nome</h4>
+            </div>
+            <div class="col-md-2">
+                <h4><b>CPF: </b>@ViewBag.Funcionario.CpfComMascara</h4>
+            </div>
+            <div class="col-md-2">
+                <h4><b>Função: </b>@ViewBag.Funcionario.Funcao</h4>
+            </div>
+            <div class="col-md-3">
+                <h4><b>Titulação: </b>@ViewBag.Funcionario.Titulacao</h4>
+            </div>
+        </div>
+    </fieldset>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <table width="100%">
+                    <thead class="btn-primary">
+                        <tr>
+                            <td height="50" align="center">
+                                <h4><b>&nbsp;&nbsp;SELECIONE OS DIAS DE AULA E AS DISCIPLINAS QUE SERÃO LECIONADAS NESTA TURMA</b></h4>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+                <table width="100%" border="1">
+                    <tbody class="text-primary">
+                        <tr>
+                            <td width="15%" align="center">
+                                <h5><b>HORÁRIOS/DIAS</b></h5>
+                            </td>
+                            <td width="15%" align="center">
+                                <h5><b>SEGUNDA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>TERÇA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>QUARTA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>QUINTA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>SEXTA</b></h5>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table width="100%" border="1">
+                    <tbody>
+
+                        @foreach (var item in Model[0].HorarioAulaViewModels.Select(p => p.Inicio).Distinct())
+                        {
+                            <tr>
+                                <td width="15%" align="center">
+                                    @foreach (var horarioView in Model[0].HorarioAulaViewModels.Where(p => p.Inicio == item).Take(1))
+                                    {
+                                        <label>
+                                            &nbsp;&nbsp;@Html.DisplayFor(modelItemHorario => horarioView.Inicio) até @Html.DisplayFor(modelItemHorario => horarioView.Termino)
+                                        </label>
+                                    }
+                                </td>
+                                @foreach (var itemHorario in Model[0].HorarioAulaViewModels.Where(p => p.Inicio == item))
+                                {
+                                    if (itemHorario.Status.ToUpper().Equals("LIVRE"))
+                                    {
+                                        <td width="15%" align="left">
+                                            @foreach (var itemDisciplina in Model.OrderBy(p => p.Disciplina.Descricao))
+                                            {
+
+                                                <div>
+                                                    <label class="btn-primary but_mini_card">
+                                                        <input type="checkbox" name="IdsHorario" value="@itemHorario.DiaSemana-@itemDisciplina.Disciplina.CodDisciplina-@itemHorario.CodHorarioAula-"><b> @Html.DisplayFor(modelItem => itemDisciplina.Disciplina.Descricao)</b>
+                                                    </label>
+                                                </div>
+
+                                            }
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td width="15%" align="left" bgcolor="#87CEFA">
+                                            <div>
+                                                <h5 class="text-danger"><b>&nbsp;&nbsp;&nbsp;&nbsp;@itemHorario.Status</b></h5>
+                                            </div>
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                    <button type="submit">
+                        <img src="~/images/Browser/ok.png" width="50" height="50" onclick="location.href='@Url.Action("AdicionarProfessor", "Turmas", new {codFuncionario = ViewBag.Funcionario.CodFuncionario })'" />
+                    </button>
+                    <button type="button" onclick="location.href='@Url.Action("Details", "Turmas")'">
+                        <img src="~/images/Browser/cancel.png" width="50" height="50"/>
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+

@@ -1,0 +1,64 @@
+﻿@model CEAG.WEB.ViewModel.Informacao.InformacaoViewModel
+
+@{
+    ViewBag.Title = "Excluir Informação";
+}
+
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        @if (ViewBag.Aluno.Sexo.ToUpper() == "MASCULINO")
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/user-2.png" /> Deseja deletar a informação abaixo do Aluno: <b>@ViewBag.Aluno.Nome</b></h3>
+
+        }
+        else
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/user-2.png" /> Deseja deletar a informação abaixo da Aluna: <b>@ViewBag.Aluno.Nome</b></h3>
+        }
+
+    </div>
+    <hr />
+    <div>
+        <fieldset>
+            <legend>Dados</legend>
+
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Tipo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Tipo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Descricao)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                    <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                        <button type="submit" value="Delete">
+                            <img src="~/images/Browser/ok.png" width="50" height="50"/>
+                        </button>
+                        <button type="button" onclick="location.href='@Url.Action("Details", "Alunos", new { codAluno = ViewBag.Aluno.CodAluno } )'">
+                            <img src="~/images/Browser/cancel.png" width="50" height="50" />
+                        </button>
+                        @*<a href="@Url.Action("Index","Alunos")">
+                                <img src="@Url.Content("~/images/Browser/cancel.png")" />
+                            </a>*@
+                    </div>
+            }
+        </fieldset>
+    </div>
+</div>

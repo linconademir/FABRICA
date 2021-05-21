@@ -1,0 +1,98 @@
+﻿@model CEAG.WEB.ViewModel.Parentesco.ParentescoAlunoViewModel
+
+@{
+    ViewBag.Title = "Inclusão Parentesco";
+}
+
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/students.png" /> INCLUSÃO DE PARENTESCO PARA ALUNO(A) @ViewBag.Aluno.Nome</h3>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CodAlunoBase)
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<fieldset>
+    <legend>DADOS DO PARENTESCO</legend>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2 col-sm-2 col-lg-2" })
+        <div class="col-md-3">
+            @Html.DropDownListFor(model => model.Descricao, (SelectList)ViewBag.DropdownTipoParentesco, new { @class = "form-control", data_live_search = "true", id = "ddlTipoDebito" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("NOME DO PARENTE", htmlAttributes: new { @class = "control-label col-md-2 col-sm-2 col-lg-2" })
+        <div class="col-md-6 col-sm-6 col-lg-6">
+            @Html.TextBox("nome", ViewBag.nomeAluno as string, new { @class = "form-control form-control-custom", @style = "width:90%;", @placeholder = "Digite o nome do Aluno" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2 col-sm-2 col-lg-2">
+
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-6">
+            @Html.DropDownListFor(model => model.CodAluno, new SelectList(string.Empty, "Value", "Text"), "SELECIONE O ALUNO", new { @class = "form-control", data_live_search = "true", id = "ddlAluno" })
+        </div>
+    </div>
+</fieldset>
+    
+</div>
+        <div class="form-group">
+            <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                <button type="submit">
+                    <img src="~/images/Browser/ok.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" />
+                </button>
+                <button type="button" onclick="location.href='@Url.Action("Details", "Alunos", new { codAluno = Model.CodAlunoBase})'">
+                        <img src="~/images/Browser/cancel.png" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" />
+                    </button>
+            </div>
+        </div>
+
+    }
+
+</div>
+</div>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/validations_pt-br")
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var ddlAluno = $('#ddlAluno');
+            ddlAluno.prop('disabled', true);
+            ddlAluno.hide();
+            $("#nome").blur(function () {
+                var nome = $('#nome').val();
+                $.ajax({
+                    dataType: "json",
+                    type: "GET",
+                    url: "/Alunos/ObterListaAluno?busca=" + nome,
+                    success: function (dados) {
+                        if (dados != null) {
+                            var ddlAluno = $('#ddlAluno');
+                            ddlAluno.prop('disabled', false);
+                            ddlAluno.show();
+
+                            $.each(dados, function (i, lista) {
+                                $("#ddlAluno").append('<option value="' + lista.Value + '">' +
+                                    lista.Text + '</option>');
+                            });
+                        }
+                    }
+                });
+            });
+        });
+/**/</script>
+}
+            /**/
+

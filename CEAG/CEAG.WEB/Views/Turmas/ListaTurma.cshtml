@@ -1,0 +1,79 @@
+﻿@model IEnumerable<CEAG.WEB.ViewModel.Turma.TurmaExibicaoViewModel>
+
+<div class="modal-dialog" >
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+            </button>
+            <table align="center">
+                <tr>
+                    <td align="center">
+                        <h3 class="modal-title"><b>SELECIONE A TURMA PARA A MIGRAÇÃO</b></h3>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="modal-body">
+            @foreach (var itemNivel in Model.Select(p => p.Nivel).Distinct())
+            {
+                <table class="table table-striped table-hover" id="tblConsulta">
+                    <thead class="btn-primary">
+                        <tr>
+                            <th>
+                                @Html.DisplayName("Nivel: "+itemNivel)
+                            </th>
+                            <th>
+                                @Html.DisplayName("Ano")
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Vagas)
+                            </th>
+                            <th>
+                                @Html.DisplayName("Matriculados")
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th>
+                                Ações
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Where(p => p.Nivel.Equals(itemNivel)))
+                        {
+                        <tr>
+                            <td width="350">
+                                @Html.DisplayFor(modelItem => item.Descricao)
+                            </td>
+                            <td width="100">
+                                @Html.DisplayFor(modelItem => item.AnoLetivo)
+                            </td>
+                            <td width="50">
+                                @Html.DisplayFor(modelItem => item.Vagas)
+                            </td>
+                            <td width="100" align="center">
+                                @Html.DisplayFor(modelItem => item.AlunosMatriculados)
+                            </td>
+                            <td width="300">
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <th>
+                                <a href="@Url.Action("Edit","AlunoMatriculas", new { codAlunoMatricula = ViewBag.CodAlunoMatricula, codNovaTurma = item.CodTurma})">
+                                    <img src="@Url.Content("~/images/refresh.png")" width="30" height="30" title='Selecionar esta turma' />
+                                </a>
+                            </th>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary but_clientes" data-dismiss="modal">Fechar</button>
+        </div>
+    </div>
+</div>
+
+

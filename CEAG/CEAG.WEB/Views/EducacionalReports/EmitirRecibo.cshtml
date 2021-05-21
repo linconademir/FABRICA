@@ -1,0 +1,73 @@
+﻿@model CEAG.DOMINIO.Procedure.AlunoReciboMensal
+@using CEAG.NEGOCIO.Enum;
+@{
+    ViewBag.Title = "Recibo";
+    Layout = "~/Views/Shared/_LayoutReport.cshtml";
+}
+
+<div class="containerLopus">
+    <div align="center">
+        <table border="1" width="850" height="30">
+            <tr align="center" class="bg-primary">
+                <td>RECEBEMOS DO ALUNO(A)<b>@Model.NOME_VC_ALUNO</b></td>
+            </tr>
+            <tr align="center" class="bg-primary">
+                <td>SÉRIE: <b>@Model.SEGMENTO_VC_TURMA</b> TURNO: <b>@Model.PERIODO_VC_TURMA</b></td>
+                <td>VALOR R$ <b>@Model.VALOR_MO_DEBITO</b></td>
+            </tr>
+            <tr align="center" class="bg-primary">
+                @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.MENSALIDADE.ToString()))
+                {
+                    <td>REFERENTE AO MÊS <b>@Model.PERIODO_DT_DEBITO.Month/@Model.PERIODO_DT_DEBITO.Year</b></td>
+                }
+                @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.MATERIAL.ToString()))
+                {
+                    <td>REFERENTE AO MATERIAL ESCOLAR</td>
+                }
+                @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.MATRICULA.ToString()))
+                {
+                    <td>REFERENTE A MATRICULA ESCOLAR</td>
+                }
+                @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.RENEGOCIAÇÃO.ToString()))
+                {
+                    <td>REFERENTE À NEGOCIAÇÃO</td>
+                }
+                @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.FARDAMENTO.ToString()))
+                {
+                    <td>REFERENTE AO FARDAMENTO ESCOLAR</td>
+                }
+                @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.LIVRO.ToString()))
+                {
+                    <td>REFERENTE À COMPRA DE LIVRO</td>
+                }
+                @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.DOCUMENTAL.ToString()))
+                {
+                    <td>REFERENTE À SOLICITAÇÃO DE DOCUMENTO</td>
+                }
+                @if (Model.TIPO_VC_DEBITO.Equals(EnumComum.TipoDebito.AVULSO.ToString()))
+                {
+                    <td>PAGAMENTO AVULSO</td>
+                }
+                <td>@Model.DESCONTO_MO_DEBITO</td>
+            </tr>
+            <tr align="center" class="bg-primary">
+                <td>@Model.DESCRICAO_VC_DEBITO</td>
+                <td>@Model.PAGO_MO_DEBITO</td>
+            </tr>
+        </table>
+    </div>
+</div>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/inputmask")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#telefone").inputmask("mask", { "mask": "(99) 9999-9999" });
+            $("#cpf").inputmask("mask", { "mask": "999.999.999-99" }, { reverse: true });
+            $("#cep").inputmask("mask", { "mask": "99999-999" });
+            $("#preco").inputmask("mask", { "mask": "999.999,99" }, { reverse: true });
+            $("#valor").inputmask("mask", { "mask": "#.##9,99" }, { reverse: true });
+        });
+    </script>
+}

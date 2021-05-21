@@ -1,0 +1,190 @@
+﻿@model CEAG.WEB.ViewModel.Aluno.AlunoExibicaoViewModel
+
+@{
+    ViewBag.Title = "Ficha de Aluno";
+    Layout = "~/Views/Shared/_LayoutReport.cshtml";
+}
+
+@if (!ViewBag.EmitirContrato)
+{
+    <br />
+    <br />
+    <div align="center">
+        <a class="btn btn-primary" href="@Url.Action("EmitirFichaAluno","Reports", new { codAlunoMatricula = Model.AlunoMatriculaExibicaoViewModel.CodAlunoMatricula, gerarPDF = true})">
+            <b>IMPRIMIR PDF</b>
+        </a>
+        <a class="btn btn-primary" href="@HttpContext.Current.Request.UrlReferrer.AbsoluteUri">
+            <b>VOLTAR</b>
+        </a>
+        <a class="btn btn-primary" href="@Url.Action("Create","AlunoQuestionarios", new { codAluno = Model.AlunoMatriculaExibicaoViewModel.CodAluno})">
+            <b>EDITAR QUESTIONÁRIO</b>
+        </a>
+    </div>
+}
+    <div class="containerLopus">    
+        <div align="center">
+            <table width="850">
+                <tr>
+                    <td width="28%">
+                        <img height="100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAABuVBMVEX////+/v4hGl3+/vwAAE0AAEf+/f8AAEr///oAAEUAAEQAAE8AAEn///j8/Pz///kAAFMAAD0hG1sAAEHZ1+D///QAAFbc2+H18//R0NwGAFEAADYAADyCfpXIxtT4//89N2v7+P+EgpDm6OeopbdmZIN4dJQAhsgAfsACjcYUCldFQGQAAFwAAC3m5u3t//9TqsoAhc+amasAgbxqZY15dI9aUHcAgsshGWMaD1LJxtmopLagnLW4tMRkXoDMytOQjKkZDkYbCF/c2+xprdtprNxortP+/+yVkqN1coXHxsrK6OoiGGd+s8K01euRudiCw9d9vcIAgNGXtr9+vdddqsGm3OUAf646NFo3iKTM8PYyLVsuJ2BLRXRZVIC7t8/aw9KdiKZOUG8rOVmzvcmmnL6GgKC91NY5M1M8lr+wqrNNa6Ecq9AlHUpGrt0ArPNYwMtNc5ZcvOlVVI95hZwIHksAACQ4g6tRSoTi8/8AdKbQ0c05hqZFntea3PLb//U2LXNXkaO6z8ViXXBBQVWRyL93XYGgnZ5iqrkAbrKRjJF2dn8AABlXVl+nqaK45+wAgOHW2MjI/v+p3j29AAAVPUlEQVR4nO2bi1vbWHqHPyP5SNi6GMuyZRFbyNgGjCMHG4MNyBe8AXOZhM2SwHBJtmzWs7jNTNuZ7gzJZvbi2bINnabtX9zvyEDuyTyDszv79LwP2EaSJf10zvlu5wDAYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBiMvw98Pt/f+hY+Mj9xheQdfPCLHGdZRETAsjn9w8f/FfANFk4UZV0FVd34xNItbsBnH6BC7h18+CYUXS/cur29dTz5c7D1AUscnEJQFIXzZPrwQ//NRzf4aFd93z0Qwu1NTc7PT965M/mtrQ+2i/woge9Q+IO/9PoeToRfbFNub9++e+/9T+NvpZCIOnlwNP125o5qs51GFw2KLmLrAjixdzEOxzvj8rsuK+uip552D1n/ITcqqoNSyCnO7rDp9/uHA8gwvg8LQTNommbIDEWlYM4/6oJIiChDJBHmgwKFv4T+pWkB7fr680/37KX9avhg7PD+/dlyOdUnQWnHgVO8q6kqR0iyc5DrHzabTbyNVHHRtQelUG8N5aqJhXg8vnDJgwdLS+0+jWpzGpuQKKrd0UxeQvApSBI+EvqLz8MvXatu5mbh54Vf7oai0RDFjObz3sdo1AwiklYjqnc5VYeFQ8nE3XgU7hME71T4zIIX0G9E/buEG4hCxWfv58ItXde5t59wIeqPKyKnr5LpaHA67Yy/BachXB835HZ++XoifUm3m15qJxLZWqZWm8tJSbXfY+w1zfTfX6RHLHqv6aXFxaVGo9PJZjMZPLZ2dFS7X/UvwmDaUIGsIKBALtJIlMtv9JZOZ8ycpT1LJHOmPw0i+FrJ18Dm9+c7MtcI8vcdADsSi0UikVarRV8iEdu77Fww5V2as6ejZqb1obtc4k1bH4RCVVccftgFuVXjQ9g5+H4fMWlnw4FoBvFtxPHJliIu8H4XdG5pTJA0KYjd6sVYDErhA4MkeXON6IV/CPNeN73ocnwzCYRTj/gicLIsQm15JE0UsBeWMq+TzXY6ncbSouu6Uf8SkQejkDTMJviMalWbTnidJYFNWfYuWKPMzbXBIrYF09EycMY0jp7c/aOjw2/GDnJR/sI8jaZled/EoWb8KsdrIy+4di0wdN32iU4gEMfoR4X0sOYSHZbCwVCUjtJX8AamP4BD22zaijgIhaJojPCLOrkfDcff+Q1ZtAn3ULjm6GQ/LzUiL4JPH7H64atVsH4d0oxV9TBnLhkvsG27FfTXdegE9wEVKsao2QHZQItUrWXpyHsH5UXAEOTqCtFauULV1iMCvwC6+tIOQr0DouuyqouFcbLLlwHaUT5pfXt35ebNG5SVC26ufMY1+YaoJ0eWVwo6/Z73I+ursq3xkVVHk1xOVGXomAe27owtBxvOB+5T5MggFAL8JpogUDanYVUmr0ejhDpokYOTuxuuEHB0oxlcKhzfmZ+ZmJihTFzyeK8bChqrypj0j/9076WoFiMeV7sGesLcJzomIJFrfJqTa/nhBTwzjQ/7MeIlROH6d0Ft+yAUKvq6EHTkiCCs9/3xy1iijJcSrcLWzl34VTQhQiL4yPqkNEH14cvUxExpZmaKfpjYsqvRtqy7w9XPv/hn6zJ043wiCedTYouPurRPQy1/CKtL0ugDUPuPkWAP8dHki/M6zmu3cHWFKlczMxzUzEMMvV9XqIuWpRY+2y7N7Oy5/LAjxzRpsfDp0ymkNEmZmig9pfomdgrFYNWQYb/6L59/8fkJXITsOpoUnncgEz1Ef89xrhSIq07QTBBO7ivE5IvjVFFVRZqGiQNXqEckLbIaF67F3xKQW7JeWJmfnJworXD72BBQy02DDujerMI5J+LzEm3KnxtVYQnHNM//6xdffF7w+pkq0szRzkWLEBkWkqJKRHKA9hjbcd9Gq3r+jInj2Be39hEUQjZ6hM7Y7L0t5SiIhe15bKGZib1ulB8Xk1rly9nOV18lOjRu9CLO9cLXM6WpmZ1CO1pFFxBevo9NelxPxuOtFrWjht3IP1Jgjp8DWSFQjEoOmjYtyXm9kt4A54xqgSalOobGZ5AK8QocGJqwDnUpEHm5i0LfSIC8dzyJN1wq3eb+bbkBZDoU8l8b4TEqlbzAIBq6Zm9NzExNTWzbI8ElUUzzm9Xl5nI1SqN2PoC+UmpWo2kxGdBo3E0cHtvTbppr0G8rTC192DFCGORi9IBBfjMG3OAUojGWxXZoX4a5fEZULse4hQYGB4W19/wGtSlTd6Z2Troh05CdohdFYlSw1OiUs9kvc1r3ZGdqZmqmVEiEwrZKjg6GaKgjCP7zyNx/TQs8IjAXrYHsW1Wz0X2Oy5iCIvevRjgd0n4t6ThOqxV3f/3ITIDiI4NSiK0k2s1gWk5qWkuWX5xVEcXC3vZxaX5qqm8wP7HR1VGj8SqZ3Jjv7gR1HLedIO/KwF2enb4BGkZiOy0HkiNaRERXEQ9oSXCHJVdXPRU6OltjJDeLzwbB3NONZkARucEpBC4dqiowbWZA1F+cFf3DVgmV3aEjEClZi3zT8Lm1i+ixNotk7uekhY2dmTvYja1Efl+FtQw9YvZVeuOqsptbgxjIZCxXA/sgmoXzYg76C8hUNzeDpiDkTOkIEhhUDFAhWmdlP9r2RqFOXpzWktW9x+jvvBakImkTttEM5ilRmvTRoJqX/BnrmPrF+XsOz3flBcwdeUnop3reAYJUxe6putKo4Y4WwZWEGIYWVUfHh3guoPvb6xjECsN8ZTPUsv2Ci+5+YL0U7Uw9oDlwFM1w+rmr5SybyHLhaypvHnsoMjNltUMagaXQQZmGi+VOo9jFjMl96DqfTd6ZQUtjpfKPAA7zGffhYrfYoLRp2pX4ZnOkhQY2moJ9s2jTUZYM+F0OYye5/4xVpR+6OgtVKQWJ6IFN/ejAFPb7Z52XYr4LSyrqNinc26GD7yIom9kyNH5RdCS+DXuFl9g72dtBKzNT+ta5FnLhIc/HlL2TE4teYdxG46HCGPV+aSE43s3vQyL0SFHCy5lX/BJGn3i8DOVok4uHMIvzvcqVFHIYI2oRMp3H0X1xQlG3bh1PojbaeigTm6hktfMHNmTMMWtlfp4GMhOTF+AzmJn41Crz+z4amFvH849vnCiqMe1Hd3E95gq8I2LTNSAQSDqBYBfDbuF1l4d+SRaTfs2F/egceb3aejWFsBacgwgvtF60qmht3+kHmrQJ8XViasu5lk9DUgvUNx5PvAyKpwFb6VYr4F/AcOy6c2vyZxsASutweahSySVIU2iIXJtv2o3hGhxhbB8RAmnnyasS0fcr9j4a0TZm2upAFfocf9CFYmjuhZPlZON3x17rlSiTqGPS+iq0b0M5VIOtlZUbKz9DnnrMPD2eeDrx9GurHDok8MhMWb/bKthu5kDYrAxVwtfttCmhE62aRZLzR5IBqc7Vckfw5LXwF+0d5mTCuBPglzjZ9xpXUgjp0AGBNbP8yk7L8l5OTk72xr+dnJhZUcJmF2CUpgZvO9fv//SE59dVN1Q92foE0pVorlIZCg+F+baC3VMU26YADSmBpqYMDobdMeX1qR9RaWnBIrbxoS2rg1VYyyfQI0rLuegyZbPyh2/mZrOdixJU1zrGrnirHhwlMuwu5yrL5+TO33K55m+dP1k0H8LHkCj80cpIlSFKODzUJO1g1Vbsa8G0Exy1izgARTcYAJnG4yKmEvgu9zNsmM7t0tpGnIhvTHpcTeFRdFFc5TL+oBaQBDPIBzE0DPICrfhGc/mA821pZmLyxA3Ocboa/40mDKOr07RAIEBDMskUchW+YX0WCwaSsGj6Hd3q+IeGzhXmu7YmpGXAUACD+x7shoqc7PqrDTftum764qWLuA1BiBhNswOiPHCFCcBIy1lfePDgvMDZDzyLjdmmuVTYwaxo8mQxOAsEj3NodRChxWKK6365HDX+ZPXQSJB9vgGwoFUqFwrDkDJ3iR6TBNfRoil7hHd03d4N8v6An1bJ6ePsF4CjId5fhp5ZJW9mh1e1pelQ80Gyvk4LnvF6PR6J0HyHptlg00TwLnXmE7fqEl9uF5dQ03lxtI7QbyQf+YvWZ3FzqJaqmQHDzeWGLhEeOv5cdiFZy38HmXBoPSb5QdVVZbGMIcOrrOGP4Y6YC/rbZvKupBA9VY7W5yXTK5LSJ0sL9v5AU6uGR2IbM55DOCZZzZul6FdHBeygfIg38yHT3Dywf2EdRfOCJATb9jDal0t20X9Web+UCyVjoXAuYY/miw5GS++4I6PJZ4n+pr6rtqHSmp47PKj6RzRanxRQWwAleBVeKWF93fd6pT9bv/z32twLxg6qZmCY1/Kh0TS3oZyeFjvZ2ft2MfpC35DfdY7uz83dPxSmobccru5CSstH/3DOwcHB2KscVB8Zyptd9MptqNKyJzEMolALbtP40GN8fDwmb89Td0/D05WNQsF66esWsRTL4jjbViwREyaF3oYxUnkhsHLIrV5MgcS1zXBFKEK7qQ1Lkhbw9x+hIAnn01b0JTiaVEV78G1IrfaqXti7t0UrnjdurGxvb91DbiH3Sl5Q6kU1O6XJqePjp8fHNzyXv7Lyl3s3Pr/5+fGeTCLtWrg/2YY+/uVGDJhDY/dpjrVfoTv8CZtE4u+G1mrfOrV6JYXelHZh63iC1pom52fm5/thZ59+XIa/pXnME+/QII4eQKOcnQ2ytTM5+R97XDkQjFK/iCznmtXcJdXqcp7OeoRC+eVqrprLS4/KRTS/FPvNO+JkWpUduEJSsO3CJ9gmGIet4NtN/HTzJr7ST3d/dhO3r3gvXqRGm9k77MbtAkdgD9u68LBWnsV8yvvJXrxmZ70Pnf4W/ONi8+xsrb4+m3UwdSKiF7yIHFnFhPd9axuupNDW9cIfCwC6rgItocuyN3Y4ugVTGn1VxKyGVi5kXRbpbD1uU+kfOqd4888Yjag083kL+vgp3SFD/3vAcSDT2iKgPK8aIsuobFVUVj+w+OVKChVZ+cvvToibipNiO2UvgpHsNtrpZLvt+CKptE8nS88asWSqaBjrEHPs07ZBnIeWGPnqIawT0m7biis+cVbdcXDHMfyCU5HrKvKDxXYjDdnDBTxIfxKL4AUioi47qSWiOEl9/InqS6fS4NTrLa5LnGenxCv7fQyFRDmZ2Cmst42ecmbbIHXtlI2jJGU4Pbtnd7syV7YNMWXUU84z6LbWYrEzaPdgvGe042fQc1o94z8dNw7ftKEcQWPc2o3AQRoS4rpLTl3je/LdonG6vt49VTIOMWrGwn/p7SOIdEUYM5LtyGLxCMp2z6ifwXv66Y9WSCxOtJ9/+t+PC4kW9qCjbJl8edZKwPo6pBZTS64r2j3gZhNlJ8HBd0YRuhG8EZ+SepCMdy2bPDPWZHJmNM7cyP88SMHauK5zz1rPILOmJMQn6zANsF5vl2On6/WeLca7XMyVF9ftTvdJpLsKhxw8i3WL6W7COBXJGfje6gqvpFAhBV2/V5qcKRWKLexjzzDyPHRmO57CVioeL4KxBlDGYZMA0jNOYbHVA9KN17JrkVOIoNweAG6vj7WeZXvJhAOKvZv6zl4z1vAxJaHHwWkrZRx117EHQBp7eRtiZ8lMORHDVGwX7LPIYtsp12y88kdRyFkK95xm7Du/NzKpMnyfWhs/gnTDU0jI95B61ouIYiaVqrdTvSTppdag3ltz2waghlTPeEbctTXXeAa1+Bo+jMTamZN0Yd09g0VUWOecXuoMnkEaFRr4ZaL6UqkzN2XAWeT7s/pcqheLdU/HjevQTn1fh48wDi1LOZmaQnf3+Pc6J9N6u8JhXEh0ovhsTEl9gCE45gI2mk3FxszbxtDAVqjBFUXAd12XFQWoWRRlVacrxPDjKt0NRJVxN7HRuug+3MARGzg0zvh19L8KRkKcjd+lFX3vQuS9xvTHKlTEwsoEVTj5fGNjb+MSh86KeeU8mRCd09FdrXJE1kmkv7riTS63xmKYnESeILH+R/qXT/RE+2heJKqiN4WG56YzsT7P3WDU9/61gT9GH6FWVLxXmijRYtpkqfR4Z3J+8nFpZ2fn03ueQny6eF+qSkRbJzKn+EhtVPBrAY0ul/IPYxJMJyekAAaawyN+TPhwC+YcJj+6aIw744bduz6KW66vxbxFf/jjPTWvYkFnQjnxciKU0GsN2uPbls/mMLulQec8xtZPt2cmdu7tTU2Vjk/syzPTuU3aI+kjMWrBofdQoUULfMvlRlxOpy6+1zBmc3wRH6b4bhvyw/hRbWhh998q0YL2namd/z1+urGzc29VP9m+VZBfnrzAEQQRt1g73G1W36dvc9PLKqS5o2wawyS6uiNCoBadpTMzbw82P7ZCkVO8JsTA+vg22T4ubLesgrWKZsMqnJ+XGg57IVsN8NFlKqDyHomSSV/HvDVOKl3NgY3IqYujEdGL7f8mConlNSH6iluWvnFXVLBHWvqqrtjnpUy0lkZjX8jR3lfxyi7vbEF+qVVs4u7ckU8XabDZP4OqGLYuvj+o/ngKLb3wNZ36nLy7Z6P5tjiUp3s2QZTpAMRo32hUo3R4UV7Xh5sw46uE+4NveAHA5TeHNh8B51nIvig8h/LDllB/BIWcpT+fpwWYvYIlvr66Q/SWULiaeS6Pyhl6swWpSE99ZdfmoChUwkLjA2b/r6hQJfBJqXTjuYU50Etz2x4cemtw5oTN/u17eK32QhvdGqZDk+4yh2M6tJo4GHdt+T2RyV9XoShav7i3YYk0QXvjntB+LgznNjdRQNX0ytreYHxVYdW/aY6GTNMvdVqyGuFzptYxxL4b/ykoVHQZo1LUab1lET4hRW2TdsKclG10vHrmXPhlU4p/+DPu6ANlwXXrtk8F97oQTjicD7vDT0Wht5KcnFvN14ehntTouKvkdi8XKkZG+yPR67hDFTO8ZMN3MW8XdgKw63WDVgg+yij8sXHpu/9fgIME7ZUVc9og5ysGAI5Clapk5ryBl9MSBtFx9HIXs0R05fRH0XYVhe8+33j2minx0ZGyoXDn61o40cjuJxw70zw4ePQo0/LCaLqM8rzNlPPfvxOF3fJs58FSYwEwZiP9GWduVcb0WBcVWismdHkhTXvEKwecH1PgO/6JzkeXLiCyiuNLocXs89obp9J0QJVlVeW8hYRex/xJ/I8ag8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGP8P+T8ox6GsHzzY0QAAAABJRU5ErkJggg==" />
+                    </td>
+                    <td>
+                        <h4><b>CENTRO EDUCACIONAL ANTONIO GALDINO</b></h4>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div align="center"><h4><b>FICHA DO ALUNO</b></h4></div>
+        <div align="center"><h4>ANO LETIVO @DateTime.Now.Year</h4></div>
+        <div align="center">
+            <table border="1" width="850" height="30">
+                <tr align="center" class="bg-primary">
+                    <td><b>INFORMAÇÕES DO ALUNO</b></td>
+                </tr>
+            </table>
+            <table border="1" width="850" height="40">
+                <tr>
+                    <td><b>&nbsp;NOME COMPLETO: </b>@Model.Nome.ToUpper()</td>
+                </tr>
+            </table>
+            <table border="1" width="850" height="40">
+                <tr>
+                    <td><b>&nbsp;DATA DE NASCIMENTO: </b>@Model.NascimentoFormatado</td>
+                    <td><b>&nbsp;SÉRIE: </b>@Model.AlunoMatriculaExibicaoViewModel.Turma.Segmento</td>
+                    <td><b>&nbsp;TURMA: </b>@Model.AlunoMatriculaExibicaoViewModel.Turma.Periodo</td>
+                </tr>
+            </table>
+            <table border="1" width="850" height="5e0">
+                <tr>
+                    <td height="20"><b>&nbsp;NOME DA MÃE: </b>@Model.MaeNome.ToUpper()</td>
+                    <td><b>&nbsp;TELEFONE: </b>@Model.FoneMae</td>
+                </tr>
+                <tr>
+                    <td height="20"><b>&nbsp;PROFISSÃO DA MÃE: </b>@Model.MaeProfissao.ToUpper()</td>
+                    <td><b>&nbsp;TELEFONE: </b>@Model.FoneMaeTrabalho</td>
+                </tr>
+                <tr>
+                    <td height="20"><b>&nbsp;NOME DO PAI: </b>@Model.PaiNome.ToUpper()</td>
+                    <td><b>&nbsp;TELEFONE: </b>@Model.FonePai</td>
+                </tr>
+                <tr>
+                    <td height="20"><b>&nbsp;PROFISSÃO DO PAI: </b>@Model.PaiProfissao.ToUpper()</td>
+                    <td><b>&nbsp;TELEFONE: </b>@Model.FonePaiTrabalho</td>
+                </tr>
+            </table>
+
+            <table border="1" width="850" height="30">
+                <tr align="center" class="bg-primary">
+                    <td width="70%"><b>QUESTIONÁRIO</b></td>
+                    <td width="10%"><b>RESPOSTA</b></td>
+                    <td width="20%"><b>COMPLEMENTO</b></td>
+                </tr>
+            </table>
+            <table border="1" width="850">
+                <tr align="left"></tr>
+                @foreach (var itemQuestionario in @Model.AlunoQuestionarioExibicaoViewModels)
+                {
+                    <tr align="left">
+                        <td width="70%" height="20">
+                            <b>&nbsp;@itemQuestionario.Ordem.&nbsp;@itemQuestionario.Descricao</b>
+                        </td>
+                        <td width="10%" align="left">
+                            <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@itemQuestionario.Resposta.ToUpper()</b>
+                        </td>
+                        <td width="20%" align="left">
+                            @if (itemQuestionario.TemComplemento.ToUpper().Equals("SIM") && itemQuestionario.Resposta.ToUpper().Equals("SIM"))
+                            {
+                                <b>&nbsp;@itemQuestionario.Complemento</b>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+            <table border="1" width="850" height="30">
+                <tr align="center" class="bg-primary">
+                    <td><b>CONTATOS DE EMERGÊNCIA</b></td>
+                </tr>
+            </table>
+            <table border="1" width="850">
+                <tr align="left"></tr>
+                @foreach (var itemTelefones in @Model.TelefoneViewModels.Where(p => p.TipoContato.ToUpper().Equals("EMERGÊNCIA")))
+                {
+                    <tr align="left">
+                        <td width="70%" height="30">
+                            <b>&nbsp;@itemTelefones.Tipo&nbsp;@itemTelefones.Pessoa&nbsp;@itemTelefones.Local</b>
+                        </td>
+                        <td width="30%" align="left">
+                            <b>&nbsp;(@itemTelefones.Ddd)&nbsp;@itemTelefones.Numero</b>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <table border="1" width="850" height="30">
+                <tr align="center" class="bg-primary">
+                    <td><b>COM QUEM VAI PRA CASA</b></td>
+                </tr>
+            </table>
+            <table border="1" width="850">
+                <tr align="left"></tr>
+                @foreach (var itemTelefones in @Model.TelefoneViewModels.Where(p => p.Pessoa.ToUpper().Equals("TRANSPORTADOR")))
+                {
+                    <tr align="left">
+                        <td width="70%" height="30">
+                            <b>&nbsp;@itemTelefones.Tipo&nbsp;@itemTelefones.Local&nbsp;(@itemTelefones.Observacao)</b>
+                        </td>
+                        <td width="30%" align="left">
+                            <b>&nbsp;(@itemTelefones.Ddd)&nbsp;@itemTelefones.Numero</b>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <table border="1" width="850" height="40">
+                <tr align="center" class="bg-primary">
+                    <td><b>CONDUÇÃO</b></td>
+                </tr>
+            </table>
+            <table border="1" width="850">
+                <tr align="left"></tr>
+                @foreach (var itemTelefones in @Model.TelefoneViewModels.Where(p => p.Pessoa.ToUpper().Equals("CONDUÇÃO")))
+                {
+                    <tr align="left">
+                        <td width="70%" height="30">
+                            <b>&nbsp;@itemTelefones.Tipo&nbsp;@itemTelefones.Local&nbsp;(@itemTelefones.Observacao)</b>
+                        </td>
+                        <td width="30%" align="left">
+                            <b>&nbsp;(@itemTelefones.Ddd)&nbsp;@itemTelefones.Numero</b>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            &nbsp;
+            <table align="center">
+                <tr><td align="center"><b>_______________________________________________________</b></td></tr>
+                <tr><td align="center"><b>Assinatura do Responsável</b></td></tr>
+            </table>
+        </div>
+
+    </div>
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/inputmask")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#telefone").inputmask("mask", { "mask": "(99) 9999-9999" });
+            $("#cpf").inputmask("mask", { "mask": "999.999.999-99" }, { reverse: true });
+            $("#cep").inputmask("mask", { "mask": "99999-999" });
+            $("#preco").inputmask("mask", { "mask": "999.999,99" }, { reverse: true });
+            $("#valor").inputmask("mask", { "mask": "#.##9,99" }, { reverse: true });
+        });
+    </script>
+}

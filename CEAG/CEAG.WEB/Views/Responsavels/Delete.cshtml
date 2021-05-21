@@ -1,0 +1,126 @@
+﻿@model CEAG.WEB.ViewModel.Responsavel.ResponsavelViewModel
+
+@{
+    ViewBag.Title = "Excluir Responsável";
+}
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        @if (ViewBag.Aluno.Sexo.ToUpper() == "MASCULINO")
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/day-care-big.png" /> DESEJA DELETAR O RESPONSÁVEL ABAIXO DO ALUNO <b>@ViewBag.Aluno.Nome</b></h3>
+
+        }
+        else
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/day-care-big.png" /> DESEJA DELETAR O RESPONSÁVEL ABAIXO DA ALUNA <b>@ViewBag.Aluno.Nome</b></h3>
+        }
+
+    </div>
+    <hr />
+    <div>
+        <fieldset>
+            <legend>Dados</legend>
+            <dl class="dl-horizontal">
+                
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Nome)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Cpf)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Cpf)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Tipo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Tipo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Rg)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Rg)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.RgUf)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.RgUf)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Profissao)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Profissao)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.EstadoCivil)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EstadoCivil)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Naturalidade)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Naturalidade)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nacionalidade)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Nacionalidade)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DeclaraIR)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DeclaraIR)
+                </dd>
+
+            </dl>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                    <button type="submit" value="Delete">
+                        <img src="~/images/Browser/ok.png" width="50" height="50" />
+                    </button>
+                    <button type="button" onclick="location.href='@Url.Action("Details", "Alunos", new { codAluno = ViewBag.Aluno.CodAluno } )'">
+                        <img src="~/images/Browser/cancel.png" width="50" height="50" />
+                    </button>
+                    @*<a href="@Url.Action("Index","Alunos")">
+                    <img src="@Url.Content("~/images/Browser/cancel.png")" />
+                </a>*@
+                </div>
+            }
+        </fieldset>
+    </div>
+</div>

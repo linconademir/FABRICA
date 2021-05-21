@@ -1,0 +1,32 @@
+﻿
+@model IEnumerable<CEAG.WEB.ViewModel.Debito.DebitoExibicaoViewModel>
+
+<table>
+    <tr>
+        @foreach (var item in Model)
+        {
+            if (@item.Pagamento.HasValue)
+            {
+                <td>
+                    <font color="#008000">
+                        <b>
+                            <img src="~/Images/ImageLink/Verde.png" width="20" height="20" />
+                            @item.Periodo.Month/@item.Periodo.Year
+                        </b>
+                    </font>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <font color="#ff0000">
+                        <b>
+                            <img src="~/Images/ImageLink/Vermelho.png" width="20" height="20" />
+                            @item.Periodo.Month/@item.Periodo.Year
+                        </b>
+                    </font>
+                </td>
+            }
+        }
+    </tr>
+</table>

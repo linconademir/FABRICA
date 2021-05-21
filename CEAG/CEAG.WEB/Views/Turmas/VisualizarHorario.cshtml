@@ -1,0 +1,141 @@
+﻿@model CEAG.WEB.ViewModel.TurmaFuncionarioDisciplinas.TurmaFuncionarioDisciplinaHorarioExibicaoViewModel
+
+@{
+    ViewBag.Title = "Visualizar Horario da Turma";
+}
+
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/calendar.png" />VISUALIZAR HORÁRIO DA TURMA</h3>
+    </div>
+
+    <fieldset>
+        <legend>
+            INFORMAÇÕES DA TURMA
+        </legend>
+
+        <div class="form-group">
+            <div class="col-md-1">
+                <img alt="Brand" height="50" width="50" src="~/Images/Browser/classroomBig.png" />
+            </div>
+            <div class="col-md-3">
+                <h4><b>Nome: </b>@Model.TurmaExibicaoViewModel.Descricao</h4>
+            </div>
+            <div class="col-md-2">
+                <h4><b>Ano: </b>@Model.TurmaExibicaoViewModel.AnoLetivo</h4>
+            </div>
+            <div class="col-md-2">
+                <h4><b>Nivel: </b>@Model.TurmaExibicaoViewModel.Nivel</h4>
+            </div>
+            <div class="col-md-4">
+                <h4><b>Segmento: </b>@Model.TurmaExibicaoViewModel.Segmento</h4>
+            </div>
+        </div>
+    </fieldset>
+    <hr />
+
+    <div class="row">
+        <hr />
+
+        <div class="form-group">
+            <table width="100%">
+                <thead class="btn-primary">
+                    <tr>
+                        <td height="50" align="center">
+                            <h4><b>&nbsp;&nbsp;HORÁRIO DE AULA</b></h4>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+            <table width="100%" border="1">
+                <tbody class="text-primary">
+                    <tr>
+                        <td width="15%" align="center">
+                            <h5><b>HORÁRIOS/DIAS</b></h5>
+                        </td>
+                        <td width="15%" align="center">
+                            <h5><b>SEGUNDA</b></h5>
+                        </td>
+
+                        <td width="15%" align="center">
+                            <h5><b>TERÇA</b></h5>
+                        </td>
+
+                        <td width="15%" align="center">
+                            <h5><b>QUARTA</b></h5>
+                        </td>
+
+                        <td width="15%" align="center">
+                            <h5><b>QUINTA</b></h5>
+                        </td>
+
+                        <td width="15%" align="center">
+                            <h5><b>SEXTA</b></h5>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" border="1">
+                <tbody>
+
+                    @foreach (var item in Model.HorarioAulaViewModels.Select(p => p.Inicio).Distinct())
+                    {
+                        <tr>
+                            <td width="15%" align="center">
+                                @foreach (var horarioView in Model.HorarioAulaViewModels.Where(p => p.Inicio == item).Take(1))
+                                {
+                                    <label>
+                                        &nbsp;&nbsp;@Html.DisplayFor(modelItemHorario => horarioView.Inicio) até @Html.DisplayFor(modelItemHorario => horarioView.Termino)
+                                    </label>
+                                }
+                            </td>
+                            @foreach (var itemHorario in Model.HorarioAulaViewModels.Where(p => p.Inicio == item))
+                            {
+
+                                if (Model.TurmaFuncionarioDisciplinaExibicaoViewModels
+                                    .Where(p => p.CodHorarioAula == itemHorario.CodHorarioAula && p.DiaSemana == itemHorario.DiaSemana).Any())
+                                {
+                                    foreach (var itemTurmaFuncionarioDisciplina in Model.TurmaFuncionarioDisciplinaExibicaoViewModels
+                                        .Where(p => p.CodHorarioAula == itemHorario.CodHorarioAula && p.DiaSemana == itemHorario.DiaSemana))
+                                    {
+                                        <td width="15%" align="left" bgcolor="#87CEFA">
+                                            <div>
+                                                <h4><b>&nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(modelItem => itemTurmaFuncionarioDisciplina.Disciplina.Descricao)</b></h4>
+                                            </div>
+                                        </td>
+                                    }
+                                }
+                                else
+                                {
+                                    <td width="15%" align="left" bgcolor="#BDB76B">
+                                        <div>
+                                            <h5 class="text-danger"><b>&nbsp;&nbsp;&nbsp;&nbsp;LIVRE</b></h5>
+                                        </div>
+                                    </td>
+                                }
+
+                                @*</div>
+                                    </td>*@
+
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+                <button type="button" onclick="location.href='@Url.Action("Index", "Turmas")'">
+                    <img src="~/images/Browser/cancel.png" width="50" height="50"/>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+

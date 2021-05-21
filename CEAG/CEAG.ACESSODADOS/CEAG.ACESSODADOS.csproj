@@ -1,0 +1,639 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6FE04674-6155-477F-9D1E-8D92063542C9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CEAG.ACESSODADOS</RootNamespace>
+    <AssemblyName>CEAG.ACESSODADOS</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CeagEntityAbstractConfig.cs" />
+    <Compile Include="Context\CeagDbContextAcesso.cs" />
+    <Compile Include="Context\CeagDbContext.cs" />
+    <Compile Include="Migrations\202005242351505_Inicio_20200524.cs" />
+    <Compile Include="Migrations\202005242351505_Inicio_20200524.designer.cs">
+      <DependentUpon>202005242351505_Inicio_20200524.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005250453385_CamposResponsavel.cs" />
+    <Compile Include="Migrations\202005250453385_CamposResponsavel.designer.cs">
+      <DependentUpon>202005250453385_CamposResponsavel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005290439350_Naturalidade.cs" />
+    <Compile Include="Migrations\202005290439350_Naturalidade.designer.cs">
+      <DependentUpon>202005290439350_Naturalidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005290615143_MensalidadeValor.cs" />
+    <Compile Include="Migrations\202005290615143_MensalidadeValor.designer.cs">
+      <DependentUpon>202005290615143_MensalidadeValor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005291933297_MensalidadeCampos.cs" />
+    <Compile Include="Migrations\202005291933297_MensalidadeCampos.designer.cs">
+      <DependentUpon>202005291933297_MensalidadeCampos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005300435209_Taxa.cs" />
+    <Compile Include="Migrations\202005300435209_Taxa.designer.cs">
+      <DependentUpon>202005300435209_Taxa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005310345238_MatriculaTurma.cs" />
+    <Compile Include="Migrations\202005310345238_MatriculaTurma.designer.cs">
+      <DependentUpon>202005310345238_MatriculaTurma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006010519347_TurmaNivel.cs" />
+    <Compile Include="Migrations\202006010519347_TurmaNivel.designer.cs">
+      <DependentUpon>202006010519347_TurmaNivel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006130342198_TurmaPeriodo.cs" />
+    <Compile Include="Migrations\202006130342198_TurmaPeriodo.designer.cs">
+      <DependentUpon>202006130342198_TurmaPeriodo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006130451093_TurmaAno.cs" />
+    <Compile Include="Migrations\202006130451093_TurmaAno.designer.cs">
+      <DependentUpon>202006130451093_TurmaAno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006130512222_TurmaAbertura.cs" />
+    <Compile Include="Migrations\202006130512222_TurmaAbertura.designer.cs">
+      <DependentUpon>202006130512222_TurmaAbertura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006130527229_TurmaAberturaNull.cs" />
+    <Compile Include="Migrations\202006130527229_TurmaAberturaNull.designer.cs">
+      <DependentUpon>202006130527229_TurmaAberturaNull.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006150250144_AlunoMatriculaCampos.cs" />
+    <Compile Include="Migrations\202006150250144_AlunoMatriculaCampos.designer.cs">
+      <DependentUpon>202006150250144_AlunoMatriculaCampos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006190542393_TabelaFuncionario.cs" />
+    <Compile Include="Migrations\202006190542393_TabelaFuncionario.designer.cs">
+      <DependentUpon>202006190542393_TabelaFuncionario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006190553581_TabelaFuncionario1.cs" />
+    <Compile Include="Migrations\202006190553581_TabelaFuncionario1.designer.cs">
+      <DependentUpon>202006190553581_TabelaFuncionario1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006200302347_TabelaDisciplina.cs" />
+    <Compile Include="Migrations\202006200302347_TabelaDisciplina.designer.cs">
+      <DependentUpon>202006200302347_TabelaDisciplina.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006200554046_TabelaAcesso.cs" />
+    <Compile Include="Migrations\202006200554046_TabelaAcesso.designer.cs">
+      <DependentUpon>202006200554046_TabelaAcesso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006201734418_TabelaAcessoRole.cs" />
+    <Compile Include="Migrations\202006201734418_TabelaAcessoRole.designer.cs">
+      <DependentUpon>202006201734418_TabelaAcessoRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006201800080_TabelaEscolaGrupo.cs" />
+    <Compile Include="Migrations\202006201800080_TabelaEscolaGrupo.designer.cs">
+      <DependentUpon>202006201800080_TabelaEscolaGrupo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006201806427_TabelaEscolaGrupo1.cs" />
+    <Compile Include="Migrations\202006201806427_TabelaEscolaGrupo1.designer.cs">
+      <DependentUpon>202006201806427_TabelaEscolaGrupo1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006230441411_TabelaFuncionarioDisciplina.cs" />
+    <Compile Include="Migrations\202006230441411_TabelaFuncionarioDisciplina.designer.cs">
+      <DependentUpon>202006230441411_TabelaFuncionarioDisciplina.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006252327211_TurmaFuncionarioDisciplina.cs" />
+    <Compile Include="Migrations\202006252327211_TurmaFuncionarioDisciplina.designer.cs">
+      <DependentUpon>202006252327211_TurmaFuncionarioDisciplina.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006290338397_TabelaNotasUnidade.cs" />
+    <Compile Include="Migrations\202006290338397_TabelaNotasUnidade.designer.cs">
+      <DependentUpon>202006290338397_TabelaNotasUnidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007040442159_AlterarCampos.cs" />
+    <Compile Include="Migrations\202007040442159_AlterarCampos.designer.cs">
+      <DependentUpon>202007040442159_AlterarCampos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007040743587_AlterarCampos1.cs" />
+    <Compile Include="Migrations\202007040743587_AlterarCampos1.designer.cs">
+      <DependentUpon>202007040743587_AlterarCampos1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007072324243_Questionario.cs" />
+    <Compile Include="Migrations\202007072324243_Questionario.designer.cs">
+      <DependentUpon>202007072324243_Questionario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007072336185_AlterarCampos2.cs" />
+    <Compile Include="Migrations\202007072336185_AlterarCampos2.designer.cs">
+      <DependentUpon>202007072336185_AlterarCampos2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007091623319_AlterarCampos3.cs" />
+    <Compile Include="Migrations\202007091623319_AlterarCampos3.designer.cs">
+      <DependentUpon>202007091623319_AlterarCampos3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007091658183_AlterarCampos4.cs" />
+    <Compile Include="Migrations\202007091658183_AlterarCampos4.designer.cs">
+      <DependentUpon>202007091658183_AlterarCampos4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007092002018_AlterarCampos5.cs" />
+    <Compile Include="Migrations\202007092002018_AlterarCampos5.designer.cs">
+      <DependentUpon>202007092002018_AlterarCampos5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007161739002_NovoCampoQuestionario.cs" />
+    <Compile Include="Migrations\202007161739002_NovoCampoQuestionario.designer.cs">
+      <DependentUpon>202007161739002_NovoCampoQuestionario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007170322304_NovoCampoQuestionario1.cs" />
+    <Compile Include="Migrations\202007170322304_NovoCampoQuestionario1.designer.cs">
+      <DependentUpon>202007170322304_NovoCampoQuestionario1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007170424027_NovoCampoTelefone.cs" />
+    <Compile Include="Migrations\202007170424027_NovoCampoTelefone.designer.cs">
+      <DependentUpon>202007170424027_NovoCampoTelefone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007180239004_CamposTaxa.cs" />
+    <Compile Include="Migrations\202007180239004_CamposTaxa.designer.cs">
+      <DependentUpon>202007180239004_CamposTaxa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007180614396_CamposTaxa1.cs" />
+    <Compile Include="Migrations\202007180614396_CamposTaxa1.designer.cs">
+      <DependentUpon>202007180614396_CamposTaxa1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007200521063_CamposFuncionario.cs" />
+    <Compile Include="Migrations\202007200521063_CamposFuncionario.designer.cs">
+      <DependentUpon>202007200521063_CamposFuncionario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007200532589_CamposFuncionario1.cs" />
+    <Compile Include="Migrations\202007200532589_CamposFuncionario1.designer.cs">
+      <DependentUpon>202007200532589_CamposFuncionario1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007290251170_Aula.cs" />
+    <Compile Include="Migrations\202007290251170_Aula.designer.cs">
+      <DependentUpon>202007290251170_Aula.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007300100051_Horario.cs" />
+    <Compile Include="Migrations\202007300100051_Horario.designer.cs">
+      <DependentUpon>202007300100051_Horario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008040025175_NovosCamposHorario.cs" />
+    <Compile Include="Migrations\202008040025175_NovosCamposHorario.designer.cs">
+      <DependentUpon>202008040025175_NovosCamposHorario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008040110186_NovosCamposHorario1.cs" />
+    <Compile Include="Migrations\202008040110186_NovosCamposHorario1.designer.cs">
+      <DependentUpon>202008040110186_NovosCamposHorario1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008130145514_CamposHorarioTurma.cs" />
+    <Compile Include="Migrations\202008130145514_CamposHorarioTurma.designer.cs">
+      <DependentUpon>202008130145514_CamposHorarioTurma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008160058179_Feriado.cs" />
+    <Compile Include="Migrations\202008160058179_Feriado.designer.cs">
+      <DependentUpon>202008160058179_Feriado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008160313167_HorarioAulas.cs" />
+    <Compile Include="Migrations\202008160313167_HorarioAulas.designer.cs">
+      <DependentUpon>202008160313167_HorarioAulas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008160428166_AcessoCampos.cs" />
+    <Compile Include="Migrations\202008160428166_AcessoCampos.designer.cs">
+      <DependentUpon>202008160428166_AcessoCampos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008260055351_Unidade.cs" />
+    <Compile Include="Migrations\202008260055351_Unidade.designer.cs">
+      <DependentUpon>202008260055351_Unidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009300341360_ResponsavelAlteracao.cs" />
+    <Compile Include="Migrations\202009300341360_ResponsavelAlteracao.designer.cs">
+      <DependentUpon>202009300341360_ResponsavelAlteracao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010082116595_CamposUsuario.cs" />
+    <Compile Include="Migrations\202010082116595_CamposUsuario.designer.cs">
+      <DependentUpon>202010082116595_CamposUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010280145247_EscolaLogradouro.cs" />
+    <Compile Include="Migrations\202010280145247_EscolaLogradouro.designer.cs">
+      <DependentUpon>202010280145247_EscolaLogradouro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011222346012_AlteraTurma.cs" />
+    <Compile Include="Migrations\202011222346012_AlteraTurma.designer.cs">
+      <DependentUpon>202011222346012_AlteraTurma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011240313187_AlteraMatricula.cs" />
+    <Compile Include="Migrations\202011240313187_AlteraMatricula.designer.cs">
+      <DependentUpon>202011240313187_AlteraMatricula.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011242359555_AlteraMensalidade.cs" />
+    <Compile Include="Migrations\202011242359555_AlteraMensalidade.designer.cs">
+      <DependentUpon>202011242359555_AlteraMensalidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011250041464_AlteraMensalidade1.cs" />
+    <Compile Include="Migrations\202011250041464_AlteraMensalidade1.designer.cs">
+      <DependentUpon>202011250041464_AlteraMensalidade1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011250104308_AlteraDebito.cs" />
+    <Compile Include="Migrations\202011250104308_AlteraDebito.designer.cs">
+      <DependentUpon>202011250104308_AlteraDebito.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012041440399_LiberarAluno.cs" />
+    <Compile Include="Migrations\202012041440399_LiberarAluno.designer.cs">
+      <DependentUpon>202012041440399_LiberarAluno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012150307521_AdicionandoNumero.cs" />
+    <Compile Include="Migrations\202012150307521_AdicionandoNumero.designer.cs">
+      <DependentUpon>202012150307521_AdicionandoNumero.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012211344511_DebitoHistorico.cs" />
+    <Compile Include="Migrations\202012211344511_DebitoHistorico.designer.cs">
+      <DependentUpon>202012211344511_DebitoHistorico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012260330097_AdvertenciaMensagem.cs" />
+    <Compile Include="Migrations\202012260330097_AdvertenciaMensagem.designer.cs">
+      <DependentUpon>202012260330097_AdvertenciaMensagem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012270429171_AlteracaoADvertencia.cs" />
+    <Compile Include="Migrations\202012270429171_AlteracaoADvertencia.designer.cs">
+      <DependentUpon>202012270429171_AlteracaoADvertencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012290456029_AlteracaoResponsavel.cs" />
+    <Compile Include="Migrations\202012290456029_AlteracaoResponsavel.designer.cs">
+      <DependentUpon>202012290456029_AlteracaoResponsavel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012300247045_AlteracaoMensalidade.cs" />
+    <Compile Include="Migrations\202012300247045_AlteracaoMensalidade.designer.cs">
+      <DependentUpon>202012300247045_AlteracaoMensalidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012301621096_AlteracaoDebito.cs" />
+    <Compile Include="Migrations\202012301621096_AlteracaoDebito.designer.cs">
+      <DependentUpon>202012301621096_AlteracaoDebito.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101150252233_CamposNota.cs" />
+    <Compile Include="Migrations\202101150252233_CamposNota.designer.cs">
+      <DependentUpon>202101150252233_CamposNota.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101200259558_PontoAtencao.cs" />
+    <Compile Include="Migrations\202101200259558_PontoAtencao.designer.cs">
+      <DependentUpon>202101200259558_PontoAtencao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101200333587_PontoAtencaoCodAcesso.cs" />
+    <Compile Include="Migrations\202101200333587_PontoAtencaoCodAcesso.designer.cs">
+      <DependentUpon>202101200333587_PontoAtencaoCodAcesso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101210345123_resolucaoAcesso.cs" />
+    <Compile Include="Migrations\202101210345123_resolucaoAcesso.designer.cs">
+      <DependentUpon>202101210345123_resolucaoAcesso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102012010503_ValorMensalidade.cs" />
+    <Compile Include="Migrations\202102012010503_ValorMensalidade.designer.cs">
+      <DependentUpon>202102012010503_ValorMensalidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102012021081_ValorMensalidade1.cs" />
+    <Compile Include="Migrations\202102012021081_ValorMensalidade1.designer.cs">
+      <DependentUpon>202102012021081_ValorMensalidade1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102012039150_CamposMatricula.cs" />
+    <Compile Include="Migrations\202102012039150_CamposMatricula.designer.cs">
+      <DependentUpon>202102012039150_CamposMatricula.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103211836355_Parentesco.cs" />
+    <Compile Include="Migrations\202103211836355_Parentesco.designer.cs">
+      <DependentUpon>202103211836355_Parentesco.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103211855122_Parentesco_acessp.cs" />
+    <Compile Include="Migrations\202103211855122_Parentesco_acessp.designer.cs">
+      <DependentUpon>202103211855122_Parentesco_acessp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104141420370_NovosCampos.cs" />
+    <Compile Include="Migrations\202104141420370_NovosCampos.designer.cs">
+      <DependentUpon>202104141420370_NovosCampos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104141635085_AtualizacaoAlunoMatricula.cs" />
+    <Compile Include="Migrations\202104141635085_AtualizacaoAlunoMatricula.designer.cs">
+      <DependentUpon>202104141635085_AtualizacaoAlunoMatricula.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104191854489_Atualizacao.cs" />
+    <Compile Include="Migrations\202104191854489_Atualizacao.designer.cs">
+      <DependentUpon>202104191854489_Atualizacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeConfiguration\AcessoRoleTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\AcessoTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\AdvertenciaTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\AlunoMatriculaUnidadeTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\AlunoMatriculaTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\AlunoTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\AulaAlunoTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\AulaTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\ContaBancariaTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\DebitoHistoricoTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\DisciplinaTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\EscolaGrupoTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\EscolaTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\FeriadoTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\FuncionarioDisciplinaTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\FuncionarioTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\HorarioAulaTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\HorarioTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\InformacaoTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\LogradouroTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\MatriculaTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\AlunoQuestionarioTypeConfiguration .cs" />
+    <Compile Include="TypeConfiguration\DebitoTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\MensagemTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\ParentescoTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\ParentescoAlunoTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\QuestionarioTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\RoleTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\TaxaTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\MensalidadeValorTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\ResponsavelTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\TelefoneTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\TurmaFuncionarioDisciplinaTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\TurmaTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\PontoAtencaoTypeConfiguration.cs" />
+    <Compile Include="TypeConfiguration\UnidadeTypeConfiguration.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CEAG.DOMINIO\CEAG.DOMINIO.csproj">
+      <Project>{A7ADE62B-3A33-47D4-A438-2979D600FB03}</Project>
+      <Name>CEAG.DOMINIO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202005242351505_Inicio_20200524.resx">
+      <DependentUpon>202005242351505_Inicio_20200524.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005250453385_CamposResponsavel.resx">
+      <DependentUpon>202005250453385_CamposResponsavel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005290439350_Naturalidade.resx">
+      <DependentUpon>202005290439350_Naturalidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005290615143_MensalidadeValor.resx">
+      <DependentUpon>202005290615143_MensalidadeValor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005291933297_MensalidadeCampos.resx">
+      <DependentUpon>202005291933297_MensalidadeCampos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005300435209_Taxa.resx">
+      <DependentUpon>202005300435209_Taxa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005310345238_MatriculaTurma.resx">
+      <DependentUpon>202005310345238_MatriculaTurma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006010519347_TurmaNivel.resx">
+      <DependentUpon>202006010519347_TurmaNivel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006130342198_TurmaPeriodo.resx">
+      <DependentUpon>202006130342198_TurmaPeriodo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006130451093_TurmaAno.resx">
+      <DependentUpon>202006130451093_TurmaAno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006130512222_TurmaAbertura.resx">
+      <DependentUpon>202006130512222_TurmaAbertura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006130527229_TurmaAberturaNull.resx">
+      <DependentUpon>202006130527229_TurmaAberturaNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006150250144_AlunoMatriculaCampos.resx">
+      <DependentUpon>202006150250144_AlunoMatriculaCampos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006190542393_TabelaFuncionario.resx">
+      <DependentUpon>202006190542393_TabelaFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006190553581_TabelaFuncionario1.resx">
+      <DependentUpon>202006190553581_TabelaFuncionario1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006200302347_TabelaDisciplina.resx">
+      <DependentUpon>202006200302347_TabelaDisciplina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006200554046_TabelaAcesso.resx">
+      <DependentUpon>202006200554046_TabelaAcesso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006201734418_TabelaAcessoRole.resx">
+      <DependentUpon>202006201734418_TabelaAcessoRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006201800080_TabelaEscolaGrupo.resx">
+      <DependentUpon>202006201800080_TabelaEscolaGrupo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006201806427_TabelaEscolaGrupo1.resx">
+      <DependentUpon>202006201806427_TabelaEscolaGrupo1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006230441411_TabelaFuncionarioDisciplina.resx">
+      <DependentUpon>202006230441411_TabelaFuncionarioDisciplina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006252327211_TurmaFuncionarioDisciplina.resx">
+      <DependentUpon>202006252327211_TurmaFuncionarioDisciplina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006290338397_TabelaNotasUnidade.resx">
+      <DependentUpon>202006290338397_TabelaNotasUnidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007040442159_AlterarCampos.resx">
+      <DependentUpon>202007040442159_AlterarCampos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007040743587_AlterarCampos1.resx">
+      <DependentUpon>202007040743587_AlterarCampos1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007072324243_Questionario.resx">
+      <DependentUpon>202007072324243_Questionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007072336185_AlterarCampos2.resx">
+      <DependentUpon>202007072336185_AlterarCampos2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007091623319_AlterarCampos3.resx">
+      <DependentUpon>202007091623319_AlterarCampos3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007091658183_AlterarCampos4.resx">
+      <DependentUpon>202007091658183_AlterarCampos4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007092002018_AlterarCampos5.resx">
+      <DependentUpon>202007092002018_AlterarCampos5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007161739002_NovoCampoQuestionario.resx">
+      <DependentUpon>202007161739002_NovoCampoQuestionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007170322304_NovoCampoQuestionario1.resx">
+      <DependentUpon>202007170322304_NovoCampoQuestionario1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007170424027_NovoCampoTelefone.resx">
+      <DependentUpon>202007170424027_NovoCampoTelefone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007180239004_CamposTaxa.resx">
+      <DependentUpon>202007180239004_CamposTaxa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007180614396_CamposTaxa1.resx">
+      <DependentUpon>202007180614396_CamposTaxa1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007200521063_CamposFuncionario.resx">
+      <DependentUpon>202007200521063_CamposFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007200532589_CamposFuncionario1.resx">
+      <DependentUpon>202007200532589_CamposFuncionario1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007290251170_Aula.resx">
+      <DependentUpon>202007290251170_Aula.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007300100051_Horario.resx">
+      <DependentUpon>202007300100051_Horario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008040025175_NovosCamposHorario.resx">
+      <DependentUpon>202008040025175_NovosCamposHorario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008040110186_NovosCamposHorario1.resx">
+      <DependentUpon>202008040110186_NovosCamposHorario1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008130145514_CamposHorarioTurma.resx">
+      <DependentUpon>202008130145514_CamposHorarioTurma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008160058179_Feriado.resx">
+      <DependentUpon>202008160058179_Feriado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008160313167_HorarioAulas.resx">
+      <DependentUpon>202008160313167_HorarioAulas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008160428166_AcessoCampos.resx">
+      <DependentUpon>202008160428166_AcessoCampos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008260055351_Unidade.resx">
+      <DependentUpon>202008260055351_Unidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009300341360_ResponsavelAlteracao.resx">
+      <DependentUpon>202009300341360_ResponsavelAlteracao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010082116595_CamposUsuario.resx">
+      <DependentUpon>202010082116595_CamposUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010280145247_EscolaLogradouro.resx">
+      <DependentUpon>202010280145247_EscolaLogradouro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011222346012_AlteraTurma.resx">
+      <DependentUpon>202011222346012_AlteraTurma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011240313187_AlteraMatricula.resx">
+      <DependentUpon>202011240313187_AlteraMatricula.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011242359555_AlteraMensalidade.resx">
+      <DependentUpon>202011242359555_AlteraMensalidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011250041464_AlteraMensalidade1.resx">
+      <DependentUpon>202011250041464_AlteraMensalidade1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011250104308_AlteraDebito.resx">
+      <DependentUpon>202011250104308_AlteraDebito.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012041440399_LiberarAluno.resx">
+      <DependentUpon>202012041440399_LiberarAluno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012150307521_AdicionandoNumero.resx">
+      <DependentUpon>202012150307521_AdicionandoNumero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012211344511_DebitoHistorico.resx">
+      <DependentUpon>202012211344511_DebitoHistorico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012260330097_AdvertenciaMensagem.resx">
+      <DependentUpon>202012260330097_AdvertenciaMensagem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012270429171_AlteracaoADvertencia.resx">
+      <DependentUpon>202012270429171_AlteracaoADvertencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012290456029_AlteracaoResponsavel.resx">
+      <DependentUpon>202012290456029_AlteracaoResponsavel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012300247045_AlteracaoMensalidade.resx">
+      <DependentUpon>202012300247045_AlteracaoMensalidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012301621096_AlteracaoDebito.resx">
+      <DependentUpon>202012301621096_AlteracaoDebito.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101150252233_CamposNota.resx">
+      <DependentUpon>202101150252233_CamposNota.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101200259558_PontoAtencao.resx">
+      <DependentUpon>202101200259558_PontoAtencao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101200333587_PontoAtencaoCodAcesso.resx">
+      <DependentUpon>202101200333587_PontoAtencaoCodAcesso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101210345123_resolucaoAcesso.resx">
+      <DependentUpon>202101210345123_resolucaoAcesso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102012010503_ValorMensalidade.resx">
+      <DependentUpon>202102012010503_ValorMensalidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102012021081_ValorMensalidade1.resx">
+      <DependentUpon>202102012021081_ValorMensalidade1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102012039150_CamposMatricula.resx">
+      <DependentUpon>202102012039150_CamposMatricula.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103211836355_Parentesco.resx">
+      <DependentUpon>202103211836355_Parentesco.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103211855122_Parentesco_acessp.resx">
+      <DependentUpon>202103211855122_Parentesco_acessp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104141420370_NovosCampos.resx">
+      <DependentUpon>202104141420370_NovosCampos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104141635085_AtualizacaoAlunoMatricula.resx">
+      <DependentUpon>202104141635085_AtualizacaoAlunoMatricula.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104191854489_Atualizacao.resx">
+      <DependentUpon>202104191854489_Atualizacao.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

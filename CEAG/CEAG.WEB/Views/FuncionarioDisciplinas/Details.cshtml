@@ -1,0 +1,50 @@
+﻿@model CEAG.DOMINIO.FuncionarioDisciplina
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FuncionarioDisciplina</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Disciplina.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Disciplina.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Funcionario.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Funcionario.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inclusao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inclusao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observacao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CodFuncionarioDisciplina }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,67 @@
+﻿@model CEAG.WEB.ViewModel.Aluno.AlunoExibicaoViewModel
+
+@{
+    ViewBag.Title = "Informações Complementares";
+}
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        @if (Model.Sexo.ToUpper() == "MASCULINO")
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/student-male-big.png" /> INFORMAÇÕES DO ALUNO <b>@Model.Nome </b></h3>
+
+        }
+        else
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/student-female-big.png" /> INFORMAÇÕES DA ALUNA <b>@Model.Nome </b></h3>
+        }
+
+    </div>
+    @Html.HiddenFor(model => model.CodAluno)
+    <br />
+    <br />
+    <div>
+        <div class="row">
+            <div class="jumbotron col-md-3 btn btn-primary">
+                <p>
+                    <img src="~/Images/smartphone-1.png" height="100" width="110" />
+                </p>
+                <p>
+                    @Html.ActionLink("TELEFONES", "Index", "Telefones", new {codAluno = Model.CodAluno }, new { @class = "btn btn-primary" })
+                </p>
+            </div>
+
+            <div class="jumbotron col-md-3 btn btn-primary">
+                <p>
+                    <img src="~/Images/user-13.png" height="100" width="110" />
+                </p>
+                <p>
+                    @Html.ActionLink("RESPONSÁVEIS", "Index", "Responsavels", new { codAluno = Model.CodAluno }, new { @class = "btn btn-primary" })
+                </p>
+            </div>
+            <div class="jumbotron col-md-3 btn btn-primary">
+                <p>
+                    <img src="~/Images/user-13.png" height="100" width="110" />
+                </p>
+                <p>
+                    @Html.ActionLink("INFORMAÇÕES", "Index", "Informacaos", new { codAluno = Model.CodAluno }, new { @class = "btn btn-primary" })
+                </p>
+            </div>
+            <div class="jumbotron col-md-3 btn btn-primary">
+                <p>
+                    <img src="~/Images/money.png" height="100" width="110" />
+                </p>
+                <p>
+                    @Html.ActionLink("MENSALIDADE", "Index", "Mensalidade", null, new { @class = "btn btn-primary" })
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+            <a href="@Url.Action("Index","Alunos")">
+                <img src="@Url.Content("~/images/Browser/cancel.png")" width="50" height="50" title='Voltar para a lista de Alunos' />
+            </a>
+        </div>
+    </div>
+</div>

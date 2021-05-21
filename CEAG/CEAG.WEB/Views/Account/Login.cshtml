@@ -1,0 +1,91 @@
+﻿@model CEAG.WEB.ViewModel.Acesso.AcessoViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/neck_estilo.css" rel="stylesheet" />
+
+<script src="~/scripts/jquery-1.10.2.js"></script>
+<script src="~/scripts/bootstrap.min.js"></script>
+
+@*@using (Html.BeginForm("LoginAcess", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post,*@
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken();
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="container"></div>
+    <div class="container">
+        <table align="center" width="800">
+            <tr>
+                <td align="center"></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-login">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="panel-title"><b>LOGIN</b></div>
+                            </div>
+
+                            <div style="padding-top:30px" class="panel-body">
+                                <div style="display:none" id="result" class="alert alert-danger col-sm-12">
+
+                                </div>
+
+                                <div style="margin-bottom: 25px" class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </span>
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "E-mail", autofocus = true } })
+                                </div>
+
+                                <div style="margin-bottom: 25px" class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-lock"></i>
+                                    </span>
+                                    @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Senha" } })
+                                </div>
+
+                                <div style="margin-top:10px" class="form-group">
+
+                                    <div class="col-sm-6 controls">
+                                        <input type="submit" value="Acessar" class="btn primary btn-lg" data-toggle="modal" data-target="#modal-mensagem" />
+                                    </div>
+                                    <div class="col-sm-6 controls">
+                                        <img src="~/Images/olie.png" width="160" height="65" />
+                                    </div>
+                                    <br />
+                                    <div class="col-sm-10 controls">
+                                        <div> @Html.ValidationSummary(false, "", new { @class = "text-danger" })</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+        </table>
+       
+        <div class="col-lg-3 col-md-3 col-sm-3">
+            <img src="~/Images/blue-lock-icon.png" />
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div class="col-lg-9 col-md-9 col-sm-9">
+            <h4>Você deve estar logado para ter acesso aos serviços do Olie. Caso você não possua login e senha, entre em contato com o administrador da sua escola, para a regularização do seu cadastro</h4>
+        </div>
+
+    </div>
+
+}
+<div class="modal fade" id="modal-mensagem">
+    @Html.Partial("_TelaAguarde")
+</div>

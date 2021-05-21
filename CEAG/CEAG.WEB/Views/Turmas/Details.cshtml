@@ -1,0 +1,340 @@
+﻿@model PagedList.IPagedList<CEAG.WEB.ViewModel.AlunoMatricula.AlunoMatriculaExibicaoViewModel>
+@using PagedList.Mvc;
+@using CEAG.WEB.ViewModel.TurmaFuncionarioDisciplinas;
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+@{
+    TurmaFuncionarioDisciplinaHorarioExibicaoViewModel listaHorario = ViewBag.TurmaFuncionarioDisciplinaHorarioExibicaoViewModel;
+}
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/classroomBig.png" /> DADOS DA TURMA <b>@Model[0].Turma.Descricao </b></h3>
+    </div>
+    <div>
+        <fieldset>
+            <legend>DADOS DA TURMA</legend>
+            <a class="jumbotron" href="@Url.Action("Edit","Turmas", new { codTurma = Model[0].Turma.CodTurma })">
+                <div class="col-md-4">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            TURMA
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model[0].Turma.Descricao)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model[0].Turma.AnoLetivo)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model[0].Turma.AnoLetivo)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model[0].Turma.Nivel)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model[0].Turma.Nivel)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model[0].Turma.Segmento)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model[0].Turma.Segmento)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model[0].Turma.Status)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model[0].Turma.Status)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model[0].Turma.Vagas)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model[0].Turma.Vagas)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model[0].Turma.Inclusao)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model[0].Turma.Inclusao)
+                        </dd>
+
+                    </dl>
+                </div>
+            </a>
+        </fieldset>
+
+
+     
+
+        <div class="row">
+            <hr />
+            <!-- #region HORARIO -->
+          
+            <div class="form-group">
+                <table width="100%">
+                    <thead class="btn-primary">
+                        <tr>
+                            <td height="50" align="center">
+                                <h4><b>&nbsp;&nbsp;HORÁRIO DE AULA</b></h4>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+                <table width="100%" border="1">
+                    <tbody class="text-primary">
+                        <tr>
+                            <td width="15%" align="center">
+                                <h5><b>HORÁRIOS/DIAS</b></h5>
+                            </td>
+                            <td width="15%" align="center">
+                                <h5><b>SEGUNDA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>TERÇA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>QUARTA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>QUINTA</b></h5>
+                            </td>
+
+                            <td width="15%" align="center">
+                                <h5><b>SEXTA</b></h5>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table width="100%" border="1">
+                    <tbody>
+
+                        @foreach (var item in listaHorario.HorarioAulaViewModels.Select(p => p.Inicio).Distinct())
+                        {
+                            <tr>
+                                <td width="15%" align="center">
+                                    @foreach (var horarioView in listaHorario.HorarioAulaViewModels.Where(p => p.Inicio == item).Take(1))
+                                    {
+                                        <label>
+                                            &nbsp;&nbsp;@Html.DisplayFor(modelItemHorario => horarioView.Inicio) até @Html.DisplayFor(modelItemHorario => horarioView.Termino)
+                                        </label>
+                                    }
+                                </td>
+                                @foreach (var itemHorario in listaHorario.HorarioAulaViewModels.Where(p => p.Inicio == item))
+                                {
+
+                                    if (listaHorario.TurmaFuncionarioDisciplinaExibicaoViewModels
+                                        .Where(p => p.CodHorarioAula == itemHorario.CodHorarioAula && p.DiaSemana == itemHorario.DiaSemana).Any())
+                                    {
+                                        foreach (var itemTurmaFuncionarioDisciplina in listaHorario.TurmaFuncionarioDisciplinaExibicaoViewModels
+                                            .Where(p => p.CodHorarioAula == itemHorario.CodHorarioAula && p.DiaSemana == itemHorario.DiaSemana))
+                                        {
+                                            <td width="15%" align="left" bgcolor="#87CEFA">
+                                                <div>
+                                                    <h4><b>&nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(modelItem => itemTurmaFuncionarioDisciplina.Disciplina.Descricao)</b></h4>
+                                                </div>
+                                            </td>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <td width="15%" align="left" bgcolor="#BDB76B">
+                                            <div>
+                                                <h5 class="text-danger"><b>&nbsp;&nbsp;&nbsp;&nbsp;LIVRE</b></h5>
+                                            </div>
+                                        </td>
+                                    }
+
+                                    @*</div>
+                                </td>*@
+
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            <!-- #endregion -->
+
+            <div class="form-group">
+                <div class="col-md-offset-5 col-si-offset-5 col-md-5">
+                    <button type="button" onclick="location.href='@Url.Action("Index", "Turmas")'">
+                        <img src="~/images/Browser/cancel.png" data-toggle="modal" data-target="#modal-mensagem" width="50" height="50" />
+                    </button>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <h3>
+            <img alt="Brand" height="100" width="100" src="~/Images/Browser/rucksackBig.png" /> ALUNOS MATRICULADOS NA TURMA
+            <button type="button" class="btn-primary but_clientes" onclick="location.href='@Url.Action("Matricular", "AlunoMatriculas", new { codTurma = ViewBag.Turma.CodTurma })'">
+                + MATRICULAR ALUNO
+            </button>
+        </h3>
+        <table class="table table-striped table-hover" id="tblConsulta">
+            <thead class="btn-primary">
+                <tr>
+                    <th>AÇÕES</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Aluno.Nome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Aluno.Matricula)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Aluno.MaeNome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Aluno.LogradouroCompleto)
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td width="150px">
+                            @if (item.CodAluno > 0)
+                            {
+                                @*@Html.ActionLink("Alterar", "Edit", "Alunos", new { id = item.CodAluno }, new { @class = "btn btn-primary but_grid" })*@
+                                <a href="@Url.Action("Edit","Alunos", new { codAluno = item.CodAluno})">
+                                    <img src="@Url.Content("~/images/ImageLink/edit-pie-chart-report.png")" width="30" height="30" title='Editar o cadastro do Aluno' />
+                                </a>
+                                <a href="@Url.Action("Details","Alunos", new { codAluno = item.CodAluno})">
+                                    <img src="@Url.Content("~/images/ImageLink/view-file.png")" width="30" height="30" title='Visualizar o cadastro do Aluno' />
+                                </a>
+                                @*@Html.ActionLink("Alterar", "Edit", "Alunos", new { id = item.CodAluno }, new { @class = "btn btn-primary but_grid" })*@
+                                <a href="@Url.Action("Edit","AlunoMatriculas", new { codAlunoMatricula = item.CodAlunoMatricula})">
+                                    <img src="@Url.Content("~/images/ImageLink/edit-pie-chart-report.png")" width="30" height="30" title='Editar a matricula do Aluno' />
+                                </a>
+                                <a href="@Url.Action("Boletim","AlunoMatriculaUnidades", new { codAlunoMatricula = item.CodAlunoMatricula})">
+                                    <img src="@Url.Content("~/images/ImageLink/exam.png")" width="30" height="30" title='Ver o boletim do Aluno' />
+                                </a>
+                                <a href="@Url.Action("EmitirContrato","Reports", new { codAlunoMatricula = item.CodAlunoMatricula})">
+                                    <img src="@Url.Content("~/images/ImageLink/agreement.png")" width="30" height="30" title='Imprimir o contrato do Aluno' />
+                                </a>
+                                <a href="@Url.Action("Index","Advertencias", new { codAlunoMatricula = item.CodAlunoMatricula})">
+                                    <img src="@Url.Content("~/images/ImageLink/delete-message.png")" width="30" height="30" title='Advertecências do Aluno' />
+                                </a>
+                            }
+
+                        </td>
+                        <td width="230px">
+                            @Html.DisplayFor(modelItem => item.Aluno.Nome)
+                        </td>
+                        <td width="80px">
+                            @Html.DisplayFor(modelItem => item.Aluno.Matricula)
+                        </td>
+                        <td width="200px">
+                            @Html.DisplayFor(modelItem => item.Aluno.MaeNome)
+                        </td>
+                        <td width="240px">
+                            @Html.DisplayFor(modelItem => item.Aluno.LogradouroCompleto)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Details",
+            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+    <hr />
+    <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/learningbig.png" /> PROFESSORES DA TURMA</h3>
+    <table class="table table-striped table-hover" id="tblConsultaProfessor">
+        <thead class="btn-primary">
+            <tr>
+                <th>
+                    AÇÕES
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Turma.TurmaFuncionarioDisciplinas[0].Funcionario.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Turma.TurmaFuncionarioDisciplinas[0].Funcionario.Disciplinas)
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model[0].Turma.TurmaFuncionarioDisciplinas)
+            {
+                <tr>
+                    <td width="10%">
+                        <a href="@Url.Action("RemoverProfessor","Turmas", new {codTurma = item.CodTurma, codFuncionario = item.Funcionario.CodFuncionario})">
+                            <img src="@Url.Content("~/images/ImageLink/delete.png")" width="30" height="30" title='Retirar o professor da Turma' />
+                        </a>
+                    </td>
+                    <td width="40%">
+                        @Html.DisplayFor(modelItem => item.Funcionario.Nome)
+                    </td>
+                    <td width="50%">
+                        @Html.DisplayFor(modelItem => item.Funcionario.Disciplinas)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    @using (Html.BeginForm())
+    {
+        <div class="col-md-2">
+            <div class="form-group">
+                <button class="btn-SelectProfessor ui-state-default ui-corner-all btn btn-primary but_clientes" data-id="@ViewBag.Turma.CodTurma">
+                    + ADICIONAR PROFESSOR
+                </button>
+            </div>
+        </div>
+    }
+</div>
+<div class="modal fade" id="modal">
+
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/validations_pt-br")
+
+    <script>
+        $(function () {
+            $(".btn-SelectProfessor").click(function (e) {
+                var codTurma = $(this).attr("data-id");
+                //var codTurma = $(this).data("id");
+                //var codTurma = $(this).attr("value");
+                e.preventDefault();
+                $("#modal").load("/Funcionarios/ListaProfessor/" + codTurma, function () {
+                    $("#modal").modal();
+                })
+            });
+        });
+    </script>
+}

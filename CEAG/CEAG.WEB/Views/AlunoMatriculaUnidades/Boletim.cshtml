@@ -1,0 +1,329 @@
+﻿@model CEAG.WEB.ViewModel.Boletim.BoletimExibicaoViewModel
+
+
+@{
+    ViewBag.Title = "Boletim";
+}
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3>
+            <img alt="Brand" height="100" width="100" src="~/Images/Browser/examBig.png" /> BOLETIM
+        </h3>
+        <h3 class="btn-danger">
+            @ViewBag.MessageError
+        </h3>
+    </div>
+
+    <hr />
+    <table align="center" width="1000">
+        <tr class="bg-primary">
+            <td>
+                @if (Model.PrimeiraUnidade[0].AlunoMatricula.Aluno.Sexo.ToUpper().Equals("MASCULINO"))
+                {
+                    <h4><b>&nbsp;ALUNO: </b>@Model.PrimeiraUnidade[0].AlunoMatricula.Aluno.Nome.ToUpper()</h4>
+                }
+                else
+                {
+                    <h4><b>&nbsp;ALUNA: </b>@Model.PrimeiraUnidade[0].AlunoMatricula.Aluno.Nome.ToUpper()</h4>
+                }
+
+            </td>
+            <td>
+                <h4><b>&nbsp;MATRICULA: </b>@Model.PrimeiraUnidade[0].AlunoMatricula.Aluno.Matricula</h4>
+            </td>
+        </tr>
+    </table>
+    <table border="0" align="center" width="1000" class="table-striped">
+        <tr>
+            <td height="30">
+                <b>&nbsp;TURMA: </b>@Model.PrimeiraUnidade[0].AlunoMatricula.Turma.Descricao
+            </td>
+            <td height="30">
+                <b>&nbsp;NÍVEL: </b>@Model.PrimeiraUnidade[0].AlunoMatricula.Turma.Nivel
+            </td>
+            <td height="30">
+                <b>&nbsp;TURNO: </b>@Model.PrimeiraUnidade[0].AlunoMatricula.Turma.Periodo
+            </td>
+            <td height="30">
+                <b>&nbsp;ANO LETIVO: </b>@Model.PrimeiraUnidade[0].AlunoMatricula.Turma.AnoLetivo
+            </td>
+        </tr>
+    </table>
+    <table border="1" align="center" width="1000" class="table-striped">
+        <tr>
+            <td width="30%" height="30" align="center">
+                <b>DISCIPLINA</b>
+            </td>
+            <td width="14%" height="30" align="center">
+                <b>&nbsp;1º BIMESTRE</b>
+            </td>
+            <td width="14%" height="30" align="center">
+                <b>&nbsp;2º BIMESTRE</b>
+            </td>
+            <td width="14%" height="30" align="center">
+                <b>&nbsp;3º BIMESTRE</b>
+            </td>
+            <td width="14%" height="30" align="center">
+                <b>&nbsp;4º BIMESTRE</b>
+            </td>
+            <td width="7%" height="30" align="center">
+                <b>&nbsp;Final</b>
+            </td>
+            <td width="7%" height="30" align="center">
+                <b>&nbsp;Media</b>
+            </td>
+        </tr>
+    </table>
+    <table border="1" align="center" width="1000" class="table-striped">
+        <tr>
+            <td width="30%" align="center">
+                <b></b>
+            </td>
+            <td width="7%" align="center">
+                <b>&nbsp;Nota</b>
+            </td>
+            <td width="7%" align="center">
+                <b>&nbsp;Falta</b>
+            </td>
+            <td width="7%" align="center">
+                <b>&nbsp;Nota</b>
+            </td>
+            <td width="7%" align="center">
+                <b>&nbsp;Falta</b>
+            </td>
+            <td width="7%" align="center">
+                <b>&nbsp;Nota</b>
+            </td>
+            <td width="7%" align="center">
+                <b>&nbsp;Falta</b>
+            </td>
+            <td width="7%" align="center">
+                <b>&nbsp;Nota</b>
+            </td>
+            <td width="7%" align="center">
+                <b>&nbsp;Falta</b>
+            </td>
+            <td width="7%" align="center">
+                <b>&nbsp;Final</b>
+            </td>
+            <td width="7%" align="center">
+                <b>&nbsp;Media</b>
+            </td>
+        </tr>
+        @foreach (var itemDisciplina in Model.DisciplinaExibicaoViewModels.Distinct().OrderBy(p => p.Descricao))
+        {
+            <tr>
+                <td width="30%" height="20">
+                    &nbsp;&nbsp;@itemDisciplina.Descricao
+                </td>
+                @if (Model.PrimeiraUnidade.Where(p => p.CodDisciplina == itemDisciplina.CodDisciplina).Any())
+                {
+                    foreach (var itemUnidade in Model.PrimeiraUnidade.Where(p => p.CodDisciplina == itemDisciplina.CodDisciplina))
+                    {
+                        <td width="7%" align="center">
+                            <b>@itemUnidade.Media</b>
+                        </td>
+
+
+                        <td width="7%" align="center">
+                            <b>@itemUnidade.Faltas</b>
+                        </td>
+                    }
+                }
+                else
+                {
+                    <td width="7%" align="center">
+                        --
+                    </td>
+                    <td width="7%" align="center">
+                        --
+                    </td>
+                }
+                @if (Model.SegundaUnidade.Where(p => p.CodDisciplina == itemDisciplina.CodDisciplina).Any())
+                {
+                    foreach (var itemUnidade in Model.SegundaUnidade.Where(p => p.CodDisciplina == itemDisciplina.CodDisciplina))
+                    {
+                        <td width="7%" align="center">
+                            <b>@itemUnidade.Media</b>
+                        </td>
+
+
+                        <td width="7%" align="center">
+                            <b>@itemUnidade.Faltas</b>
+                        </td>
+                    }
+                }
+                else
+                {
+                    <td width="7%" align="center">
+                        --
+                    </td>
+                    <td width="7%" align="center">
+                        --
+                    </td>
+                }
+                @if (Model.TerceiraUnidade.Where(p => p.CodDisciplina == itemDisciplina.CodDisciplina).Any())
+                {
+                    foreach (var itemUnidade in Model.TerceiraUnidade.Where(p => p.CodDisciplina == itemDisciplina.CodDisciplina))
+                    {
+                        <td width="7%" align="center">
+                            <b>@itemUnidade.Media</b>
+                        </td>
+
+
+                        <td width="7%" align="center">
+                            <b>@itemUnidade.Faltas</b>
+                        </td>
+                    }
+                }
+                else
+                {
+                    <td width="7%" align="center">
+                        --
+                    </td>
+                    <td width="7%" align="center">
+                        --
+                    </td>
+                }
+                @if (Model.QuartaUnidade.Where(p => p.CodDisciplina == itemDisciplina.CodDisciplina).Any())
+                {
+                    foreach (var itemUnidade in Model.QuartaUnidade.Where(p => p.CodDisciplina == itemDisciplina.CodDisciplina))
+                    {
+
+                        <td width="7%" align="center">
+                            <b>@itemUnidade.Media</b>
+                        </td>
+
+
+                        <td width="7%" align="center">
+                            <b>@itemUnidade.Faltas</b>
+                        </td>
+
+                    }
+                }
+                else
+                {
+                    <td width="7%" align="center">
+                        --
+                    </td>
+                    <td width="7%" align="center">
+                        --
+                    </td>
+                }
+                <td width="7%" align="center">
+                    --
+                </td>
+                <td width="7%" align="center">
+                    --
+                </td>
+
+                @*<td width="7%" align="center">
+                        <a href="@Url.Action("EnviarEmailParaProfessor","AlunoMatriculaUnidades", new { codAlunoMatricula = Model.CodAlunoMatricula})">
+                            <img src="@Url.Content("~/images/info.png")" width="30" height="30" title='Notificar Professor' />
+                        </a>
+                    </td>*@
+
+
+            </tr>
+        }
+    </table>
+    <br />
+    <table align="center" width="1000">
+        <tr align="center" class="bg-primary">
+            <td><b>SUMÁRIO DO BOLETIM</b></td>
+        </tr>
+        <tr>
+            <td>
+                TOTAL DE DISCIPLINAS: <b>@Model.DisciplinaExibicaoViewModels.Count()</b>
+            </td>
+        </tr>
+    </table>
+    <table align="center" width="1000" border="1">
+        <tr>
+            <td>
+                (1º BIMESTRE):
+            </td>
+            <td>
+                APROVADO <b>@Model.PrimeiraUnidade.Where(p => p.Media >= 6).Count()</b>
+            </td>
+            <td>
+                EM RECUPERAÇÃO <b>@Model.PrimeiraUnidade.Where(p => p.Media < 6).Count()</b>
+            </td>
+            <td>
+                @{
+                    var valorPrimeiraSemNota = Model.DisciplinaExibicaoViewModels.Count() - Model.PrimeiraUnidade.Count();
+                }
+                DISCIPLINAS SEM NOTA: <b>@valorPrimeiraSemNota</b>
+            </td>
+        </tr>
+    </table>
+    <table align="center" width="1000" border="1">
+        <tr>
+            <td>
+                (2º BIMESTRE):
+            </td>
+            <td>
+                APROVADO <b>@Model.SegundaUnidade.Where(p => p.Media >= 6).Count()</b>
+            </td>
+            <td>
+                EM RECUPERAÇÃO <b>@Model.SegundaUnidade.Where(p => p.Media < 6).Count()</b>
+            </td>
+            <td>
+                @{
+                    var valorSegundaSemNota = Model.DisciplinaExibicaoViewModels.Count() - Model.SegundaUnidade.Count();
+                }
+                DISCIPLINAS SEM NOTA: <b>@valorSegundaSemNota</b>
+            </td>
+        </tr>
+    </table>
+    <table align="center" width="1000" border="1">
+        <tr>
+            <td>
+                (3º BIMESTRE):
+            </td>
+            <td>
+                APROVADO <b>@Model.TerceiraUnidade.Where(p => p.Media >= 6).Count()</b>
+            </td>
+            <td>
+                EM RECUPERAÇÃO <b>@Model.TerceiraUnidade.Where(p => p.Media < 6).Count()</b>
+            </td>
+            <td>
+                @{
+                    var valorTerceiraSemNota = Model.DisciplinaExibicaoViewModels.Count() - Model.TerceiraUnidade.Count();
+                }
+                DISCIPLINAS SEM NOTA: <b>@valorTerceiraSemNota</b>
+            </td>
+        </tr>
+    </table>
+    <table align="center" width="1000" border="1">
+        <tr>
+            <td>
+                (4º BIMESTRE):
+            </td>
+            <td>
+                APROVADO <b>@Model.QuartaUnidade.Where(p => p.Media >= 6).Count()</b>
+            </td>
+            <td>
+                EM RECUPERAÇÃO <b>@Model.QuartaUnidade.Where(p => p.Media < 6).Count()</b>
+            </td>
+            <td>
+                @{
+                    var valorQuartaSemNota = Model.DisciplinaExibicaoViewModels.Count() - Model.QuartaUnidade.Count();
+                }
+                DISCIPLINAS SEM NOTA: <b>@valorQuartaSemNota</b>
+            </td>
+        </tr>
+    </table>
+
+    <hr class="btn-primary" />
+    <div class="form-group">
+        <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+            <a href="@Url.Action("Details","Turmas", new { codTurma = ViewBag.CodTurma})">
+                <img src="@Url.Content("~/images/Browser/cancel.png")" width="50" height="50" data-toggle="modal" data-target="#modal-mensagem" title='Voltar para a lista de Turmas' />
+            </a>
+        </div>
+    </div>
+</div>
+

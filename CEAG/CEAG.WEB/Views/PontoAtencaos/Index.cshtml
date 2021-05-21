@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CEAG.DOMINIO.PontoAtencao>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Escola.Razao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoPontoAtencao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescricaoPontoAtencao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodReferencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resolucao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Inclusao)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Escola.Razao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoPontoAtencao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescricaoPontoAtencao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodReferencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Resolucao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Inclusao)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CodPontoAtencao }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CodPontoAtencao }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CodPontoAtencao })
+        </td>
+    </tr>
+}
+
+</table>

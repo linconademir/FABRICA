@@ -1,0 +1,123 @@
+﻿@model CEAG.WEB.ViewModel.Responsavel.ResponsavelExibicaoViewModel
+
+@{
+        ViewBag.Title = "Detalhes";
+}
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        @if (Model.Sexo.ToUpper() == "MASCULINO")
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/day-care-big.png" /> CADASTRO DO RESPONSÁVEL <b>@Model.Nome </b></h3>
+
+        }
+        else
+        {
+            <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/day-care-big.png" /> CADASTRO DA RESPONSÁVEL <b>@Model.Nome </b></h3>
+        }
+    </div>
+
+    <div class="jumbotron">
+      
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Cpf)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Cpf)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Tipo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Rg)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Rg)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RgOrgaoEmissor)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RgOrgaoEmissor)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RgUf)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RgUf)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Profissao)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Profissao)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EstadoCivil)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EstadoCivil)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Naturalidade)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Naturalidade)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Nacionalidade)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nacionalidade)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DeclaraIR)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DeclaraIR)
+            </dd>
+
+        </dl>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-5 col-si-offset-5 col-md-10">
+            <a href="@Url.Action("Edit","Responsavels", new { codResponsavel = Model.CodResponsavel })">
+                <img src="@Url.Content("~/images/ImageLink/edit-pie-chart-report.png")" width="50" height="50" title='Editar o cadastro do Responsável' />
+            </a>
+            <a href="@Url.Action("Details","Alunos", new { codAluno = Model.CodAluno})">
+                <img src="@Url.Content("~/images/Browser/cancel.png")" width="50" height="50" title='Voltar para a lista de responsaveis por aluno' />
+            </a>
+        </div>
+    </div>
+</div>

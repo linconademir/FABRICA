@@ -1,0 +1,71 @@
+﻿@model CEAG.WEB.ViewModel.Debito.DebitoGeralExibicaoViewModel
+
+@{
+    ViewBag.Title = "Cobrança";
+}
+
+
+<div class="containerLopus">
+    <div>
+        <img src="" />
+        <h3><img alt="Brand" height="100" width="100" src="~/Images/Browser/front-desk.png" /> COBRANÇA</b></h3>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <div>
+                <h4>Alunos que pagam em dia: @Model.QtdAlunoPagamEmDia</h4>
+                <h4>Alunos que atrasaram em algum momento: @Model.QtdAlunosJaAtrasaram</h4>
+                <h4>Débitos vencidos no mês: @Model.QtdDebitosVencidosNoMes, totalizando <b>R$ @Model.ValorDebitosVencidosNoMes</b></h4>
+                <h4>Débitos vencidos geral: @Model.QtdDebitosVencidosMesesGeral, totalizando <b>R$ @Model.ValorDebitosVencidosMesesGeral</b></h4>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="col-lg-6">
+                <a href="@Url.Action("Cobranca","Debitos")" class="btn btn-primary">
+                    <img src="@Url.Content("~/images/Browser/student-male-big.png")" width="100" height="100" data-toggle="modal" data-target="#modal-mensagem" />
+                    <h3>LISTAR POR ALUNO</h3>
+                </a>
+                
+            </div>
+            <div class="col-lg-6">
+                <a href="@Url.Action("CobrancaTurma","Debitos")" class="btn btn-primary">
+                    <img src="@Url.Content("~/Images/Browser/classroomBig.png")" width="100" height="100" data-toggle="modal" data-target="#modal-mensagem" />
+                    <h3>LISTAR POR TURMA</h3>
+                </a>
+              
+            </div>
+        </div>
+
+    </div>
+
+    <br />
+    @using (Html.BeginForm("IndexCobranca", "Debitos", FormMethod.Get))
+    {
+        if (ViewBag.TipoGrafico == "MENSAL")
+        {
+            <div class="row">
+                <div class="col-lg-3 col-sm-3 col-md-3">
+                    <input name="tipoGrafico" type="submit" id="btnPesquisar" class="btn-primary but_clientes" value="ANUAL" data-toggle="modal" data-target="#modal-mensagem" />
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-lg-3 col-sm-3 col-md-3">
+                    <input name="tipoGrafico" type="submit" id="btnPesquisar" class="btn-primary but_clientes" value="MENSAL" data-toggle="modal" data-target="#modal-mensagem" />
+                </div>
+            </div>
+        }
+    }
+
+    @foreach (var item in Model.Graficos)
+    {
+        <div class="row">
+            @Html.Partial("_GraficoColuna", item)
+        </div>
+    }
+
+</div>
