@@ -19,3 +19,24 @@ D:\4 - OLIE\FONTE\V1\CEAG\CEAG.NEGOCIO\obj\Debug\CEAG.NEGOCIO.csproj.CoreCompile
 D:\4 - OLIE\FONTE\V1\CEAG\CEAG.NEGOCIO\obj\Debug\CEAG.NEGOCIO.csproj.CopyComplete
 D:\4 - OLIE\FONTE\V1\CEAG\CEAG.NEGOCIO\obj\Debug\CEAG.NEGOCIO.dll
 D:\4 - OLIE\FONTE\V1\CEAG\CEAG.NEGOCIO\obj\Debug\CEAG.NEGOCIO.pdb
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\CEAG.NEGOCIO.dll.config
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\CEAG.NEGOCIO.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\CEAG.NEGOCIO.pdb
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\CEAG.ACESSODADOS.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\CEAG.DOMINIO.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\CEAG.REPOSITORIO.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\EntityFramework.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\MessagingToolkit.QRCode.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\CEAG.ACESSODADOS.pdb
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\CEAG.ACESSODADOS.dll.config
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\CEAG.DOMINIO.pdb
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\CEAG.REPOSITORIO.pdb
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\CEAG.REPOSITORIO.dll.config
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\EntityFramework.xml
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\obj\Debug\CEAG.NEGOCIO.csprojAssemblyReference.cache
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\obj\Debug\CEAG.NEGOCIO.csproj.CoreCompileInputs.cache
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\obj\Debug\CEAG.NEGOCIO.csproj.CopyComplete
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\obj\Debug\CEAG.NEGOCIO.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.NEGOCIO\obj\Debug\CEAG.NEGOCIO.pdb

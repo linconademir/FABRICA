@@ -4,3 +4,8 @@ D:\4 - OLIE\FONTE\V1\CEAG\CEAG.DOMINIO\obj\Debug\CEAG.DOMINIO.csprojAssemblyRefe
 D:\4 - OLIE\FONTE\V1\CEAG\CEAG.DOMINIO\obj\Debug\CEAG.DOMINIO.csproj.CoreCompileInputs.cache
 D:\4 - OLIE\FONTE\V1\CEAG\CEAG.DOMINIO\obj\Debug\CEAG.DOMINIO.dll
 D:\4 - OLIE\FONTE\V1\CEAG\CEAG.DOMINIO\obj\Debug\CEAG.DOMINIO.pdb
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.DOMINIO\bin\Debug\CEAG.DOMINIO.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.DOMINIO\bin\Debug\CEAG.DOMINIO.pdb
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.DOMINIO\obj\Debug\CEAG.DOMINIO.csproj.CoreCompileInputs.cache
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.DOMINIO\obj\Debug\CEAG.DOMINIO.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.DOMINIO\obj\Debug\CEAG.DOMINIO.pdb

@@ -266,6 +266,12 @@
     <Compile Include="Models\SendEmail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\ConexaoRelatorio.cs" />
+    <Compile Include="Reports\RelFichaMatricula.cs">
+      <DependentUpon>RelFichaMatricula.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\RelListaAluno.cs">
       <DependentUpon>RelListaAluno.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -534,6 +540,10 @@
     <EmbeddedResource Include="Reports\RelListaAluno.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RelListaAluno.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\RelFichaMatricula.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RelFichaMatricula.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\inputmask\bindings\inputmask.binding.js" />

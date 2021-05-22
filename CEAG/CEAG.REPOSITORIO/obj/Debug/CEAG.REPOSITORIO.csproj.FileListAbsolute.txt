@@ -15,3 +15,20 @@ D:\4 - OLIE\FONTE\V1\CEAG\CEAG.REPOSITORIO\obj\Debug\CEAG.REPOSITORIO.csproj.Cor
 D:\4 - OLIE\FONTE\V1\CEAG\CEAG.REPOSITORIO\obj\Debug\CEAG.REPOSITORIO.csproj.CopyComplete
 D:\4 - OLIE\FONTE\V1\CEAG\CEAG.REPOSITORIO\obj\Debug\CEAG.REPOSITORIO.dll
 D:\4 - OLIE\FONTE\V1\CEAG\CEAG.REPOSITORIO\obj\Debug\CEAG.REPOSITORIO.pdb
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\bin\Debug\CEAG.REPOSITORIO.dll.config
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\bin\Debug\CEAG.REPOSITORIO.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\bin\Debug\CEAG.REPOSITORIO.pdb
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\bin\Debug\CEAG.ACESSODADOS.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\bin\Debug\CEAG.DOMINIO.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\bin\Debug\EntityFramework.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\bin\Debug\CEAG.ACESSODADOS.pdb
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\bin\Debug\CEAG.ACESSODADOS.dll.config
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\bin\Debug\CEAG.DOMINIO.pdb
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\bin\Debug\EntityFramework.xml
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\obj\Debug\CEAG.REPOSITORIO.csprojAssemblyReference.cache
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\obj\Debug\CEAG.REPOSITORIO.csproj.CoreCompileInputs.cache
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\obj\Debug\CEAG.REPOSITORIO.csproj.CopyComplete
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\obj\Debug\CEAG.REPOSITORIO.dll
+C:\Users\lincon.silva\Documents\FABRICA\CEAG\CEAG.REPOSITORIO\obj\Debug\CEAG.REPOSITORIO.pdb
